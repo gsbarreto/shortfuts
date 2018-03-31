@@ -32,11 +32,20 @@ body {
         width: 300px;
     }
 
-    .shortfutShortcut {
+    .shortfutShortcutBase {
         @extend .shortfutShared;
-        color: $themePrimaryColor;
         text-align: right;
         width: 70px;
+    }
+
+    .shortfutShortcut {
+        @extend .shortfutShortcutBase;
+        color: $themePrimaryColor;
+    }
+
+    .shortfutSetShortcut {
+        @extend .shortfutShortcutBase;
+        color: $themeLightColor;
     }
 }
 

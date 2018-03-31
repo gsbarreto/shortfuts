@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ActionButton } from 'office-ui-fabric-react/lib/Button';
+import { Link } from 'office-ui-fabric-react/lib/Link';
 import { loadTheme } from '@uifabric/styling';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
@@ -49,8 +50,6 @@ export default class Popup extends React.Component<AppProps, AppState> {
         });
 
         chrome.commands.getAll((commands: Command[]) => {
-            console.log(commands);
-
             for (const command of commands) {
                 this.commands.set(command.name, command);
             }
@@ -70,7 +69,9 @@ export default class Popup extends React.Component<AppProps, AppState> {
                     <ActionButton
                         iconProps={{ iconName: 'EditStyle' }}
                         onClick={() => {
-                            chrome.runtime.sendMessage({ changeOptions: true });
+                            chrome.runtime.sendMessage({
+                                changeShortcuts: true
+                            });
                         }}
                     >
                         Change shortcuts
@@ -119,9 +120,22 @@ export default class Popup extends React.Component<AppProps, AppState> {
                 <span className="shortfutDescription">
                     {command.description || 'Open extension popup'}
                 </span>
-                <span className="ms-fontWeight-semibold shortfutShortcut">
-                    {command.shortcut || 'Not set'}
-                </span>
+                {command.shortcut ? (
+                    <span className="ms-fontWeight-semibold shortfutShortcut">
+                        {command.shortcut}
+                    </span>
+                ) : (
+                    <Link
+                        className="ms-fontWeight-semibold shortfutSetShortcut"
+                        onClick={() => {
+                            chrome.runtime.sendMessage({
+                                changeShortcuts: true
+                            });
+                        }}
+                    >
+                        (Set)
+                    </Link>
+                )}
             </div>
         );
     }
