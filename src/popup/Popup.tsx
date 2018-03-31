@@ -34,7 +34,11 @@ export default class Popup extends React.Component<AppProps, AppState> {
     }
 
     render() {
-        return <div className="popupContainer">{this.renderShortfuts()}</div>;
+        return (
+            <div className="popupContainer ms-Fabric">
+                {this.renderShortfuts()}
+            </div>
+        );
     }
 
     /**
@@ -65,7 +69,7 @@ export default class Popup extends React.Component<AppProps, AppState> {
                 <span className="shortfutDescription">
                     {command.description || 'Open extension popup'}
                 </span>
-                <span className="shortfutShortcut">
+                <span className="ms-fontWeight-semibold shortfutShortcut">
                     {command.shortcut || 'Not set'}
                 </span>
             </div>
