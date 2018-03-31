@@ -1,3 +1,9 @@
+@import './theme';
+
+body {
+    margin: 0;
+}
+
 .popupContainer {
     max-width: 350px;
 }
@@ -5,6 +11,7 @@
 .shortfutsList {
     display: flex;
     flex-direction: column;
+    padding: 8px;
 
     :last-child {
         border-bottom: none;
@@ -12,7 +19,7 @@
 }
 
 .shortfut {
-    border-bottom: 1px solid darkgray;
+    border-bottom: 1px solid $themeLighterColor;
     display: flex;
     padding: 0px 2px;
 
@@ -27,7 +34,16 @@
 
     .shortfutShortcut {
         @extend .shortfutShared;
+        color: $themePrimaryColor;
         text-align: right;
-        width: 50px;
+        width: 70px;
     }
+}
+
+.footer {
+    align-items: center;
+    background-color: $themeLighterAltColor;
+    display: flex;
+    justify-content: space-around;
+    padding: 0 24px;
 }
