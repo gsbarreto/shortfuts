@@ -1,10 +1,10 @@
 {
     "manifest_version": 2,
 
-    "name": "Chrome Extension (built with TypeScript + React)",
+    "name": "SHORTFUTS 19",
     "description":
-        "A boilerplate project to quickly build a Chrome extension using TypeScript and React (built using webpack).",
-    "version": "1.0.0",
+        "Exposes keyboard shortcuts for FIFA 19 FUT web app. Click the icon in address bar for a list of supported hotkeys.",
+    "version": "2.0.0",
 
     "browser_action": {
         "default_icon": "icon16.png",
@@ -21,6 +21,23 @@
         "48": "icon48.png",
         "128": "icon128.png"
     },
+
+    "commands": {
+        "buyNow": {
+            "suggested_key": {
+                "default": "Alt+N",
+                "mac": "Alt+N"
+            },
+            "description": "Executes \"Buy Now\" on the current item"
+        }
+    },
+
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["js/contentScript.js"]
+        }
+    ],
 
     "permissions": []
 }
