@@ -118,7 +118,8 @@ export default class Popup extends React.Component<AppProps, AppState> {
         return (
             <div className="shortfut" key={command.name}>
                 <span className="shortfutDescription">
-                    {command.description || 'Open extension popup'}
+                    {command.description ||
+                        'Open extension popup (Activate the extension)'}
                 </span>
                 {command.shortcut ? (
                     <span className="ms-fontWeight-semibold shortfutShortcut">
