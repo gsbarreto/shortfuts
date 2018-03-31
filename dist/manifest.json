@@ -1,10 +1,10 @@
 {
     "manifest_version": 2,
 
-    "name": "SHORTFUTS 19",
+    "name": "shortfuts",
     "description":
         "Exposes keyboard shortcuts for FIFA 19 FUT web app. Click the icon in address bar for a list of supported hotkeys.",
-    "version": "2.0.0",
+    "version": "3.0.0",
 
     "browser_action": {
         "default_icon": "icon16.png",
@@ -23,12 +23,37 @@
     },
 
     "commands": {
-        "buyNow": {
-            "suggested_key": {
-                "default": "Alt+N",
-                "mac": "Alt+N"
-            },
-            "description": "Executes \"Buy Now\" on the current item"
+        "command0": {
+            "description": "Toggles the extension on and off"
+        },
+        "command1": {
+            "description": "Pulls in FUTBIN data for the current item"
+        },
+        "command2": {
+            "description": "Stores current item in the club"
+        },
+        "command3": {
+            "description": "Buys the current item for BIN price"
+        },
+        "command4": {
+            "description":
+                "Compares price of the current item with other items on the market"
+        },
+        "command5": {
+            "description": "Quick sells the current item"
+        },
+        "command6": {
+            "description": "Sends current item to transfer list"
+        },
+        "command7": {
+            "description": "Lists the current item for minimum BIN"
+        },
+        "command8": {
+            "description":
+                "Lists the current item (with currently selected price range)"
+        },
+        "command9": {
+            "description": "Buys a bronze pack"
         }
     },
 
