@@ -6,6 +6,7 @@ export default class Footer extends React.Component<{}, {}> {
     render() {
         return (
             <div className="footer">
+                {/* Donate button */}
                 <ActionButton
                     iconProps={{ iconName: 'DiamondSolid' }}
                     onClick={() => {
@@ -17,6 +18,7 @@ export default class Footer extends React.Component<{}, {}> {
                 >
                     Donate
                 </ActionButton>
+                {/* Change shortcuts button */}
                 <ActionButton
                     iconProps={{ iconName: 'EditStyle' }}
                     onClick={() => {
@@ -26,6 +28,17 @@ export default class Footer extends React.Component<{}, {}> {
                     }}
                 >
                     Change shortcuts
+                </ActionButton>
+                {/* Contact button */}
+                <ActionButton
+                    iconProps={{ iconName: 'Mail' }}
+                    onClick={() => {
+                        chrome.runtime.sendMessage({
+                            contactDeveloper: true
+                        });
+                    }}
+                >
+                    Contact developer
                 </ActionButton>
             </div>
         );

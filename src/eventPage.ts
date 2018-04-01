@@ -10,10 +10,44 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             active: true,
             url: 'chrome://extensions/shortcuts'
         });
+    } else if (request.contactDeveloper) {
+        contactDeveloper();
     }
 
     return isResponseAsync;
 });
+
+// This function hits the mailto protocol and returns user to current tab.
+function contactDeveloper() {
+    chrome.tabs.query(
+        {
+            active: true
+        },
+        tabs => {
+            // Caches current user tab so we can returnto it.
+            const currentTabId = tabs[0].id;
+
+            chrome.tabs.create(
+                {
+                    active: true,
+                    url:
+                        'mailto:martellaj@live.com?subject=[shortfuts]%20Subject'
+                },
+                mailToTab => {
+                    setTimeout(function() {
+                        // Closes tab created by mailto protocol.
+                        chrome.tabs.remove(mailToTab.id);
+
+                        // Makes previously focused tab selected.
+                        chrome.tabs.update(currentTabId, {
+                            highlighted: true
+                        });
+                    }, 150);
+                }
+            );
+        }
+    );
+}
 
 // Listens for hotkeys to be pressed and notifies content script.
 chrome.commands.onCommand.addListener(command => {
