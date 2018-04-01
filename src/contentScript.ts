@@ -4,7 +4,7 @@ import { log } from './utils/logger';
     log('Running contentScript...');
 
     function logHotkeyReceived(hotkeyName: string) {
-        log(`${hotkeyName} received in content script!`);
+        log(`${hotkeyName} shortfut received in content script!`);
     }
 
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
