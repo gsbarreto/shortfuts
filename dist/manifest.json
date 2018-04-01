@@ -71,10 +71,17 @@
 
     "content_scripts": [
         {
-            "matches": ["<all_urls>"],
+            "matches": ["*://www.easports.com/*fifa/ultimate-team/web-app/*"],
             "js": ["js/contentScript.js"]
         }
     ],
 
-    "permissions": []
+    "content_security_policy":
+        "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+
+    "permissions": [
+        "storage",
+        "https://www.futbin.com/",
+        "http://www.futbin.com/"
+    ]
 }
