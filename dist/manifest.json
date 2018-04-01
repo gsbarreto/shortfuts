@@ -39,10 +39,7 @@
             }
         },
         "command3": {
-            "description": "Buys the current item for BIN price",
-            "suggested_key": {
-                "default": "Alt+B"
-            }
+            "description": "Buys the current item for BIN price"
         },
         "command4": {
             "description":
@@ -65,7 +62,10 @@
                 "Lists the current item (with currently selected price range)"
         },
         "command9": {
-            "description": "Buys a bronze pack"
+            "description": "Buys a bronze pack",
+            "suggested_key": {
+                "default": "Alt+B"
+            }
         }
     },
 
