@@ -1,6 +1,7 @@
 export type Direction = 'up' | 'down';
 
 export default interface Provider {
+    back: () => void;
     buyBronzePack: () => void;
     buyNow: () => void;
     comparePrice: () => void;

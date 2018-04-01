@@ -29,11 +29,14 @@ import { log } from './utils/logger';
             }
 
             switch (keyCode) {
-                case 40 /* down arrow */:
-                    provider.move('down');
+                case 8 /* backspace */:
+                    provider.back();
                     break;
                 case 38 /* up arrow */:
                     provider.move('up');
+                    break;
+                case 40 /* down arrow */:
+                    provider.move('down');
                     break;
             }
         });
