@@ -55,6 +55,7 @@ import { log } from './utils/logger';
                 provider.sendToTransferList();
             } else if (request.listMinBin) {
                 logHotkeyReceived('listMinBin');
+                provider.listMinBin();
             } else if (request.list) {
                 logHotkeyReceived('list');
                 provider.list();

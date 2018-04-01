@@ -1,6 +1,7 @@
 import buyNow from './buyNow';
 import comparePrice from './comparePrice';
 import list from './list';
+import listMinBin from './listMinBin';
 import Provider from '../Provider';
 import quickSell from './quickSell';
 import sendToTransferList from './sendToTransferList';
@@ -12,6 +13,7 @@ export default function getFIFA18Provider(): Provider {
         buyNow: buyNow,
         comparePrice: comparePrice,
         list: list,
+        listMinBin: listMinBin,
         quickSell: quickSell,
         sendToTransferList: sendToTransferList,
         storeInClub: storeInClub
