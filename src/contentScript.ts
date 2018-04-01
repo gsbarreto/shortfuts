@@ -46,6 +46,7 @@ import { log } from './utils/logger';
                 provider.buyNow();
             } else if (request.comparePrice) {
                 logHotkeyReceived('comparePrice');
+                provider.comparePrice();
             } else if (request.quickSell) {
                 logHotkeyReceived('quickSell');
             } else if (request.sendToTransferList) {
