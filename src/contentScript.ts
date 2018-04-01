@@ -61,6 +61,7 @@ import { log } from './utils/logger';
                 provider.list();
             } else if (request.buyBronzePack) {
                 logHotkeyReceived('buyBronzePack');
+                provider.buyBronzePack();
             }
         });
     });

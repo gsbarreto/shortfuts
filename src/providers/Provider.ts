@@ -1,4 +1,5 @@
 export default interface Provider {
+    buyBronzePack: () => void;
     buyNow: () => void;
     comparePrice: () => void;
     list: () => void;

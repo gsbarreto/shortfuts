@@ -1,3 +1,4 @@
+import buyBronzePack from './buyBronzePack';
 import buyNow from './buyNow';
 import comparePrice from './comparePrice';
 import list from './list';
@@ -10,6 +11,7 @@ import { log } from '../../utils/logger';
 
 export default function getFIFA18Provider(): Provider {
     return {
+        buyBronzePack: buyBronzePack,
         buyNow: buyNow,
         comparePrice: comparePrice,
         list: list,
