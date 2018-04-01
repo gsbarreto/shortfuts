@@ -11,5 +11,6 @@ export default function clickBuyNowButton() {
         clickElement(buyNowButton);
     } else {
         logError('Unable to find "Buy Now" button.');
+        throw 'Unable to find "Buy Now" button.';
     }
 }

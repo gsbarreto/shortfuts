@@ -1,11 +1,9 @@
 import clickBuyNowButton from './helpers/clickBuyNowButton';
 import confirmConfirmationDialog from './helpers/confirmConfirmationDialog';
 import isUserOnPage from './helpers/isUserOnPage';
-import { log, logError } from '../../utils/logger';
+import { logError } from '../../utils/logger';
 
 export default function buyNow() {
-    log('Buying itemm...');
-
     // Bail if user isn't on "Search Results" page.
     if (!isUserOnPage('Search Results')) {
         logError(
@@ -14,6 +12,10 @@ export default function buyNow() {
         return;
     }
 
-    clickBuyNowButton();
-    confirmConfirmationDialog();
+    try {
+        clickBuyNowButton();
+        confirmConfirmationDialog();
+    } catch (error) {
+        logError('Failed to buy item.');
+    }
 }

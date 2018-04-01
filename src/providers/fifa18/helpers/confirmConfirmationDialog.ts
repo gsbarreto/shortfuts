@@ -13,6 +13,7 @@ export default function confirmConfirmationDialog() {
             clickElement(okButton);
         } catch (error) {
             logError(error);
+            throw error;
         }
     }, 250);
 }

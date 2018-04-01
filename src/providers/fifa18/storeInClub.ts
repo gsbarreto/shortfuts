@@ -7,13 +7,11 @@ import clickDetailsPanelButton from './helpers/clickDetailsPanelButton';
  */
 export default function storeInClub() {
     try {
-        log('Storing item in the club...');
         clickDetailsPanelButton('Send to My Club');
     } catch (error) {
         logError('Failed to store item in the club.');
 
         try {
-            log('Redeeming coins...');
             clickDetailsPanelButton('Redeem');
         } catch (error) {
             logError('Failed to redeem coins.');

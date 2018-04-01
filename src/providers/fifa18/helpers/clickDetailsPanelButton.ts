@@ -1,9 +1,7 @@
-import { log, logError } from '../../../utils/logger';
+import { logError } from '../../../utils/logger';
 import clickElement from './clickElement';
 
 export default function clickDetailsPanelButton(buttonLabel: string) {
-    log(`Attempting to press "${buttonLabel}" button...`);
-
     try {
         // Expand "List on Transfer Market" section.
         if (buttonLabel === 'List Item') {
@@ -57,6 +55,7 @@ export default function clickDetailsPanelButton(buttonLabel: string) {
         // Click target button.
         clickElement(_button);
     } catch (error) {
-        logError(`Unable to locate the "${buttonLabel}" button.`);
+        logError(error);
+        throw `Unable to locate the "${buttonLabel}" button.`;
     }
 }

@@ -49,6 +49,7 @@ import { log } from './utils/logger';
                 provider.comparePrice();
             } else if (request.quickSell) {
                 logHotkeyReceived('quickSell');
+                provider.quickSell();
             } else if (request.sendToTransferList) {
                 logHotkeyReceived('sendToTransferList');
             } else if (request.listMinBin) {
