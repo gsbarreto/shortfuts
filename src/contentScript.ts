@@ -5,12 +5,45 @@ import { log } from './utils/logger';
 (function() {
     log('Content script has loaded and is running.');
 
+    // Update badge with current status.
+    chrome.storage.sync.get('isActive', function(data) {
+        chrome.runtime.sendMessage({ isActive: data.isActive });
+    });
+
     // Get provider that performs hotkey actions for correct version of web app.
     const provider = getProvider();
 
+    // Sets up listeners for non-configurable shortcuts.
+    window.addEventListener('keydown', function(ev) {
+        const keyCode = ev.keyCode;
+
+        chrome.storage.sync.get('isActive', function(data) {
+            // Update badge with current status.
+            const isActive = data.isActive;
+            chrome.runtime.sendMessage({ isActive: isActive });
+
+            // If extension "isn't active", don't handle any commands.
+            if (!isActive) {
+                log('Extension is currently not active, so ignoring hotkey.');
+                return;
+            }
+
+            switch (keyCode) {
+                case 40 /* down arrow */:
+                    provider.move('down');
+                    break;
+                case 38 /* up arrow */:
+                    provider.move('up');
+                    break;
+            }
+        });
+    });
+
+    // Sets up listeners for configurable shortcuts.
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         chrome.storage.sync.get('isActive', data => {
             const isActive = data.isActive;
+            chrome.runtime.sendMessage({ isActive: isActive });
 
             /**
              * This shortcut is checked prior to checking if extension "is active"
