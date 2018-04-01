@@ -67,16 +67,6 @@ export default class Popup extends React.Component<AppProps, AppState> {
                 {this.renderShortfuts()}
                 <div className="footer">
                     <ActionButton
-                        iconProps={{ iconName: 'EditStyle' }}
-                        onClick={() => {
-                            chrome.runtime.sendMessage({
-                                changeShortcuts: true
-                            });
-                        }}
-                    >
-                        Change shortcuts
-                    </ActionButton>
-                    <ActionButton
                         iconProps={{ iconName: 'DiamondSolid' }}
                         onClick={() => {
                             window.open(
@@ -86,6 +76,16 @@ export default class Popup extends React.Component<AppProps, AppState> {
                         }}
                     >
                         Donate
+                    </ActionButton>
+                    <ActionButton
+                        iconProps={{ iconName: 'EditStyle' }}
+                        onClick={() => {
+                            chrome.runtime.sendMessage({
+                                changeShortcuts: true
+                            });
+                        }}
+                    >
+                        Change shortcuts
                     </ActionButton>
                 </div>
             </div>
