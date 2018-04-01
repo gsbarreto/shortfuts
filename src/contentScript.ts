@@ -52,6 +52,7 @@ import { log } from './utils/logger';
                 provider.quickSell();
             } else if (request.sendToTransferList) {
                 logHotkeyReceived('sendToTransferList');
+                provider.sendToTransferList();
             } else if (request.listMinBin) {
                 logHotkeyReceived('listMinBin');
             } else if (request.list) {

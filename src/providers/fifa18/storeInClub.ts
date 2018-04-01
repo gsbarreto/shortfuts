@@ -1,4 +1,4 @@
-import { log, logError } from '../../utils/logger';
+import { logError } from '../../utils/logger';
 import clickDetailsPanelButton from './helpers/clickDetailsPanelButton';
 
 /**
