@@ -57,6 +57,7 @@ import { log } from './utils/logger';
                 logHotkeyReceived('listMinBin');
             } else if (request.list) {
                 logHotkeyReceived('list');
+                provider.list();
             } else if (request.buyBronzePack) {
                 logHotkeyReceived('buyBronzePack');
             }
