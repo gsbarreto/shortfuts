@@ -12,6 +12,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         });
     } else if (request.contactDeveloper) {
         contactDeveloper();
+    } else if (request.isActive !== undefined) {
+        chrome.browserAction.setBadgeBackgroundColor({
+            color: '#201c55' /* themePrimaryColor */
+        });
+        chrome.browserAction.setBadgeText({
+            text: request.isActive ? 'ON' : 'OFF'
+        });
     }
 
     return isResponseAsync;
