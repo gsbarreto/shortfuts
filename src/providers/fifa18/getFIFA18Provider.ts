@@ -1,6 +1,7 @@
 import buyBronzePack from './buyBronzePack';
 import buyNow from './buyNow';
 import comparePrice from './comparePrice';
+import futbin from './futbin';
 import list from './list';
 import listMinBin from './listMinBin';
 import Provider from '../Provider';
@@ -14,6 +15,7 @@ export default function getFIFA18Provider(): Provider {
         buyBronzePack: buyBronzePack,
         buyNow: buyNow,
         comparePrice: comparePrice,
+        futbin: futbin,
         list: list,
         listMinBin: listMinBin,
         quickSell: quickSell,

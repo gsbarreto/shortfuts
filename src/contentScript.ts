@@ -38,6 +38,7 @@ import { log } from './utils/logger';
 
             if (request.futbin) {
                 logHotkeyReceived('futbin');
+                provider.futbin();
             } else if (request.storeInClub) {
                 logHotkeyReceived('storeInClub');
                 provider.storeInClub();
