@@ -43,6 +43,7 @@ import { log } from './utils/logger';
                 provider.storeInClub();
             } else if (request.buyNow) {
                 logHotkeyReceived('buyNow');
+                provider.buyNow();
             } else if (request.comparePrice) {
                 logHotkeyReceived('comparePrice');
             } else if (request.quickSell) {

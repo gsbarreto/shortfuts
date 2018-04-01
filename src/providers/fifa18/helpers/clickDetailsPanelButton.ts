@@ -1,4 +1,4 @@
-import { log, logError } from '../logger';
+import { log, logError } from '../../../utils/logger';
 import clickElement from './clickElement';
 
 export default function clickDetailsPanelButton(buttonLabel: string) {

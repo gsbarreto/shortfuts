@@ -18,6 +18,7 @@ function sendTouchEvent(element, eventType) {
      * Touch constructor does take an object in Chrome, but typings aren't updated,
      * so it shows as an error when in reality it's fine.
      */
+    // @ts-ignore
     const touch = new Touch({
         identifier: 'shortfut',
         target: element,
