@@ -1,11 +1,12 @@
+import getProvider from './providers/getProvider';
+import Provider from './providers/Provider';
 import { log } from './utils/logger';
 
 (function() {
-    log('Running contentScript...');
+    log('Content script has loaded and is running.');
 
-    function logHotkeyReceived(hotkeyName: string) {
-        log(`${hotkeyName} shortfut received in content script.`);
-    }
+    // Get provider that performs hotkey actions for correct version of web app.
+    const provider = getProvider();
 
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         chrome.storage.sync.get('isActive', data => {
@@ -39,6 +40,7 @@ import { log } from './utils/logger';
                 logHotkeyReceived('futbin');
             } else if (request.storeInClub) {
                 logHotkeyReceived('storeInClub');
+                provider.storeInClub();
             } else if (request.buyNow) {
                 logHotkeyReceived('buyNow');
             } else if (request.comparePrice) {
@@ -56,4 +58,8 @@ import { log } from './utils/logger';
             }
         });
     });
+
+    function logHotkeyReceived(hotkeyName: string) {
+        log(`${hotkeyName} shortfut received in content script`);
+    }
 })();
