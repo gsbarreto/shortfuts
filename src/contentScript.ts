@@ -104,6 +104,6 @@ import { log } from './utils/logger';
     });
 
     function logHotkeyReceived(hotkeyName: string) {
-        log(`${hotkeyName} shortfut received in content script`);
+        log(`${hotkeyName} shortfut received in content script.`);
     }
 })();
