@@ -3,7 +3,7 @@
 
     "name": "shortfuts",
     "description":
-        "Exposes keyboard shortcuts for FIFA 19 FUT web app. Click the icon in address bar for a list of supported hotkeys.",
+        "Exposes keyboard shortcuts for FIFA Ultimate Team (FUT) web app.",
     "version": "3.0.0",
 
     "browser_action": {
