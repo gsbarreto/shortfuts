@@ -27,17 +27,29 @@
             "description": "Toggles the extension on and off"
         },
         "command1": {
-            "description": "Pulls in FUTBIN data for the current item"
+            "description": "Pulls in FUTBIN data for the current item",
+            "suggested_key": {
+                "default": "Alt+F"
+            }
         },
         "command2": {
-            "description": "Stores current item in the club"
+            "description": "Stores current item in the club",
+            "suggested_key": {
+                "default": "Alt+S"
+            }
         },
         "command3": {
-            "description": "Buys the current item for BIN price"
+            "description": "Buys the current item for BIN price",
+            "suggested_key": {
+                "default": "Alt+B"
+            }
         },
         "command4": {
             "description":
-                "Compares price of the current item with other items on the market"
+                "Compares price of the current item with other items on the market",
+            "suggested_key": {
+                "default": "Alt+C"
+            }
         },
         "command5": {
             "description": "Quick sells the current item"
