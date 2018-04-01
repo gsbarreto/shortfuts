@@ -5,9 +5,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     // onMessage must return "true" if response is async.
     let isResponseAsync = false;
 
-    if (request.popupMounted) {
-        log('eventPage notified that Popup.tsx has mounted.');
-    } else if (request.changeShortcuts) {
+    if (request.changeShortcuts) {
         chrome.tabs.create({
             active: true,
             url: 'chrome://extensions/shortcuts'

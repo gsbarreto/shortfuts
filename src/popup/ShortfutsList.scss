@@ -1,0 +1,42 @@
+@import './theme';
+
+.shortfutsList {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+
+    :last-child {
+        border-bottom: none;
+    }
+}
+
+.shortfut {
+    border-bottom: 1px solid $themeLighterColor;
+    display: flex;
+    padding: 0px 2px;
+
+    .shortfutShared {
+        padding: 4px 2px;
+    }
+
+    .shortfutDescription {
+        @extend .shortfutShared;
+        width: 300px;
+    }
+
+    .shortfutShortcutBase {
+        @extend .shortfutShared;
+        text-align: right;
+        width: 70px;
+    }
+
+    .shortfutShortcut {
+        @extend .shortfutShortcutBase;
+        color: $themePrimaryColor;
+    }
+
+    .shortfutSetShortcut {
+        @extend .shortfutShortcutBase;
+        color: $themeLightColor;
+    }
+}
