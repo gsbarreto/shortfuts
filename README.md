@@ -11,8 +11,8 @@
 
 ## Demo
 
-[![Demo](https://raw.githubusercontent.com/martellaj/shortfuts/shortfuts-v3/README%20media/screenshot%20with%20play.png)](https://youtu.be/VbbbM3LWLgs)
+[![Demo](https://github.com/martellaj/shortfuts/blob/master/README%20media/screenshot%20with%20play.png)](https://youtu.be/VbbbM3LWLgs)
 
 ## Supported shortfuts
 
-![Shortfuts list](https://raw.githubusercontent.com/martellaj/shortfuts/shortfuts-v3/README%20media/shortfuts%20list.png)
+![Shortfuts list](https://raw.githubusercontent.com/martellaj/shortfuts/master/README%20media/shortfuts%20list.png)
