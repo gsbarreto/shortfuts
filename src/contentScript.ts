@@ -6,7 +6,15 @@ import { log } from './utils/logger';
     log('Content script has loaded and is running.');
 
     // Update badge with current status.
-    chrome.storage.sync.get('isActive', function(data) {
+    chrome.storage.sync.get('isActive', data => {
+        // Make extension active on first run.
+        if (data.isActive === undefined) {
+            chrome.storage.sync.set({ isActive: true }, () => {
+                chrome.runtime.sendMessage({ isActive: true });
+            });
+            return;
+        }
+
         chrome.runtime.sendMessage({ isActive: data.isActive });
     });
 
@@ -14,10 +22,10 @@ import { log } from './utils/logger';
     const provider = getProvider();
 
     // Sets up listeners for non-configurable shortcuts.
-    window.addEventListener('keydown', function(ev) {
+    window.addEventListener('keydown', ev => {
         const keyCode = ev.keyCode;
 
-        chrome.storage.sync.get('isActive', function(data) {
+        chrome.storage.sync.get('isActive', data => {
             // Update badge with current status.
             const isActive = data.isActive;
             chrome.runtime.sendMessage({ isActive: isActive });
