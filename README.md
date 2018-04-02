@@ -1,15 +1,18 @@
-# Chrome Extension (built with TypeScript + React)
+# shortfuts
 
-> This project is a boilerplate project to allow you to quickly build chrome extensions using TypeScript and React.
+> **shortfuts** is a Chrome extension that exposes keyboard shortcuts for common actions in the FUT web app, with a focus on making the "Bronze Pack Method" (BPM) quicker.
 
-## Building
+## Features
 
-1.  Clone repo
-2.  `npm i`
-3.  `npm run build` to compile once or `npm run watch` to run the build task in watch mode
+*   Exposes shortcuts for popular FUT web app tasks
+*   Configurable hotkeys so you can do what's best for you
+*   Directly see FUTBIN data for player cards in the web app
+*   Free (but feel free to [support me](https://www.paypal.me/martellaj/5) if you find it useful)
 
-## Installation
+## Demo
 
-1.  Complete the steps to build the project above
-2.  Go to [_chrome://extensions_](chrome://extensions) in Google Chrome
-3.  With the developer mode checkbox ticked, click **Load unpacked extension...** and select the _dist_ folder from this repo
+[![Demo](https://raw.githubusercontent.com/martellaj/shortfuts/shortfuts-v3/README%20media/screenshot%20with%20play.png)](https://youtu.be/VbbbM3LWLgs)
+
+## Supported shortfuts
+
+![Shortfuts list](https://raw.githubusercontent.com/martellaj/shortfuts/shortfuts-v3/README%20media/shortfuts%20list.png)
