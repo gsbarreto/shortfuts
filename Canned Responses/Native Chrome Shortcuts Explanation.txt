@@ -1,0 +1,5 @@
+I rewrote shortfuts to improve it (and get it ready for FIFA 19). One decision I made was to switch from hard-coded hotkeys to native Chrome ones.
+
+It was a tradeoff I made because I've had A LOT of people ask about customizing keybindings or turning off certain shortcuts. With native Chrome hotkeys, both of these asks can be accomplished. I thought using the modifier key would be a little clumsy, but it only takes a little getting used to and it feels natural.
+
+If there are a lot of complaints with the new behavior, I'll consider adding in a "legacy" mode where the extension behaves like v2 (hard-coded shortcuts that the user can't control) and letting users have a choice if they want to use that. A feature like that would be extra overhead and really won't be considered unless there's a lot of complaints (or a large donation).
