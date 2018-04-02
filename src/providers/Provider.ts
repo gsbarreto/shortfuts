@@ -12,5 +12,6 @@ export default interface Provider {
     quickSell: () => void;
     quickSellAll: () => void;
     sendToTransferList: () => void;
+    storeAllInClub: () => void;
     storeInClub: () => void;
 };

@@ -146,6 +146,14 @@ chrome.commands.onCommand.addListener(command => {
                 });
                 break;
             }
+            // storeAllInClub
+            case 'command11': {
+                _gaq.push(['_trackEvent', 'telemetry', 'storeAllInClub']);
+                chrome.tabs.sendMessage(currentTab, {
+                    storeAllInClub: true
+                });
+                break;
+            }
         }
     });
 });

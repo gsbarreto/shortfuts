@@ -110,6 +110,9 @@ import { log } from './utils/logger';
             } else if (request.quickSellAll) {
                 logHotkeyReceived('quickSellAll');
                 provider.quickSellAll();
+            } else if (request.storeAllInClub) {
+                logHotkeyReceived('storeAllInClub');
+                provider.storeAllInClub();
             }
         });
     });

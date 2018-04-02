@@ -10,6 +10,7 @@ import Provider from '../Provider';
 import quickSell from './quickSell';
 import quickSellAll from './quickSellAll';
 import sendToTransferList from './sendToTransferList';
+import storeAllInClub from './storeAllInClub';
 import storeInClub from './storeInClub';
 import { log } from '../../utils/logger';
 
@@ -26,6 +27,7 @@ export default function getFIFA18Provider(): Provider {
         quickSell: quickSell,
         quickSellAll: quickSellAll,
         sendToTransferList: sendToTransferList,
+        storeAllInClub: storeAllInClub,
         storeInClub: storeInClub
     };
 }
