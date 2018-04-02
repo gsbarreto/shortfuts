@@ -1,5 +1,15 @@
 import { log } from './utils/logger';
 
+// Google Analytics bootstrap
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-108017342-1']);
+var ga = document.createElement('script');
+ga.type = 'text/javascript';
+ga.async = true;
+ga.src = 'https://ssl.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(ga, s);
+
 // Listen to messages sent from other parts of the extension.
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     // onMessage must return "true" if response is async.
@@ -69,6 +79,7 @@ chrome.commands.onCommand.addListener(command => {
             }
             // futbin
             case 'command1': {
+                _gaq.push(['_trackEvent', 'telemetry', 'futbin']);
                 chrome.tabs.sendMessage(currentTab, { futbin: true });
                 break;
             }
@@ -79,21 +90,25 @@ chrome.commands.onCommand.addListener(command => {
             }
             // buyNow
             case 'command3': {
+                _gaq.push(['_trackEvent', 'telemetry', 'buyNow']);
                 chrome.tabs.sendMessage(currentTab, { buyNow: true });
                 break;
             }
             // comparePrice
             case 'command4': {
+                _gaq.push(['_trackEvent', 'telemetry', 'comparePrice']);
                 chrome.tabs.sendMessage(currentTab, { comparePrice: true });
                 break;
             }
             // quickSell
             case 'command5': {
+                _gaq.push(['_trackEvent', 'telemetry', 'quickSell']);
                 chrome.tabs.sendMessage(currentTab, { quickSell: true });
                 break;
             }
             // sendToTransferList
             case 'command6': {
+                _gaq.push(['_trackEvent', 'telemetry', 'sendToTransferList']);
                 chrome.tabs.sendMessage(currentTab, {
                     sendToTransferList: true
                 });
@@ -101,6 +116,7 @@ chrome.commands.onCommand.addListener(command => {
             }
             // listMinBin
             case 'command7': {
+                _gaq.push(['_trackEvent', 'telemetry', 'listMinBin']);
                 chrome.tabs.sendMessage(currentTab, {
                     listMinBin: true
                 });
@@ -108,6 +124,7 @@ chrome.commands.onCommand.addListener(command => {
             }
             // list
             case 'command8': {
+                _gaq.push(['_trackEvent', 'telemetry', 'listItem']);
                 chrome.tabs.sendMessage(currentTab, {
                     list: true
                 });
@@ -115,6 +132,7 @@ chrome.commands.onCommand.addListener(command => {
             }
             // buyBronzePack
             case 'command9': {
+                _gaq.push(['_trackEvent', 'telemetry', 'buyBronzePack']);
                 chrome.tabs.sendMessage(currentTab, {
                     buyBronzePack: true
                 });
