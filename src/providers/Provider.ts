@@ -10,6 +10,7 @@ export default interface Provider {
     listMinBin: () => void;
     move: (direction: Direction) => void;
     quickSell: () => void;
+    quickSellAll: () => void;
     sendToTransferList: () => void;
     storeInClub: () => void;
 };

@@ -107,6 +107,9 @@ import { log } from './utils/logger';
             } else if (request.buyBronzePack) {
                 logHotkeyReceived('buyBronzePack');
                 provider.buyBronzePack();
+            } else if (request.quickSellAll) {
+                logHotkeyReceived('quickSellAll');
+                provider.quickSellAll();
             }
         });
     });

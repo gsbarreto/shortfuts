@@ -138,6 +138,14 @@ chrome.commands.onCommand.addListener(command => {
                 });
                 break;
             }
+            // quickSellAll
+            case 'command10': {
+                _gaq.push(['_trackEvent', 'telemetry', 'quickSellAll']);
+                chrome.tabs.sendMessage(currentTab, {
+                    quickSellAll: true
+                });
+                break;
+            }
         }
     });
 });

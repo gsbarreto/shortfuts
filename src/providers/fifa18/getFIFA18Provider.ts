@@ -8,6 +8,7 @@ import listMinBin from './listMinBin';
 import move from './move';
 import Provider from '../Provider';
 import quickSell from './quickSell';
+import quickSellAll from './quickSellAll';
 import sendToTransferList from './sendToTransferList';
 import storeInClub from './storeInClub';
 import { log } from '../../utils/logger';
@@ -23,6 +24,7 @@ export default function getFIFA18Provider(): Provider {
         listMinBin: listMinBin,
         move: move,
         quickSell: quickSell,
+        quickSellAll: quickSellAll,
         sendToTransferList: sendToTransferList,
         storeInClub: storeInClub
     };
