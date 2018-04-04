@@ -5,6 +5,14 @@ import { log } from './utils/logger';
 (function() {
     log('Content script has loaded and is running.');
 
+    setTimeout(() => {
+        const header = document.getElementById('FIFAHeader');
+        const shortfutsWarning = document.createElement('div');
+        shortfutsWarning.innerText =
+            'SHORTFUTS USERS, OPEN EXTENSION TO CONFIGURE HOTKEYS!';
+        header.appendChild(shortfutsWarning);
+    }, 5000);
+
     // Update badge with current status.
     chrome.storage.sync.get('isActive', data => {
         // Make extension active on first run.
