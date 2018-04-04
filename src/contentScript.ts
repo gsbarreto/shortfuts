@@ -121,6 +121,9 @@ import { log } from './utils/logger';
             } else if (request.storeAllInClub) {
                 logHotkeyReceived('storeAllInClub');
                 provider.storeAllInClub();
+            } else if (request.watch) {
+                logHotkeyReceived('watch');
+                provider.watch();
             }
         });
     });

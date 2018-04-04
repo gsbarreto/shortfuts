@@ -13,6 +13,7 @@ import sendToTransferList from './sendToTransferList';
 import storeAllInClub from './storeAllInClub';
 import storeInClub from './storeInClub';
 import { log } from '../../utils/logger';
+import watch from './watch';
 
 export default function getFIFA18Provider(): Provider {
     return {
@@ -28,6 +29,7 @@ export default function getFIFA18Provider(): Provider {
         quickSellAll: quickSellAll,
         sendToTransferList: sendToTransferList,
         storeAllInClub: storeAllInClub,
-        storeInClub: storeInClub
+        storeInClub: storeInClub,
+        watch: watch
     };
 }

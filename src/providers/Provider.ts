@@ -14,4 +14,5 @@ export default interface Provider {
     sendToTransferList: () => void;
     storeAllInClub: () => void;
     storeInClub: () => void;
+    watch: () => void;
 };

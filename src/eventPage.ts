@@ -154,6 +154,14 @@ chrome.commands.onCommand.addListener(command => {
                 });
                 break;
             }
+            // watch
+            case 'command12': {
+                _gaq.push(['_trackEvent', 'telemetry', 'watch']);
+                chrome.tabs.sendMessage(currentTab, {
+                    watch: true
+                });
+                break;
+            }
         }
     });
 });
