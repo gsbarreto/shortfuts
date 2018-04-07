@@ -85,6 +85,7 @@ chrome.commands.onCommand.addListener(command => {
             }
             // storeInClub
             case 'command2': {
+                _gaq.push(['_trackEvent', 'telemetry', 'storeInClub']);
                 chrome.tabs.sendMessage(currentTab, { storeInClub: true });
                 break;
             }
