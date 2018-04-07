@@ -8,8 +8,15 @@ import './ShortfutsList.scss';
 // Aliases type to save typing.
 type Command = chrome.commands.Command;
 
+export interface ShortcutsListProps {
+    isNativeShortcuts: boolean;
+}
+
 @observer
-export default class ShortfutsList extends React.Component<{}, {}> {
+export default class ShortfutsList extends React.Component<
+    ShortcutsListProps,
+    {}
+> {
     @observable
     private commands: Map<string, Command> = new Map<string, Command>();
 
@@ -29,11 +36,15 @@ export default class ShortfutsList extends React.Component<{}, {}> {
         }
 
         // Build array from map.
-        const commandArray = Array.from(this.commands);
+        const commandArray = this.props.isNativeShortcuts
+            ? Array.from(this.commands)
+            : Array.from(this.buildLegacyShortcutsList());
 
         return (
-            <div className="shortfutsList">
-                {commandArray.map(this.renderShortfut)}
+            <div className="shortfutsListContainer">
+                <div className="shortfutsList">
+                    {commandArray.map(this.renderShortfut)}
+                </div>
             </div>
         );
     }
@@ -66,5 +77,79 @@ export default class ShortfutsList extends React.Component<{}, {}> {
                 )}
             </div>
         );
+    }
+
+    buildLegacyShortcutsList() {
+        const map: Map<any, any> = new Map();
+
+        map.set('altSpace', {
+            description: 'Toggles the extension on and off',
+            name: 'Alt+Space',
+            shortcut: 'Alt+Space'
+        });
+        map.set('f', {
+            description: 'Pulls in FUTBIN data for the current item',
+            name: 'F',
+            shortcut: 'F'
+        });
+        map.set('s', {
+            description: 'Stores current item in the club',
+            name: 'S',
+            shortcut: 'S'
+        });
+        map.set('altS', {
+            description: 'Stores all remaining items in pack in the club',
+            name: 'AltS',
+            shortcut: 'Alt+S'
+        });
+        map.set('n', {
+            description: 'Buys the current item for BIN price',
+            name: 'N',
+            shortcut: 'N'
+        });
+        map.set('c', {
+            description:
+                'Compares price of the current item with other items on the market',
+            name: 'C',
+            shortcut: 'C'
+        });
+        map.set('q', {
+            description: 'Quick sells the current item',
+            name: 'Q',
+            shortcut: 'Q'
+        });
+        map.set('altQ', {
+            description: 'Quick sells all remaining items in pack',
+            name: 'AltQ',
+            shortcut: 'Alt+Q'
+        });
+        map.set('t', {
+            description: 'Sends current item to transfer list',
+            name: 'T',
+            shortcut: 'T'
+        });
+        map.set('m', {
+            description: 'Lists the current item for minimum BIN',
+            name: 'M',
+            shortcut: 'M'
+        });
+        map.set('l', {
+            description:
+                'Lists the current item (with currently selected price range)',
+            name: 'L',
+            shortcut: 'L'
+        });
+        map.set('b', {
+            description: 'Buys a bronze pack',
+            name: 'B',
+            shortcut: 'B'
+        });
+        map.set('w', {
+            description: `Toggles current item's status on your transfer targets list`,
+            name: 'W',
+            shortcut: 'W'
+        });
+
+        return map;
     }
 }

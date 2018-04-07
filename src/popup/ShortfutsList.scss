@@ -1,5 +1,10 @@
 @import '../theme';
 
+.shortfutsListContainer {
+    max-height: 350px;
+    overflow-y: scroll;
+}
+
 .shortfutsList {
     display: flex;
     flex-direction: column;

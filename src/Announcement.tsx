@@ -37,7 +37,7 @@ loadTheme({
     }
 });
 
-const ANNOUNCEMENT_VERSION = 1;
+const ANNOUNCEMENT_VERSION = 2;
 
 @observer
 export default class Announcement extends React.Component<{}, {}> {
@@ -103,9 +103,9 @@ export default class Announcement extends React.Component<{}, {}> {
                                 iconName="RadioBullet"
                                 className="announcementBulletIcon"
                             />
-                            Custom hotkeys not for you? "Legacy" mode is coming
-                            soon where you'll be able to choose to go back to
-                            shortfuts v2 hotkeys. Stay tuned!
+                            Custom hotkeys not for you? "Legacy" mode is here!
+                            Open the extension's popup to turn off native Chrome
+                            hotkeys and go back to the original set!
                         </div>
                     </div>
                     <Footer showChangeShortfutsButton={false} />
