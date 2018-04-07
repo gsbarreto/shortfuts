@@ -1,16 +1,27 @@
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import Announcement from './Announcement';
 import getProvider from './providers/getProvider';
 import Provider from './providers/Provider';
+import { initializeIcons } from 'office-ui-fabric-react/lib/Icons';
 import { log } from './utils/logger';
 
 (function() {
     log('Content script has loaded and is running.');
 
+    // Initialize OUFR icons.
+    initializeIcons();
+
     setTimeout(() => {
         const header = document.getElementById('FIFAHeader');
-        const shortfutsWarning = document.createElement('div');
-        shortfutsWarning.innerText =
-            'SHORTFUTS USERS, OPEN EXTENSION TO CONFIGURE HOTKEYS!';
-        header.appendChild(shortfutsWarning);
+        const updateAnchor = document.createElement('div');
+        updateAnchor.id = 'updateAnchor';
+        header.appendChild(updateAnchor);
+
+        ReactDOM.render(
+            <Announcement />,
+            document.getElementById('updateAnchor')
+        );
     }, 5000);
 
     // Update badge with current status.

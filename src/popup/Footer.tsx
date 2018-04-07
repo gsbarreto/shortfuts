@@ -2,7 +2,15 @@ import * as React from 'react';
 import { ActionButton } from 'office-ui-fabric-react/lib/Button';
 import './Footer.scss';
 
-export default class Footer extends React.Component<{}, {}> {
+export interface FooterProps {
+    showChangeShortfutsButton: boolean;
+}
+
+export default class Footer extends React.Component<FooterProps, {}> {
+    constructor(props: FooterProps, state: {}) {
+        super(props, state);
+    }
+
     render() {
         return (
             <div className="footer">
@@ -19,16 +27,18 @@ export default class Footer extends React.Component<{}, {}> {
                     Donate
                 </ActionButton>
                 {/* Change shortcuts button */}
-                <ActionButton
-                    iconProps={{ iconName: 'EditStyle' }}
-                    onClick={() => {
-                        chrome.runtime.sendMessage({
-                            changeShortcuts: true
-                        });
-                    }}
-                >
-                    Change shortcuts
-                </ActionButton>
+                {this.props.showChangeShortfutsButton && (
+                    <ActionButton
+                        iconProps={{ iconName: 'EditStyle' }}
+                        onClick={() => {
+                            chrome.runtime.sendMessage({
+                                changeShortcuts: true
+                            });
+                        }}
+                    >
+                        Change shortcuts
+                    </ActionButton>
+                )}
                 {/* Contact button */}
                 <ActionButton
                     iconProps={{ iconName: 'Mail' }}

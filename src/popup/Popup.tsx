@@ -8,7 +8,7 @@ export default class Popup extends React.Component<{}, {}> {
         return (
             <div className="popupContainer ms-Fabric">
                 <ShortfutsList />
-                <Footer />
+                <Footer showChangeShortfutsButton={true} />
             </div>
         );
     }
