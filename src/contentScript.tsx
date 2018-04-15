@@ -123,6 +123,12 @@ import { log } from './utils/logger';
                         case 70 /* f */:
                             provider.futbin();
                             break;
+                        case 37 /* left arrow */:
+                            provider.pagePrevious();
+                            break;
+                        case 39 /* right arrow */:
+                            provider.pageNext();
+                            break;
                         default:
                             break;
                     }
@@ -144,6 +150,12 @@ import { log } from './utils/logger';
                             break;
                         case 40 /* down arrow */:
                             provider.move('down');
+                            break;
+                        case 37 /* left arrow */:
+                            provider.pagePrevious();
+                            break;
+                        case 39 /* right arrow */:
+                            provider.pageNext();
                             break;
                     }
                 }
