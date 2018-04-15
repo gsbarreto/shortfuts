@@ -37,7 +37,7 @@ loadTheme({
     }
 });
 
-const ANNOUNCEMENT_VERSION = 2;
+const ANNOUNCEMENT_VERSION = 3;
 
 @observer
 export default class Announcement extends React.Component<{}, {}> {
@@ -103,9 +103,9 @@ export default class Announcement extends React.Component<{}, {}> {
                                 iconName="RadioBullet"
                                 className="announcementBulletIcon"
                             />
-                            Custom hotkeys not for you? "Legacy" mode is here!
-                            Open the extension's popup to turn off native Chrome
-                            hotkeys and go back to the original set!
+                            New shortcuts added! Set up a custom hotkey to bid
+                            on a player, as well as use the left and right
+                            arrows to flip through pages of items!
                         </div>
                     </div>
                     <Footer showChangeShortfutsButton={false} />
