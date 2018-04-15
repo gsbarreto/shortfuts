@@ -5,6 +5,7 @@ import comparePrice from './comparePrice';
 import futbin from './futbin';
 import list from './list';
 import listMinBin from './listMinBin';
+import makeBid from './makeBid';
 import move from './move';
 import Provider from '../Provider';
 import quickSell from './quickSell';
@@ -12,8 +13,8 @@ import quickSellAll from './quickSellAll';
 import sendToTransferList from './sendToTransferList';
 import storeAllInClub from './storeAllInClub';
 import storeInClub from './storeInClub';
-import { log } from '../../utils/logger';
 import watch from './watch';
+import { log } from '../../utils/logger';
 
 export default function getFIFA18Provider(): Provider {
     return {
@@ -24,6 +25,7 @@ export default function getFIFA18Provider(): Provider {
         futbin: futbin,
         list: list,
         listMinBin: listMinBin,
+        makeBid: makeBid,
         move: move,
         quickSell: quickSell,
         quickSellAll: quickSellAll,

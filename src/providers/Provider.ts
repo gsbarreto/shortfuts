@@ -8,6 +8,7 @@ export default interface Provider {
     futbin: () => void;
     list: () => void;
     listMinBin: () => void;
+    makeBid: () => void;
     move: (direction: Direction) => void;
     quickSell: () => void;
     quickSellAll: () => void;

@@ -76,6 +76,9 @@
         "command12": {
             "description":
                 "Toggles current item's status on your transfer targets list"
+        },
+        "command13": {
+            "description": "Makes a bid on the current item"
         }
     },
 

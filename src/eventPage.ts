@@ -163,6 +163,14 @@ chrome.commands.onCommand.addListener(command => {
                 });
                 break;
             }
+            // makeBid
+            case 'command13': {
+                _gaq.push(['_trackEvent', 'telemetry', 'makeBid']);
+                chrome.tabs.sendMessage(currentTab, {
+                    makeBid: true
+                });
+                break;
+            }
         }
     });
 });

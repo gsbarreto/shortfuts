@@ -227,6 +227,9 @@ import { log } from './utils/logger';
                     } else if (request.watch) {
                         logHotkeyReceived('watch');
                         provider.watch();
+                    } else if (request.makeBid) {
+                        logHotkeyReceived('makeBid');
+                        provider.makeBid();
                     }
                 }
             });
