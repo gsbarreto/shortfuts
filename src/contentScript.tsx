@@ -129,6 +129,9 @@ import { log } from './utils/logger';
                         case 39 /* right arrow */:
                             provider.pageNext();
                             break;
+                        case 68 /* d */:
+                            provider.makeBid();
+                            break;
                         default:
                             break;
                     }

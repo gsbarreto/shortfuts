@@ -149,6 +149,11 @@ export default class ShortfutsList extends React.Component<
             name: 'W',
             shortcut: 'W'
         });
+        map.set('d', {
+            description: `Makes a bid on the current item`,
+            name: 'D',
+            shortcut: 'D'
+        });
 
         return map;
     }
