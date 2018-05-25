@@ -15,7 +15,7 @@ export default class Header extends React.Component<HeaderProps, {}> {
     render() {
         return (
             <div className="header">
-                <span className="headerTitle">shortfuts v3.6.0</span>
+                <span className="headerTitle">shortfuts v3.7.1</span>
                 <Toggle
                     checked={this.props.isNativeShortcuts}
                     offText="Legacy shortcuts (not configurable)"
