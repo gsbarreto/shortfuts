@@ -29,6 +29,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         chrome.browserAction.setBadgeText({
             text: request.isActive ? 'ON' : 'OFF'
         });
+    } else if (request.privacyPolicy) {
+        _gaq.push(['_trackEvent', 'telemetry', 'privacyPolicy']);
+    } else if (request.announcementShown) {
+        _gaq.push(['_trackEvent', 'telemetry', 'announcementShown']);
     }
 
     return isResponseAsync;

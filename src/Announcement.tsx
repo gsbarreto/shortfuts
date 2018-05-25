@@ -55,6 +55,10 @@ export default class Announcement extends React.Component<{}, {}> {
                 chrome.storage.sync.set({
                     announcementVersion: ANNOUNCEMENT_VERSION
                 });
+
+                chrome.runtime.sendMessage({
+                    announcementShown: true
+                });
             }
         });
     }
@@ -93,6 +97,10 @@ export default class Announcement extends React.Component<{}, {}> {
                                             'https://www.paypal.me/martellaj/5',
                                             '_blank'
                                         );
+
+                                        chrome.runtime.sendMessage({
+                                            privacyPolicy: true
+                                        });
                                     }}
                                 >
                                     We've updated our privacy policy!
