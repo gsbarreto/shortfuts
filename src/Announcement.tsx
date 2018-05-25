@@ -5,9 +5,9 @@ import { IconButton } from 'office-ui-fabric-react/lib/Button';
 import { Link } from 'office-ui-fabric-react/lib/Link';
 import { loadTheme } from '@uifabric/styling';
 import { Modal } from 'office-ui-fabric-react/lib/Modal';
-import './Announcement.scss';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
+import './Announcement.scss';
 
 // Replace OUFR default theme with FIFA 18 color theme.
 loadTheme({
@@ -37,7 +37,7 @@ loadTheme({
     }
 });
 
-const ANNOUNCEMENT_VERSION = 3;
+const ANNOUNCEMENT_VERSION = 4;
 
 @observer
 export default class Announcement extends React.Component<{}, {}> {
@@ -89,23 +89,15 @@ export default class Announcement extends React.Component<{}, {}> {
                                 <Link
                                     id="announcementSetShortcuts"
                                     onClick={() => {
-                                        chrome.runtime.sendMessage({
-                                            changeShortcuts: true
-                                        });
+                                        window.open(
+                                            'https://www.paypal.me/martellaj/5',
+                                            '_blank'
+                                        );
                                     }}
                                 >
-                                    Custom hotkeys are here!
+                                    We've updated our privacy policy!
                                 </Link>
                             </div>
-                        </div>
-                        <div className="announcementBullet">
-                            <Icon
-                                iconName="RadioBullet"
-                                className="announcementBulletIcon"
-                            />
-                            New shortcuts added! Set up a custom hotkey to bid
-                            on a player, as well as use the left and right
-                            arrows to flip through pages of items!
                         </div>
                     </div>
                     <Footer showChangeShortfutsButton={false} />
