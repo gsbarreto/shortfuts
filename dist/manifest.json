@@ -2,9 +2,8 @@
     "manifest_version": 2,
 
     "name": "shortfuts",
-    "description":
-        "Exposes keyboard shortcuts for FIFA Ultimate Team (FUT) web app.",
-    "version": "3.7.1",
+    "description": "Exposes keyboard shortcuts for FIFA Ultimate Team (FUT) web app.",
+    "version": "3.8.0",
 
     "browser_action": {
         "default_icon": "icon16.png",
@@ -39,8 +38,7 @@
             "description": "Buys the current item for BIN price"
         },
         "command4": {
-            "description":
-                "Compares price of the current item with other items on the market"
+            "description": "Compares price of the current item with other items on the market"
         },
         "command5": {
             "description": "Quick sells the current item",
@@ -58,8 +56,7 @@
             }
         },
         "command8": {
-            "description":
-                "Lists the current item (with currently selected price range)"
+            "description": "Lists the current item (with currently selected price range)"
         },
         "command9": {
             "description": "Buys a bronze pack",
@@ -74,8 +71,7 @@
             "description": "Stores all remaining items in pack in the club"
         },
         "command12": {
-            "description":
-                "Toggles current item's status on your transfer targets list"
+            "description": "Toggles current item's status on your transfer targets list"
         },
         "command13": {
             "description": "Makes a bid on the current item"
@@ -89,8 +85,7 @@
         }
     ],
 
-    "content_security_policy":
-        "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+    "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
 
     "permissions": [
         "storage",

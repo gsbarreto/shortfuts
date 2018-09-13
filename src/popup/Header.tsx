@@ -1,6 +1,4 @@
 import * as React from 'react';
-import { ActionButton } from 'office-ui-fabric-react/lib/Button';
-import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
 import './Header.scss';
@@ -15,7 +13,7 @@ export default class Header extends React.Component<HeaderProps, {}> {
     render() {
         return (
             <div className="header">
-                <span className="headerTitle">shortfuts v3.7.1</span>
+                <span className="headerTitle">shortfuts v3.8.0</span>
                 <Toggle
                     checked={this.props.isNativeShortcuts}
                     offText="Legacy shortcuts (not configurable)"
