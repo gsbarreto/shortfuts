@@ -37,14 +37,15 @@ loadTheme({
     }
 });
 
-const ANNOUNCEMENT_VERSION = 4;
+const ANNOUNCEMENT_VERSION = 5;
 
 @observer
 export default class Announcement extends React.Component<{}, {}> {
-    @observable private isOpen: boolean = false;
+    @observable
+    private isOpen: boolean = false;
 
     componentDidMount() {
-        chrome.storage.sync.get('announcementVersion', data => {
+        chrome.storage.sync.get('announcementVersion2', data => {
             if (
                 data.announcementVersion === undefined ||
                 data.announcementVersion < ANNOUNCEMENT_VERSION
@@ -94,16 +95,16 @@ export default class Announcement extends React.Component<{}, {}> {
                                     id="announcementSetShortcuts"
                                     onClick={() => {
                                         window.open(
-                                            'https://www.paypal.me/martellaj/5',
+                                            'https://www.gofundme.com/shortfuts-for-fifa-19',
                                             '_blank'
                                         );
 
                                         chrome.runtime.sendMessage({
-                                            privacyPolicy: true
+                                            goFundMe: true
                                         });
                                     }}
                                 >
-                                    We've updated our privacy policy!
+                                    Do you want shortfuts for FIFA 19?
                                 </Link>
                             </div>
                         </div>

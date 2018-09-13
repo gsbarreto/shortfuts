@@ -18,6 +18,16 @@ import { log } from './utils/logger';
         updateAnchor.id = 'updateAnchor';
         header.appendChild(updateAnchor);
 
+        const a = document.createElement('a');
+        const linkText = document.createTextNode(
+            'DO YOU WANT SHORTFUTS IN FIFA 19?'
+        );
+        a.appendChild(linkText);
+        a.href = 'https://www.gofundme.com/shortfuts-for-fifa-19';
+        a.target = '_blank';
+
+        header.appendChild(a);
+
         ReactDOM.render(
             <Announcement />,
             document.getElementById('updateAnchor')
