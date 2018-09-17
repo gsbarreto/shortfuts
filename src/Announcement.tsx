@@ -37,7 +37,7 @@ loadTheme({
     }
 });
 
-const ANNOUNCEMENT_VERSION = 6;
+const ANNOUNCEMENT_VERSION = 7;
 
 @observer
 export default class Announcement extends React.Component<{}, {}> {
@@ -48,8 +48,7 @@ export default class Announcement extends React.Component<{}, {}> {
         chrome.storage.sync.get('announcementVersion2', data => {
             if (
                 data.announcementVersion === undefined ||
-                data.announcementVersion < ANNOUNCEMENT_VERSION ||
-                true
+                data.announcementVersion < ANNOUNCEMENT_VERSION
             ) {
                 this.isOpen = true;
 
