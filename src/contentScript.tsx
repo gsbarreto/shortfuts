@@ -42,6 +42,7 @@ import { log } from './utils/logger';
         const header2 = document.getElementById('header-search-bar');
         if (header2) {
             header2.appendChild(updateAnchor);
+            a.style.fontSize = '40px';
             header2.parentElement.parentElement.appendChild(a);
 
             ReactDOM.render(
