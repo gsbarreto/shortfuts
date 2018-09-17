@@ -38,7 +38,7 @@ import { log } from './utils/logger';
             return;
         }
 
-        // For FIFA subreddit
+        // For FIFA subreddit (new)
         const header2 = document.getElementById('header-search-bar');
         if (header2) {
             header2.appendChild(updateAnchor);
@@ -51,7 +51,22 @@ import { log } from './utils/logger';
 
             return;
         }
-    }, 5000);
+
+        // For FIFA subreddit (old)
+        const header3 = document.getElementById('header-bottom-left');
+        if (header3) {
+            header3.appendChild(updateAnchor);
+            a.style.fontSize = '40px';
+            header3.appendChild(a);
+
+            ReactDOM.render(
+                <Announcement />,
+                document.getElementById('updateAnchor')
+            );
+
+            return;
+        }
+    }, 2000);
 
     // Update badge with current status.
     chrome.storage.sync.get('isActive', data => {

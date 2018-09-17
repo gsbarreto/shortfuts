@@ -82,7 +82,8 @@
         {
             "matches": [
                 "*://www.easports.com/*fifa/ultimate-team/web-app/*",
-                "*://www.reddit.com/r/fifa*"
+                "*://www.reddit.com/r/fifa*",
+                "*://www.reddit.com/r/FIFA*"
             ],
             "js": ["js/contentScript.js"]
         }
