@@ -13,10 +13,8 @@ import { log } from './utils/logger';
     initializeIcons();
 
     setTimeout(() => {
-        const header = document.getElementById('FIFAHeader');
         const updateAnchor = document.createElement('div');
         updateAnchor.id = 'updateAnchor';
-        header.appendChild(updateAnchor);
 
         const a = document.createElement('a');
         const linkText = document.createTextNode(
@@ -26,12 +24,33 @@ import { log } from './utils/logger';
         a.href = 'https://www.gofundme.com/shortfuts-for-fifa-19';
         a.target = '_blank';
 
-        header.appendChild(a);
+        // For FIFA web app
+        const header = document.getElementById('FIFAHeader');
+        if (header) {
+            header.appendChild(updateAnchor);
+            header.appendChild(a);
 
-        ReactDOM.render(
-            <Announcement />,
-            document.getElementById('updateAnchor')
-        );
+            ReactDOM.render(
+                <Announcement />,
+                document.getElementById('updateAnchor')
+            );
+
+            return;
+        }
+
+        // For FIFA subreddit
+        const header2 = document.getElementById('header-search-bar');
+        if (header2) {
+            header2.appendChild(updateAnchor);
+            header2.appendChild(a);
+
+            ReactDOM.render(
+                <Announcement />,
+                document.getElementById('updateAnchor')
+            );
+
+            return;
+        }
     }, 5000);
 
     // Update badge with current status.

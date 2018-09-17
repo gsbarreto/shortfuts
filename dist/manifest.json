@@ -3,7 +3,7 @@
 
     "name": "shortfuts",
     "description": "Exposes keyboard shortcuts for FIFA Ultimate Team (FUT) web app.",
-    "version": "3.8.0",
+    "version": "3.8.1",
 
     "browser_action": {
         "default_icon": "icon16.png",
@@ -80,7 +80,10 @@
 
     "content_scripts": [
         {
-            "matches": ["*://www.easports.com/*fifa/ultimate-team/web-app/*"],
+            "matches": [
+                "*://www.easports.com/*fifa/ultimate-team/web-app/*",
+                "*://www.reddit.com/r/fifa*"
+            ],
             "js": ["js/contentScript.js"]
         }
     ],
