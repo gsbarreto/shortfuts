@@ -42,7 +42,7 @@ import { log } from './utils/logger';
         const header2 = document.getElementById('header-search-bar');
         if (header2) {
             header2.appendChild(updateAnchor);
-            header2.appendChild(a);
+            header2.parentElement.parentElement.appendChild(a);
 
             ReactDOM.render(
                 <Announcement />,
