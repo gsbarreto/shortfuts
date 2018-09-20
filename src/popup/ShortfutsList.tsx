@@ -40,6 +40,28 @@ export default class ShortfutsList extends React.Component<
             ? Array.from(this.commands)
             : Array.from(this.buildLegacyShortcutsList());
 
+        if (this.props.isNativeShortcuts) {
+            commandArray.sort(
+                (
+                    [keyA, commandA]: [string, Command],
+                    [keyB, commandB]: [string, Command]
+                ) => {
+                    // Push commands that aren't set to end.
+                    if (!commandA.shortcut) {
+                        return 1;
+                    }
+
+                    if (commandA.shortcut < commandB.shortcut) {
+                        return -1;
+                    } else if (commandA.shortcut > commandB.shortcut) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                }
+            );
+        }
+
         return (
             <div className="shortfutsListContainer">
                 <div className="shortfutsList">
