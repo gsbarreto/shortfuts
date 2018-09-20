@@ -7,12 +7,12 @@ export default function quickSell() {
         clickDetailsPanelButton('Quick Sell');
         confirmConfirmationDialog();
     } catch (error) {
-        logError('Failed to quick sell item.');
+        logError(`Oops! Couldn't quick sell that.`);
 
         try {
             clickDetailsPanelButton('Redeem');
         } catch (error) {
-            logError('Failed to redeem coins.');
+            logError(`Oops! Couldn't redeem those coins.`);
         }
     }
 }

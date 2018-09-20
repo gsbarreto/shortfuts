@@ -9,12 +9,12 @@ export default function storeInClub() {
     try {
         clickDetailsPanelButton('Send to My Club');
     } catch (error) {
-        logError('Failed to store item in the club.');
+        logError('Unable to store that item in your club.');
 
         try {
             clickDetailsPanelButton('Redeem');
         } catch (error) {
-            logError('Failed to redeem coins.');
+            logError(`Oops! Couldn't redeem those coins.`);
         }
     }
 }

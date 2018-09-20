@@ -5,6 +5,6 @@ export default function makeBid() {
     try {
         clickDetailsPanelButton('Make Bid');
     } catch (error) {
-        logError('Failed to make bid.');
+        logError(`Couldn't make that bid for some reason.`);
     }
 }

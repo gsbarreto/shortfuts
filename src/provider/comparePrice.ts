@@ -5,6 +5,6 @@ export default function comparePrice() {
     try {
         clickDetailsPanelButton('Compare Price');
     } catch (error) {
-        logError('Failed to compare price of current item.');
+        logError(`Couldn't compare the price of that item for some reason.`);
     }
 }

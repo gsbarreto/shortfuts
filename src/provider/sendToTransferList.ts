@@ -5,6 +5,6 @@ export default function sendToTransferList() {
     try {
         clickDetailsPanelButton('Send to Transfer List');
     } catch (error) {
-        logError('Failed to send item to transfer list.');
+        logError(`Couldn't send that item to the transfer list.`);
     }
 }

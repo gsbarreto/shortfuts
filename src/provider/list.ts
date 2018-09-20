@@ -5,6 +5,6 @@ export default function list() {
     try {
         clickDetailsPanelButton('List Item');
     } catch (error) {
-        logError('Failed to list item.');
+        logError('Unable to list that card.');
     }
 }

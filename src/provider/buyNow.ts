@@ -7,7 +7,7 @@ export default function buyNow() {
     // Bail if user isn't on "Search Results" page.
     if (!isUserOnPage('Search Results')) {
         logError(
-            `Failed to buy item because user isn't on "Search Results" page.`
+            `Unable to "buy it now" because you're not on the "Search Results" page.`
         );
         return;
     }
@@ -16,6 +16,6 @@ export default function buyNow() {
         clickBuyNowButton();
         confirmConfirmationDialog();
     } catch (error) {
-        logError('Failed to buy item.');
+        logError(`Oops! Couldn't "buy it now" for some reason...`);
     }
 }

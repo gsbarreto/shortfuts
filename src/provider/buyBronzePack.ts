@@ -5,9 +5,7 @@ import { logError } from '../utils/logger';
 
 export default function buyBronzePack() {
     if (!isUserOnPage('Store')) {
-        logError(
-            `Failed to buy bronze pack because user isn't on "Store" page.`
-        );
+        logError(`Go to the "Store" page to buy a bronze pack!`);
         return;
     }
 
