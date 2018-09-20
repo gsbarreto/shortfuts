@@ -20,11 +20,15 @@ import { log } from './utils/logger';
 
             const a = document.createElement('a');
             const linkText = document.createTextNode(
-                'DO YOU WANT SHORTFUTS IN FIFA 19?'
+                'Enjoying shortfuts? Please buy me a coffee!'
             );
             a.appendChild(linkText);
-            a.href = 'https://www.gofundme.com/shortfuts-for-fifa-19';
+            a.href = 'https://www.paypal.me/martellaj/5';
             a.target = '_blank';
+            a.style.position = 'absolute';
+            a.style.top = '15px';
+            a.style.left = '105px';
+            a.style.color = 'white';
 
             header.appendChild(updateAnchor);
             header.appendChild(a);
