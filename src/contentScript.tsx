@@ -100,21 +100,13 @@ import { log } from './utils/logger';
                             provider.listMinBin();
                             break;
                         case 83 /* s */:
-                            if (ev.altKey) {
-                                provider.storeAllInClub();
-                            } else {
-                                provider.storeInClub();
-                            }
+                            provider.storeInClub();
                             break;
                         case 84 /* t */:
                             provider.sendToTransferList();
                             break;
                         case 81 /* q */:
-                            if (ev.altKey) {
-                                provider.quickSellAll();
-                            } else {
-                                provider.quickSell();
-                            }
+                            provider.quickSell();
                             break;
                         case 40 /* down arrow */:
                             provider.move('down');

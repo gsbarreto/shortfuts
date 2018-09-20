@@ -92,11 +92,6 @@ export default class ShortfutsList extends React.Component<
             name: 'S',
             shortcut: 'S'
         });
-        map.set('altS', {
-            description: 'Stores all remaining items in pack in the club',
-            name: 'AltS',
-            shortcut: 'Alt+S'
-        });
         map.set('n', {
             description: 'Buys the current item for BIN price',
             name: 'N',
@@ -112,11 +107,6 @@ export default class ShortfutsList extends React.Component<
             description: 'Quick sells the current item',
             name: 'Q',
             shortcut: 'Q'
-        });
-        map.set('altQ', {
-            description: 'Quick sells all remaining items in pack',
-            name: 'AltQ',
-            shortcut: 'Alt+Q'
         });
         map.set('t', {
             description: 'Sends current item to transfer list',
