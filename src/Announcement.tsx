@@ -37,7 +37,7 @@ loadTheme({
     }
 });
 
-const ANNOUNCEMENT_VERSION = 7;
+const ANNOUNCEMENT_VERSION = 8;
 
 @observer
 export default class Announcement extends React.Component<{}, {}> {
@@ -91,21 +91,8 @@ export default class Announcement extends React.Component<{}, {}> {
                                 className="announcementBulletIcon"
                             />
                             <div className="announcementMessage">
-                                <Link
-                                    id="announcementSetShortcuts"
-                                    onClick={() => {
-                                        window.open(
-                                            'https://www.gofundme.com/shortfuts-for-fifa-19',
-                                            '_blank'
-                                        );
-
-                                        chrome.runtime.sendMessage({
-                                            goFundMe: true
-                                        });
-                                    }}
-                                >
-                                    Do you want shortfuts for FIFA 19?
-                                </Link>
+                                FIFA 19 web app is now supported! Please contact
+                                me with any bugs!
                             </div>
                         </div>
                     </div>
