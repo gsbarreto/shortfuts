@@ -12,7 +12,7 @@ export default function quickSellAll() {
     }
 
     const quickSellAllButtons = document.getElementsByClassName(
-        'list coin-btn'
+        'ut-group-button cta'
     );
 
     clickElement(quickSellAllButtons[0]);
