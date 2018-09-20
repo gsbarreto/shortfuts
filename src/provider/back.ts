@@ -3,7 +3,11 @@ import isUserOnPage from './helpers/isUserOnPage';
 import { logError } from '../utils/logger';
 
 export default function goBack() {
-    if (!isUserOnPage('Search Results')) {
+    const searchResultsHeader = document.getElementsByClassName(
+        'navbar-style-secondary'
+    )[0];
+
+    if (!searchResultsHeader) {
         logError(
             `Failed to "go back" because user isn't on the "Search Results" page.`
         );
@@ -11,8 +15,8 @@ export default function goBack() {
     }
 
     try {
-        const backButton = document.getElementsByClassName(
-            'btn-flat back headerButton'
+        const backButton = searchResultsHeader.getElementsByTagName(
+            'button'
         )[0];
         clickElement(backButton);
     } catch (error) {
