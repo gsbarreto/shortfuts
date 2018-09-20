@@ -20,7 +20,7 @@ import { log } from './utils/logger';
 
             const a = document.createElement('a');
             const linkText = document.createTextNode(
-                'Enjoying shortfuts? Please buy me a coffee!'
+                'Enjoying shortfuts? Please consider buying me a coffee!'
             );
             a.appendChild(linkText);
             a.href = 'https://www.paypal.me/martellaj/5';
