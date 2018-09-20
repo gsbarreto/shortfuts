@@ -9,7 +9,7 @@ export default function confirmConfirmationDialog() {
         try {
             const okButton = document
                 .getElementsByClassName('Dialog')[0]
-                .getElementsByClassName('btn-flat')[1];
+                .getElementsByClassName('flat')[1];
             clickElement(okButton);
         } catch (error) {
             logError(error);
