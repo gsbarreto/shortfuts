@@ -87,11 +87,6 @@ export default class ShortfutsList extends React.Component<
             name: 'Alt+Space',
             shortcut: 'Alt+Space'
         });
-        map.set('f', {
-            description: 'Pulls in FUTBIN data for the current item',
-            name: 'F',
-            shortcut: 'F'
-        });
         map.set('s', {
             description: 'Stores current item in the club',
             name: 'S',
