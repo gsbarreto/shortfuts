@@ -48,8 +48,7 @@ export default class Announcement extends React.Component<{}, {}> {
         chrome.storage.sync.get('announcementVersion', data => {
             if (
                 data.announcementVersion === undefined ||
-                data.announcementVersion < ANNOUNCEMENT_VERSION ||
-                true
+                data.announcementVersion < ANNOUNCEMENT_VERSION
             ) {
                 this.isOpen = true;
 
