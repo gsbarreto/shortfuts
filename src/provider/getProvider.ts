@@ -2,7 +2,6 @@ import back from './back';
 import buyBronzePack from './buyBronzePack';
 import buyNow from './buyNow';
 import comparePrice from './comparePrice';
-import futbin from './futbin';
 import list from './list';
 import listMinBin from './listMinBin';
 import makeBid from './makeBid';
@@ -23,7 +22,6 @@ export default function getProvider(): Provider {
         buyBronzePack: buyBronzePack,
         buyNow: buyNow,
         comparePrice: comparePrice,
-        futbin: futbin,
         list: list,
         listMinBin: listMinBin,
         makeBid: makeBid,

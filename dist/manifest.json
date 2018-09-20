@@ -25,12 +25,6 @@
         "command0": {
             "description": "Toggles the extension on and off"
         },
-        "command1": {
-            "description": "Pulls in FUTBIN data for the current item",
-            "suggested_key": {
-                "default": "Ctrl+1"
-            }
-        },
         "command2": {
             "description": "Stores current item in the club"
         },
@@ -87,9 +81,5 @@
 
     "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
 
-    "permissions": [
-        "storage",
-        "https://www.futbin.com/",
-        "http://www.futbin.com/"
-    ]
+    "permissions": ["storage"]
 }

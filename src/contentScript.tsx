@@ -138,9 +138,6 @@ import { log } from './utils/logger';
                         case 76 /* l */:
                             provider.list();
                             break;
-                        case 70 /* f */:
-                            provider.futbin();
-                            break;
                         case 37 /* left arrow */:
                             provider.pagePrevious();
                             break;
@@ -224,10 +221,7 @@ import { log } from './utils/logger';
                         return;
                     }
 
-                    if (request.futbin) {
-                        logHotkeyReceived('futbin');
-                        provider.futbin();
-                    } else if (request.storeInClub) {
+                    if (request.storeInClub) {
                         logHotkeyReceived('storeInClub');
                         provider.storeInClub();
                     } else if (request.buyNow) {

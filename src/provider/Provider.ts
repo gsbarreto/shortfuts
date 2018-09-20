@@ -5,7 +5,7 @@ export default interface Provider {
     buyBronzePack: () => void;
     buyNow: () => void;
     comparePrice: () => void;
-    futbin: () => void;
+    // futbin: () => void; // Disabled in FUT 19... unable to get item ID.
     list: () => void;
     listMinBin: () => void;
     makeBid: () => void;
@@ -18,4 +18,4 @@ export default interface Provider {
     storeAllInClub: () => void;
     storeInClub: () => void;
     watch: () => void;
-};
+}
