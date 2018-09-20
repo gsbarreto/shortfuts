@@ -20,6 +20,8 @@ function sendTouchEvent(element, eventType) {
      */
     // @ts-ignore
     const touch = new Touch({
+        // Using a number like TS suggest breaks this... stupid.
+        // @ts-ignore
         identifier: 'shortfut',
         target: element,
         clientX: 0,
