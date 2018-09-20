@@ -80,11 +80,7 @@
 
     "content_scripts": [
         {
-            "matches": [
-                "*://www.easports.com/*fifa/ultimate-team/web-app/*",
-                "*://www.reddit.com/r/fifa*",
-                "*://www.reddit.com/r/FIFA*"
-            ],
+            "matches": ["*://www.easports.com/*fifa/ultimate-team/web-app/*"],
             "js": ["js/contentScript.js"]
         }
     ],

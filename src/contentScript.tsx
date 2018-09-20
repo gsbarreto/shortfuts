@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Announcement from './Announcement';
 import getProvider from './providers/getProvider';
-import Provider from './providers/Provider';
 import { initializeIcons } from 'office-ui-fabric-react/lib/Icons';
 import { log } from './utils/logger';
 
@@ -13,52 +12,22 @@ import { log } from './utils/logger';
     initializeIcons();
 
     setTimeout(() => {
-        const updateAnchor = document.createElement('div');
-        updateAnchor.id = 'updateAnchor';
-
-        const a = document.createElement('a');
-        const linkText = document.createTextNode(
-            'DO YOU WANT SHORTFUTS IN FIFA 19?'
-        );
-        a.appendChild(linkText);
-        a.href = 'https://www.gofundme.com/shortfuts-for-fifa-19';
-        a.target = '_blank';
-
         // For FIFA web app
         const header = document.getElementById('FIFAHeader');
         if (header) {
+            const updateAnchor = document.createElement('div');
+            updateAnchor.id = 'updateAnchor';
+
+            const a = document.createElement('a');
+            const linkText = document.createTextNode(
+                'DO YOU WANT SHORTFUTS IN FIFA 19?'
+            );
+            a.appendChild(linkText);
+            a.href = 'https://www.gofundme.com/shortfuts-for-fifa-19';
+            a.target = '_blank';
+
             header.appendChild(updateAnchor);
             header.appendChild(a);
-
-            ReactDOM.render(
-                <Announcement />,
-                document.getElementById('updateAnchor')
-            );
-
-            return;
-        }
-
-        // For FIFA subreddit (new)
-        const header2 = document.getElementById('header-search-bar');
-        if (header2) {
-            header2.appendChild(updateAnchor);
-            a.style.fontSize = '40px';
-            header2.parentElement.parentElement.appendChild(a);
-
-            ReactDOM.render(
-                <Announcement />,
-                document.getElementById('updateAnchor')
-            );
-
-            return;
-        }
-
-        // For FIFA subreddit (old)
-        const header3 = document.getElementById('header-bottom-left');
-        if (header3) {
-            header3.appendChild(updateAnchor);
-            a.style.fontSize = '40px';
-            header3.appendChild(a);
 
             ReactDOM.render(
                 <Announcement />,
