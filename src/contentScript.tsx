@@ -33,10 +33,7 @@ import { log } from './utils/logger';
             header.appendChild(updateAnchor);
             header.appendChild(a);
 
-            ReactDOM.render(
-                <Announcement />,
-                document.getElementById('updateAnchor')
-            );
+            ReactDOM.render(<Announcement />, document.getElementById('updateAnchor'));
 
             return;
         }
@@ -62,6 +59,11 @@ import { log } from './utils/logger';
     window.addEventListener('keydown', ev => {
         const keyCode = ev.keyCode;
 
+        // If user is typing in an input, ignore hotkeys.
+        if (document.activeElement.tagName.toLocaleLowerCase() === 'input') {
+            return;
+        }
+
         chrome.storage.sync.get('isActive', data => {
             // Update badge with current status.
             const isActive = data.isActive;
@@ -76,14 +78,11 @@ import { log } from './utils/logger';
             chrome.storage.sync.get('isNativeShortcuts', isNativeShortcuts => {
                 if (isNativeShortcuts.isNativeShortcuts === false) {
                     if (ev.altKey && keyCode === 32 /* Alt + Space */) {
-                        chrome.storage.sync.set(
-                            { isActive: !isActive },
-                            function() {
-                                chrome.runtime.sendMessage({
-                                    isActive: !isActive
-                                });
-                            }
-                        );
+                        chrome.storage.sync.set({ isActive: !isActive }, function() {
+                            chrome.runtime.sendMessage({
+                                isActive: !isActive,
+                            });
+                        });
                         return;
                     }
 
@@ -145,9 +144,7 @@ import { log } from './utils/logger';
                 } else {
                     // If extension "isn't active", don't handle any commands.
                     if (!isActive) {
-                        log(
-                            'Extension is currently not active, so ignoring hotkey.'
-                        );
+                        log('Extension is currently not active, so ignoring hotkey.');
                         return;
                     }
 
@@ -193,11 +190,7 @@ import { log } from './utils/logger';
                         logHotkeyReceived('toggleExtension');
 
                         chrome.storage.sync.set({ isActive: !isActive }, () => {
-                            log(
-                                `Extension is now ${
-                                    !isActive ? 'active' : 'inactive'
-                                }.`
-                            );
+                            log(`Extension is now ${!isActive ? 'active' : 'inactive'}.`);
                             chrome.runtime.sendMessage({ isActive: !isActive });
                         });
 
@@ -207,9 +200,7 @@ import { log } from './utils/logger';
 
                     // If extension "isn't active", don't handle any commands.
                     if (!isActive) {
-                        log(
-                            'Extension is currently not active, so ignoring hotkey.'
-                        );
+                        log('Extension is currently not active, so ignoring hotkey.');
                         return;
                     }
 
@@ -252,7 +243,15 @@ import { log } from './utils/logger';
                     }
                 }
             });
+
+            // Lets eventPage know if active element is an input.
+            if (request.getActiveElement) {
+                sendResponse(document.activeElement.tagName.toLowerCase() === 'input');
+            }
         });
+
+        // Necessary for asynchronous message passing.
+        return true;
     });
 
     function logHotkeyReceived(hotkeyName: string) {

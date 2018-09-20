@@ -18,16 +18,16 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.changeShortcuts) {
         chrome.tabs.create({
             active: true,
-            url: 'chrome://extensions/shortcuts'
+            url: 'chrome://extensions/shortcuts',
         });
     } else if (request.contactDeveloper) {
         contactDeveloper();
     } else if (request.isActive !== undefined) {
         chrome.browserAction.setBadgeBackgroundColor({
-            color: '#201c55' /* themePrimaryColor */
+            color: '#201c55' /* themePrimaryColor */,
         });
         chrome.browserAction.setBadgeText({
-            text: request.isActive ? 'ON' : 'OFF'
+            text: request.isActive ? 'ON' : 'OFF',
         });
     } else if (request.goFundMe) {
         _gaq.push(['_trackEvent', 'telemetry', 'goFundMe']);
@@ -42,7 +42,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 function contactDeveloper() {
     chrome.tabs.query(
         {
-            active: true
+            active: true,
         },
         tabs => {
             // Caches current user tab so we can returnto it.
@@ -51,8 +51,7 @@ function contactDeveloper() {
             chrome.tabs.create(
                 {
                     active: true,
-                    url:
-                        'mailto:martellaj@live.com?subject=[shortfuts]%20Subject'
+                    url: 'mailto:martellaj@live.com?subject=[shortfuts]%20Subject',
                 },
                 mailToTab => {
                     setTimeout(function() {
@@ -61,7 +60,7 @@ function contactDeveloper() {
 
                         // Makes previously focused tab selected.
                         chrome.tabs.update(currentTabId, {
-                            highlighted: true
+                            highlighted: true,
                         });
                     }, 150);
                 }
@@ -75,106 +74,113 @@ chrome.commands.onCommand.addListener(command => {
     chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
         const currentTab = tabs[0].id;
 
-        switch (command) {
-            // toggleExtension
-            case 'command0': {
-                chrome.tabs.sendMessage(currentTab, { toggleExtension: true });
-                break;
+        chrome.tabs.sendMessage(currentTab, { getActiveElement: true }, (isInInput: boolean) => {
+            // If user is typing in an input, ignore commands.
+            if (isInInput) {
+                return;
             }
-            // futbin
-            case 'command1': {
-                _gaq.push(['_trackEvent', 'telemetry', 'futbin']);
-                chrome.tabs.sendMessage(currentTab, { futbin: true });
-                break;
+
+            switch (command) {
+                // toggleExtension
+                case 'command0': {
+                    chrome.tabs.sendMessage(currentTab, { toggleExtension: true });
+                    break;
+                }
+                // futbin
+                case 'command1': {
+                    _gaq.push(['_trackEvent', 'telemetry', 'futbin']);
+                    chrome.tabs.sendMessage(currentTab, { futbin: true });
+                    break;
+                }
+                // storeInClub
+                case 'command2': {
+                    _gaq.push(['_trackEvent', 'telemetry', 'storeInClub']);
+                    chrome.tabs.sendMessage(currentTab, { storeInClub: true });
+                    break;
+                }
+                // buyNow
+                case 'command3': {
+                    _gaq.push(['_trackEvent', 'telemetry', 'buyNow']);
+                    chrome.tabs.sendMessage(currentTab, { buyNow: true });
+                    break;
+                }
+                // comparePrice
+                case 'command4': {
+                    _gaq.push(['_trackEvent', 'telemetry', 'comparePrice']);
+                    chrome.tabs.sendMessage(currentTab, { comparePrice: true });
+                    break;
+                }
+                // quickSell
+                case 'command5': {
+                    _gaq.push(['_trackEvent', 'telemetry', 'quickSell']);
+                    chrome.tabs.sendMessage(currentTab, { quickSell: true });
+                    break;
+                }
+                // sendToTransferList
+                case 'command6': {
+                    _gaq.push(['_trackEvent', 'telemetry', 'sendToTransferList']);
+                    chrome.tabs.sendMessage(currentTab, {
+                        sendToTransferList: true,
+                    });
+                    break;
+                }
+                // listMinBin
+                case 'command7': {
+                    _gaq.push(['_trackEvent', 'telemetry', 'listMinBin']);
+                    chrome.tabs.sendMessage(currentTab, {
+                        listMinBin: true,
+                    });
+                    break;
+                }
+                // list
+                case 'command8': {
+                    _gaq.push(['_trackEvent', 'telemetry', 'listItem']);
+                    chrome.tabs.sendMessage(currentTab, {
+                        list: true,
+                    });
+                    break;
+                }
+                // buyBronzePack
+                case 'command9': {
+                    _gaq.push(['_trackEvent', 'telemetry', 'buyBronzePack']);
+                    chrome.tabs.sendMessage(currentTab, {
+                        buyBronzePack: true,
+                    });
+                    break;
+                }
+                // quickSellAll
+                case 'command10': {
+                    _gaq.push(['_trackEvent', 'telemetry', 'quickSellAll']);
+                    chrome.tabs.sendMessage(currentTab, {
+                        quickSellAll: true,
+                    });
+                    break;
+                }
+                // storeAllInClub
+                case 'command11': {
+                    _gaq.push(['_trackEvent', 'telemetry', 'storeAllInClub']);
+                    chrome.tabs.sendMessage(currentTab, {
+                        storeAllInClub: true,
+                    });
+                    break;
+                }
+                // watch
+                case 'command12': {
+                    _gaq.push(['_trackEvent', 'telemetry', 'watch']);
+                    chrome.tabs.sendMessage(currentTab, {
+                        watch: true,
+                    });
+                    break;
+                }
+                // makeBid
+                case 'command13': {
+                    _gaq.push(['_trackEvent', 'telemetry', 'makeBid']);
+                    chrome.tabs.sendMessage(currentTab, {
+                        makeBid: true,
+                    });
+                    break;
+                }
             }
-            // storeInClub
-            case 'command2': {
-                _gaq.push(['_trackEvent', 'telemetry', 'storeInClub']);
-                chrome.tabs.sendMessage(currentTab, { storeInClub: true });
-                break;
-            }
-            // buyNow
-            case 'command3': {
-                _gaq.push(['_trackEvent', 'telemetry', 'buyNow']);
-                chrome.tabs.sendMessage(currentTab, { buyNow: true });
-                break;
-            }
-            // comparePrice
-            case 'command4': {
-                _gaq.push(['_trackEvent', 'telemetry', 'comparePrice']);
-                chrome.tabs.sendMessage(currentTab, { comparePrice: true });
-                break;
-            }
-            // quickSell
-            case 'command5': {
-                _gaq.push(['_trackEvent', 'telemetry', 'quickSell']);
-                chrome.tabs.sendMessage(currentTab, { quickSell: true });
-                break;
-            }
-            // sendToTransferList
-            case 'command6': {
-                _gaq.push(['_trackEvent', 'telemetry', 'sendToTransferList']);
-                chrome.tabs.sendMessage(currentTab, {
-                    sendToTransferList: true
-                });
-                break;
-            }
-            // listMinBin
-            case 'command7': {
-                _gaq.push(['_trackEvent', 'telemetry', 'listMinBin']);
-                chrome.tabs.sendMessage(currentTab, {
-                    listMinBin: true
-                });
-                break;
-            }
-            // list
-            case 'command8': {
-                _gaq.push(['_trackEvent', 'telemetry', 'listItem']);
-                chrome.tabs.sendMessage(currentTab, {
-                    list: true
-                });
-                break;
-            }
-            // buyBronzePack
-            case 'command9': {
-                _gaq.push(['_trackEvent', 'telemetry', 'buyBronzePack']);
-                chrome.tabs.sendMessage(currentTab, {
-                    buyBronzePack: true
-                });
-                break;
-            }
-            // quickSellAll
-            case 'command10': {
-                _gaq.push(['_trackEvent', 'telemetry', 'quickSellAll']);
-                chrome.tabs.sendMessage(currentTab, {
-                    quickSellAll: true
-                });
-                break;
-            }
-            // storeAllInClub
-            case 'command11': {
-                _gaq.push(['_trackEvent', 'telemetry', 'storeAllInClub']);
-                chrome.tabs.sendMessage(currentTab, {
-                    storeAllInClub: true
-                });
-                break;
-            }
-            // watch
-            case 'command12': {
-                _gaq.push(['_trackEvent', 'telemetry', 'watch']);
-                chrome.tabs.sendMessage(currentTab, {
-                    watch: true
-                });
-                break;
-            }
-            // makeBid
-            case 'command13': {
-                _gaq.push(['_trackEvent', 'telemetry', 'makeBid']);
-                chrome.tabs.sendMessage(currentTab, {
-                    makeBid: true
-                });
-                break;
-            }
-        }
+        });
     });
 });
