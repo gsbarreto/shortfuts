@@ -1,5 +1,5 @@
-import { logError } from '../../utils/logger';
 import clickDetailsPanelButton from './helpers/clickDetailsPanelButton';
+import { logError } from '../utils/logger';
 
 /**
  * Stores item in the club. If "Send to My Club" button can't be found, item

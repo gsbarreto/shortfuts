@@ -1,7 +1,7 @@
 import clickBuyNowButton from './helpers/clickBuyNowButton';
 import confirmConfirmationDialog from './helpers/confirmConfirmationDialog';
 import isUserOnPage from './helpers/isUserOnPage';
-import { logError } from '../../utils/logger';
+import { logError } from '../utils/logger';
 
 export default function buyNow() {
     // Bail if user isn't on "Search Results" page.

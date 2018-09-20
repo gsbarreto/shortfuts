@@ -1,5 +1,5 @@
 import clickElement from './clickElement';
-import { logError } from '../../../utils/logger';
+import { logError } from '../../utils/logger';
 
 /**
  * Clicks "Buy Now" button.

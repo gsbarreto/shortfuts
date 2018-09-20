@@ -9,16 +9,15 @@ import makeBid from './makeBid';
 import move from './move';
 import pageNext from './pageNext';
 import pagePrevious from './pagePrevious';
-import Provider from '../Provider';
+import Provider from './Provider';
 import quickSell from './quickSell';
 import quickSellAll from './quickSellAll';
 import sendToTransferList from './sendToTransferList';
 import storeAllInClub from './storeAllInClub';
 import storeInClub from './storeInClub';
 import watch from './watch';
-import { log } from '../../utils/logger';
 
-export default function getFIFA18Provider(): Provider {
+export default function getProvider(): Provider {
     return {
         back: back,
         buyBronzePack: buyBronzePack,

@@ -1,7 +1,7 @@
 import clickElement from './helpers/clickElement';
 import confirmConfirmationDialog from './helpers/confirmConfirmationDialog';
 import isUserOnPage from './helpers/isUserOnPage';
-import { logError } from '../../utils/logger';
+import { logError } from '../utils/logger';
 
 export default function quickSellAll() {
     if (!isUserOnPage('Unassigned')) {

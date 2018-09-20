@@ -1,5 +1,3 @@
-import { logError } from '../../utils/logger';
-import clickDetailsPanelButton from './helpers/clickDetailsPanelButton';
 import clickElement from './helpers/clickElement';
 
 export default function listMinBin() {

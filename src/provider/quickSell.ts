@@ -1,6 +1,6 @@
 import clickDetailsPanelButton from './helpers/clickDetailsPanelButton';
 import confirmConfirmationDialog from './helpers/confirmConfirmationDialog';
-import { logError } from '../../utils/logger';
+import { logError } from '../utils/logger';
 
 export default function quickSell() {
     try {

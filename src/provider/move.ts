@@ -2,8 +2,8 @@ import clickElement from './helpers/clickElement';
 import getCurrentSelectedIndex from './helpers/getCurrentSelectedIndex';
 import getItemId from './helpers/getItemId';
 import getListItems from './helpers/getListItems';
-import { Direction } from '../Provider';
-import { logError } from '../../utils/logger';
+import { Direction } from './Provider';
+import { logError } from '../utils/logger';
 
 export default function move(direction: Direction) {
     // Clear FUTBIN data div, if it exists.

@@ -1,6 +1,6 @@
 import clickElement from './helpers/clickElement';
 import isUserOnPage from './helpers/isUserOnPage';
-import { logError } from '../../utils/logger';
+import { logError } from '../utils/logger';
 
 export default function goBack() {
     if (!isUserOnPage('Search Results')) {

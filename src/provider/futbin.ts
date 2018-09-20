@@ -1,7 +1,7 @@
 import getCurrentSelectedIndex from './helpers/getCurrentSelectedIndex';
 import getItemId from './helpers/getItemId';
 import getListItems from './helpers/getListItems';
-import { logError } from '../../utils/logger';
+import { logError } from '../utils/logger';
 
 export default function futbin() {
     try {

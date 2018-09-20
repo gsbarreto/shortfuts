@@ -1,5 +1,5 @@
 import clickElement from './helpers/clickElement';
-import { logError } from '../../utils/logger';
+import { logError } from '../utils/logger';
 
 export default function watch() {
     try {

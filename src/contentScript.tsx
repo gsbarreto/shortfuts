@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Announcement from './Announcement';
-import getProvider from './providers/getProvider';
+import getProvider from './provider/getProvider';
 import { initializeIcons } from 'office-ui-fabric-react/lib/Icons';
 import { log } from './utils/logger';
 

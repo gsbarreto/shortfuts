@@ -1,5 +1,5 @@
-import { logError } from '../../utils/logger';
 import clickDetailsPanelButton from './helpers/clickDetailsPanelButton';
+import { logError } from '../utils/logger';
 
 export default function list() {
     try {
