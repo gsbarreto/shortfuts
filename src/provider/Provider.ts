@@ -14,6 +14,7 @@ export default interface Provider {
     pagePrevious: () => void;
     quickSell: () => void;
     quickSellAll: () => void;
+    search: () => void;
     sendToTransferList: () => void;
     storeAllInClub: () => void;
     storeInClub: () => void;

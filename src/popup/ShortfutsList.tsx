@@ -161,6 +161,11 @@ export default class ShortfutsList extends React.Component<
             name: 'D',
             shortcut: 'D'
         });
+        map.set('=', {
+            description: `Searches the transfer market`,
+            name: '=',
+            shortcut: '='
+        });
 
         return map;
     }

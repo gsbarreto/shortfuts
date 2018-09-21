@@ -69,6 +69,9 @@
         },
         "command13": {
             "description": "Makes a bid on the current item"
+        },
+        "command14": {
+            "description": "Searches the transfer market"
         }
     },
 

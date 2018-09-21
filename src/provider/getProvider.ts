@@ -11,6 +11,7 @@ import pagePrevious from './pagePrevious';
 import Provider from './Provider';
 import quickSell from './quickSell';
 import quickSellAll from './quickSellAll';
+import search from './search';
 import sendToTransferList from './sendToTransferList';
 import storeAllInClub from './storeAllInClub';
 import storeInClub from './storeInClub';
@@ -30,6 +31,7 @@ export default function getProvider(): Provider {
         pagePrevious: pagePrevious,
         quickSell: quickSell,
         quickSellAll: quickSellAll,
+        search: search,
         sendToTransferList: sendToTransferList,
         storeAllInClub: storeAllInClub,
         storeInClub: storeInClub,
