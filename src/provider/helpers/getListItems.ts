@@ -3,7 +3,17 @@ import isUserOnPage from './isUserOnPage';
 export default function getListItems() {
     let items = [];
 
-    if (isUserOnPage('Search Results') || isUserOnPage('Players')) {
+    if (
+        isUserOnPage('Search Results') ||
+        isUserOnPage('Players') ||
+        isUserOnPage('Club Items') ||
+        isUserOnPage('Training') ||
+        isUserOnPage('Contracts') ||
+        isUserOnPage('Fitness') ||
+        isUserOnPage('Healing') ||
+        isUserOnPage('Positioning') ||
+        isUserOnPage('Chemistry Styles')
+    ) {
         const itemList = document.getElementsByClassName(
             'paginated-item-list'
         )[0];
