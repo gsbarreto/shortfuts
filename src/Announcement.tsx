@@ -44,7 +44,18 @@ export default class Announcement extends React.Component<{}, {}> {
     @observable
     private isOpen: boolean = false;
 
+    private message: string = `shortfuts only works when the web app is in English! Please change the language if you'd like to use shortfuts.`;
+
     componentDidMount() {
+        const appLanguage = document.getElementsByTagName('html')[0].lang;
+        if (appLanguage.toLowerCase() !== 'en') {
+            this.isOpen = true;
+            return;
+        } else {
+            this.message = `FIFA 19 web app is now supported! Please contact
+            me with any bugs!`;
+        }
+
         chrome.storage.sync.get('announcementVersion', data => {
             if (
                 data.announcementVersion === undefined ||
@@ -86,13 +97,8 @@ export default class Announcement extends React.Component<{}, {}> {
                     </div>
                     <div className="announcementBody">
                         <div className="announcementBullet">
-                            <Icon
-                                iconName="RadioBullet"
-                                className="announcementBulletIcon"
-                            />
                             <div className="announcementMessage">
-                                FIFA 19 web app is now supported! Please contact
-                                me with any bugs!
+                                {this.message}
                             </div>
                         </div>
                     </div>
