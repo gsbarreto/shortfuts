@@ -48,7 +48,7 @@ export default class Announcement extends React.Component<{}, {}> {
 
     componentDidMount() {
         const appLanguage = document.getElementsByTagName('html')[0].lang;
-        if (appLanguage.toLowerCase() !== 'en') {
+        if (appLanguage && appLanguage.toLowerCase() !== 'en') {
             this.isOpen = true;
             return;
         } else {
