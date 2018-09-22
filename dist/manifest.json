@@ -35,28 +35,19 @@
             "description": "Compares price of the current item with other items on the market"
         },
         "command5": {
-            "description": "Quick sells the current item",
-            "suggested_key": {
-                "default": "Ctrl+3"
-            }
+            "description": "Quick sells the current item"
         },
         "command6": {
             "description": "Sends current item to transfer list"
         },
         "command7": {
-            "description": "Lists the current item for minimum BIN",
-            "suggested_key": {
-                "default": "Ctrl+2"
-            }
+            "description": "Lists the current item for minimum BIN"
         },
         "command8": {
             "description": "Lists the current item (with currently selected price range)"
         },
         "command9": {
-            "description": "Buys a bronze pack",
-            "suggested_key": {
-                "default": "Ctrl+B"
-            }
+            "description": "Buys a bronze pack"
         },
         "command10": {
             "description": "Quick sells all remaining items in pack"
