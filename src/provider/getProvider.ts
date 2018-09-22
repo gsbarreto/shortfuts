@@ -2,6 +2,8 @@ import back from './back';
 import buyBronzePack from './buyBronzePack';
 import buyNow from './buyNow';
 import comparePrice from './comparePrice';
+import decreaseMinBidPrice from './decreaseMinBidPrice';
+import increaseMinBidPrice from './increaseMinBidPrice';
 import list from './list';
 import listMinBin from './listMinBin';
 import makeBid from './makeBid';
@@ -23,6 +25,8 @@ export default function getProvider(): Provider {
         buyBronzePack: buyBronzePack,
         buyNow: buyNow,
         comparePrice: comparePrice,
+        decreaseMinBidPrice: decreaseMinBidPrice,
+        increaseMinBidPrice: increaseMinBidPrice,
         list: list,
         listMinBin: listMinBin,
         makeBid: makeBid,
@@ -35,6 +39,6 @@ export default function getProvider(): Provider {
         sendToTransferList: sendToTransferList,
         storeAllInClub: storeAllInClub,
         storeInClub: storeInClub,
-        watch: watch
+        watch: watch,
     };
 }

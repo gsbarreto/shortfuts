@@ -63,6 +63,12 @@
         },
         "command14": {
             "description": "Searches the transfer market"
+        },
+        "command15": {
+            "description": "Decrease minimum bid price"
+        },
+        "command16": {
+            "description": "Increase minimum bid price"
         }
     },
 

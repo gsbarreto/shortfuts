@@ -5,7 +5,9 @@ export default interface Provider {
     buyBronzePack: () => void;
     buyNow: () => void;
     comparePrice: () => void;
+    decreaseMinBidPrice: () => void;
     // futbin: () => void; // Disabled in FUT 19... unable to get item ID.
+    increaseMinBidPrice: () => void;
     list: () => void;
     listMinBin: () => void;
     makeBid: () => void;
