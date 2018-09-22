@@ -22,7 +22,8 @@ export default function goBack() {
         isUserOnPage('Players') ||
         isUserOnPage('Consumables') ||
         isUserOnPage('Staff') ||
-        isUserOnPage('Club Items')
+        isUserOnPage('Club Items') ||
+        isUserOnPage('Unassigned')
     ) {
         clickElement(document.getElementsByClassName('btn-navigation')[0]);
         return;
