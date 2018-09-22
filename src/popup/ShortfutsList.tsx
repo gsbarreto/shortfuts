@@ -166,6 +166,16 @@ export default class ShortfutsList extends React.Component<
             name: '=',
             shortcut: '='
         });
+        map.set('o', {
+            description: `Decrease minimum bid price`,
+            name: 'O',
+            shortcut: 'O'
+        });
+        map.set('p', {
+            description: `Increase minimum bid price`,
+            name: 'P',
+            shortcut: 'P'
+        });
 
         return map;
     }
