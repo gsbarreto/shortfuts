@@ -33,10 +33,21 @@ import { log } from './utils/logger';
             header.appendChild(updateAnchor);
             header.appendChild(a);
 
-            ReactDOM.render(
-                <Announcement />,
-                document.getElementById('updateAnchor')
-            );
+            const a2 = document.createElement('a');
+            const linkText2 = document.createTextNode('Have a shortfuts question? Read the FAQ!');
+            a2.appendChild(linkText2);
+            a2.href = 'https://martellaj.github.io/shortfuts/';
+            a2.target = '_blank';
+            a2.style.position = 'absolute';
+            a2.style.top = '15px';
+            a2.style.left = '535px';
+            a2.style.color = 'white';
+
+            header.appendChild(updateAnchor);
+            header.appendChild(a);
+            header.appendChild(a2);
+
+            ReactDOM.render(<Announcement />, document.getElementById('updateAnchor'));
 
             return;
         }
@@ -81,14 +92,11 @@ import { log } from './utils/logger';
             chrome.storage.sync.get('isNativeShortcuts', isNativeShortcuts => {
                 if (isNativeShortcuts.isNativeShortcuts === false) {
                     if (ev.altKey && keyCode === 32 /* Alt + Space */) {
-                        chrome.storage.sync.set(
-                            { isActive: !isActive },
-                            function() {
-                                chrome.runtime.sendMessage({
-                                    isActive: !isActive
-                                });
-                            }
-                        );
+                        chrome.storage.sync.set({ isActive: !isActive }, function() {
+                            chrome.runtime.sendMessage({
+                                isActive: !isActive,
+                            });
+                        });
                         return;
                     }
 
@@ -159,9 +167,7 @@ import { log } from './utils/logger';
                 } else {
                     // If extension "isn't active", don't handle any commands.
                     if (!isActive) {
-                        log(
-                            'Extension is currently not active, so ignoring hotkey.'
-                        );
+                        log('Extension is currently not active, so ignoring hotkey.');
                         return;
                     }
 
@@ -207,11 +213,7 @@ import { log } from './utils/logger';
                         logHotkeyReceived('toggleExtension');
 
                         chrome.storage.sync.set({ isActive: !isActive }, () => {
-                            log(
-                                `Extension is now ${
-                                    !isActive ? 'active' : 'inactive'
-                                }.`
-                            );
+                            log(`Extension is now ${!isActive ? 'active' : 'inactive'}.`);
                             chrome.runtime.sendMessage({ isActive: !isActive });
                         });
 
@@ -221,9 +223,7 @@ import { log } from './utils/logger';
 
                     // If extension "isn't active", don't handle any commands.
                     if (!isActive) {
-                        log(
-                            'Extension is currently not active, so ignoring hotkey.'
-                        );
+                        log('Extension is currently not active, so ignoring hotkey.');
                         return;
                     }
 
@@ -278,9 +278,7 @@ import { log } from './utils/logger';
 
             // Lets eventPage know if active element is an input.
             if (request.getActiveElement) {
-                sendResponse(
-                    document.activeElement.tagName.toLowerCase() === 'input'
-                );
+                sendResponse(document.activeElement.tagName.toLowerCase() === 'input');
             }
         });
 
