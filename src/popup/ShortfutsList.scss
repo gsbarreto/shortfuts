@@ -1,5 +1,3 @@
-@import '../theme';
-
 .shortfutsListContainer {
     max-height: 350px;
     overflow-y: scroll;
@@ -16,7 +14,6 @@
 }
 
 .shortfut {
-    border-bottom: 1px solid $themeLighterColor;
     display: flex;
     padding: 0px 2px;
 

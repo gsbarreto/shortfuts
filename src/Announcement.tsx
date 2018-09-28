@@ -78,7 +78,7 @@ export default class Announcement extends React.Component<{}, {}> {
     render() {
         return (
             <Modal isOpen={this.isOpen} onDismiss={this.onModalDismissed}>
-                <div className="announcementContainer ms-Fabric">
+                <div className="announcementContainer ms-Fabric ms-borderColor-themePrimary ms-fontColor-themePrimary">
                     <IconButton
                         className="announcementCloseButton"
                         iconProps={{ iconName: 'ChromeClose' }}

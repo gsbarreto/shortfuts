@@ -1,11 +1,10 @@
-@import '../theme';
-
 .ms-TextField {
     margin: 0 10px !important;
+    width: 50px;
 }
 
 .editShortcutsContainer {
-    width: 340px;
+    // width: 340px;
     height: 600px;
 }
 
@@ -14,13 +13,24 @@
     margin-left: auto;
     margin-top: 12px;
     margin-right: 6px;
-    width: 340px;
+    // width: 340px;
     justify-content: center;
 }
 
 .editShortcutsError {
     margin-top: 12px;
-    width: 340px;
+    // width: 340px;
     display: flex;
     justify-content: center;
+}
+
+.editShortcutsShortcut {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 12px;
+    margin-top: 2px;
+    border-bottom: 1px solid;
+    padding-bottom: 4px;
+    margin-right: 12px;
 }

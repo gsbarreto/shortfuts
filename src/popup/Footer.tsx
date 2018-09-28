@@ -13,7 +13,7 @@ export default class Footer extends React.Component<FooterProps, {}> {
 
     render() {
         return (
-            <div className="footer">
+            <div className="footer ms-bgColor-themeLighterAlt">
                 {/* Donate button */}
                 <ActionButton
                     iconProps={{ iconName: 'DiamondSolid' }}

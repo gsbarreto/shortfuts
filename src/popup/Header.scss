@@ -1,8 +1,5 @@
-@import '../theme';
-
 .header {
     align-items: center;
-    background-color: $themeLighterAltColor;
     display: flex;
     justify-content: space-between;
     padding-left: 12px;
@@ -12,4 +9,10 @@
 .headerTitle {
     font-size: 20px;
     padding-bottom: 6px;
+}
+
+.headerButtons {
+    display: flex;
+    width: 200px;
+    justify-content: space-around;
 }

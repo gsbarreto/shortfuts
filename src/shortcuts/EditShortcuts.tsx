@@ -74,23 +74,6 @@ export default class EditShortcuts extends React.Component<
 
         return (
             <div className="editShortcutsContainer ms-Fabric">
-                <TextField
-                    data-shortcut={Shortcut.BACK}
-                    label="Go back (on any page)"
-                    componentRef={ref => (this.backTextField = ref)}
-                    defaultValue={this.state.backDefault}
-                />
-                <TextField
-                    data-shortcut={Shortcut.BID}
-                    label="Bid on card"
-                    componentRef={ref => (this.bidTextField = ref)}
-                    defaultValue={this.state.bidDefault}
-                />
-                {this.hasError && (
-                    <div className="editShortcutsError">
-                        All shortcuts must be a single character and unique.
-                    </div>
-                )}
                 <div className="editShortcutsButtons">
                     <PrimaryButton
                         onClick={this.onSaveShortcutsClicked}
@@ -98,7 +81,41 @@ export default class EditShortcuts extends React.Component<
                     >
                         Save
                     </PrimaryButton>
-                    <DefaultButton>Discard</DefaultButton>
+                    <DefaultButton
+                        style={{ marginRight: '12px' }}
+                        title="Discards any unsaved changes"
+                    >
+                        Discard
+                    </DefaultButton>
+                    <DefaultButton title="Resets to default shortcuts">
+                        Reset
+                    </DefaultButton>
+                </div>
+
+                {this.hasError && (
+                    <div className="editShortcutsError ms-fontColor-redDark">
+                        All shortcuts must be a single character and unique.
+                    </div>
+                )}
+
+                <div className="editShortcutsShortcut ms-borderColor-themePrimary">
+                    <span>Go back</span>
+                    <TextField
+                        data-shortcut={Shortcut.BACK}
+                        componentRef={ref => (this.backTextField = ref)}
+                        defaultValue={this.state.backDefault}
+                        underlined={true}
+                    />
+                </div>
+
+                <div className="editShortcutsShortcut ms-borderColor-themePrimary">
+                    <span>Bid on card</span>
+                    <TextField
+                        data-shortcut={Shortcut.BID}
+                        componentRef={ref => (this.bidTextField = ref)}
+                        defaultValue={this.state.bidDefault}
+                        underlined={true}
+                    />
                 </div>
             </div>
         );

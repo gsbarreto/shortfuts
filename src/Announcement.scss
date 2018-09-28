@@ -1,9 +1,6 @@
-@import './theme';
-
 .announcementContainer {
     background-color: white;
-    border: 1px solid $themePrimaryColor;
-    color: $themePrimaryColor;
+    border: 1px solid;
     display: flex;
     flex-direction: column;
     line-height: 1;

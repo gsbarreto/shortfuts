@@ -1,4 +1,5 @@
 import * as React from 'react';
+import EditShortcuts from '../shortcuts/EditShortcuts';
 import Footer from './Footer';
 import Header from './Header';
 import ShortfutsList from './ShortfutsList';
@@ -8,7 +9,8 @@ import './Popup.scss';
 
 @observer
 export default class Popup extends React.Component<{}, {}> {
-    @observable private isNativeShortcuts = true;
+    @observable
+    private isNativeShortcuts = true;
 
     componentWillMount() {
         chrome.storage.sync.get('isNativeShortcuts', data => {
@@ -24,14 +26,15 @@ export default class Popup extends React.Component<{}, {}> {
     }
 
     render() {
+        const isEditMode = true;
+
         return (
             <div className="popupContainer ms-Fabric">
                 <Header
                     isNativeShortcuts={this.isNativeShortcuts}
                     onShortcutsModeToggled={this.onShortcutsModeToggled}
                 />
-                <ShortfutsList isNativeShortcuts={this.isNativeShortcuts} />
-                <Footer showChangeShortfutsButton={this.isNativeShortcuts} />
+                <EditShortcuts />
             </div>
         );
     }
