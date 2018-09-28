@@ -11,3 +11,4 @@
     - If there dupes, just show an error message and let them sort it out
   - UI should have button to restore default shortcuts
 - Update FAQ
+- For navigation shortcuts (back, prev item, etc.), we'll also listen for defaults.
