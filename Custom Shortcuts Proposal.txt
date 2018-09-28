@@ -9,4 +9,5 @@
   - Before writing to storage, there'd have to be a validator that ensures
     there are no duplicates
     - If there dupes, just show an error message and let them sort it out
+  - UI should have button to restore default shortcuts
 - Update FAQ
