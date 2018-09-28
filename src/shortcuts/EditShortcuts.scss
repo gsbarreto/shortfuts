@@ -1,22 +1,26 @@
 @import '../theme';
 
+.ms-TextField {
+    margin: 0 10px !important;
+}
+
 .editShortcutsContainer {
-    width: 400px;
+    width: 340px;
     height: 600px;
 }
 
 .editShortcutsButtons {
     display: flex;
-    justify-content: space-between;
     margin-left: auto;
     margin-top: 12px;
     margin-right: 6px;
-    width: 180px;
+    width: 340px;
+    justify-content: center;
 }
 
 .editShortcutsError {
     margin-top: 12px;
-    width: 400px;
+    width: 340px;
     display: flex;
     justify-content: center;
 }

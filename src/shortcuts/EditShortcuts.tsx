@@ -34,7 +34,7 @@ export default class EditShortcuts extends React.Component<{}, {}> {
                 <TextField label="Bid on card" componentRef={ (ref) => this.bidTextField = ref } />
                 { this.hasError && <div className="editShortcutsError">All shortcuts must be a single character and unique.</div> }
                 <div className="editShortcutsButtons">
-                    <PrimaryButton onClick={ this.onSaveShortcutsClicked }>Save</PrimaryButton>
+                    <PrimaryButton onClick={ this.onSaveShortcutsClicked } style={ { marginRight: '12px' } }>Save</PrimaryButton>
                     <DefaultButton>Discard</DefaultButton>
                 </div>
             </div>
