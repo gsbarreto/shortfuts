@@ -16,6 +16,13 @@ export default function buyBronzePack() {
     clickElement(bronzeTabButton);
 
     setTimeout(() => {
+        // Ensure we're actually buying a bronze pack...
+        const packHeader = document.getElementsByClassName('packHeader')[0];
+        const packTitle = packHeader.getElementsByTagName('span')[0];
+        if (packTitle.textContent.toLowerCase() !== 'bronze pack') {
+            return;
+        }
+
         // Buy a 400 coin bronze pack.
         const bronzePackButton = document.getElementsByClassName(
             'currency call-to-action coins'
