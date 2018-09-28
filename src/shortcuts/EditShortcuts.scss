@@ -1,3 +1,5 @@
+@import '../theme';
+
 .editShortcutsContainer {
     width: 400px;
     height: 600px;
@@ -10,4 +12,11 @@
     margin-top: 12px;
     margin-right: 6px;
     width: 180px;
+}
+
+.editShortcutsError {
+    margin-top: 12px;
+    width: 400px;
+    display: flex;
+    justify-content: center;
 }
