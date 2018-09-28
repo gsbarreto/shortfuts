@@ -69,6 +69,12 @@
         },
         "command16": {
             "description": "Increase minimum bid price"
+        },
+        "command17": {
+            "description": "Decrease maximum bid price"
+        },
+        "command18": {
+            "description": "Increase maximum bid price"
         }
     },
 

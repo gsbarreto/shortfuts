@@ -5,7 +5,7 @@ import getProvider from './provider/getProvider';
 import { initializeIcons } from 'office-ui-fabric-react/lib/Icons';
 import { log } from './utils/logger';
 
-(function() {
+(function () {
     log('Content script has loaded and is running.');
 
     // Initialize OUFR icons.
@@ -92,7 +92,7 @@ import { log } from './utils/logger';
             chrome.storage.sync.get('isNativeShortcuts', isNativeShortcuts => {
                 if (isNativeShortcuts.isNativeShortcuts === false) {
                     if (ev.altKey && keyCode === 32 /* Alt + Space */) {
-                        chrome.storage.sync.set({ isActive: !isActive }, function() {
+                        chrome.storage.sync.set({ isActive: !isActive }, function () {
                             chrome.runtime.sendMessage({
                                 isActive: !isActive,
                             });
@@ -160,6 +160,12 @@ import { log } from './utils/logger';
                             break;
                         case 80 /* p */:
                             provider.increaseMinBidPrice();
+                            break;
+                        case 74 /* j */:
+                            provider.decreaseMaxBidPrice();
+                            break;
+                        case 75 /* k */:
+                            provider.increaseMaxBidPrice();
                             break;
                         default:
                             break;
@@ -272,6 +278,12 @@ import { log } from './utils/logger';
                     } else if (request.increaseMinBidPrice) {
                         logHotkeyReceived('increaseMinBidPrice');
                         provider.increaseMinBidPrice();
+                    } else if (request.decreaseMaxBidPrice) {
+                        logHotkeyReceived('decreaseMaxBidPrice');
+                        provider.decreaseMaxBidPrice();
+                    } else if (request.increaseMaxBidPrice) {
+                        logHotkeyReceived('increaseMaxBidPrice');
+                        provider.increaseMaxBidPrice();
                     }
                 }
             });

@@ -54,7 +54,7 @@ function contactDeveloper() {
                     url: 'mailto:martellaj@live.com?subject=[shortfuts]%20Subject',
                 },
                 mailToTab => {
-                    setTimeout(function() {
+                    setTimeout(function () {
                         // Closes tab created by mailto protocol.
                         chrome.tabs.remove(mailToTab.id);
 
@@ -209,6 +209,22 @@ chrome.commands.onCommand.addListener(command => {
                     _gaq.push(['_trackEvent', 'telemetry', 'increaseMinBidPrice']);
                     chrome.tabs.sendMessage(currentTab, {
                         increaseMinBidPrice: true,
+                    });
+                    break;
+                }
+                // decreaseMaxBidPrice
+                case 'command17': {
+                    _gaq.push(['_trackEvent', 'telemetry', 'decreaseMaxBidPrice']);
+                    chrome.tabs.sendMessage(currentTab, {
+                        decreaseMaxBidPrice: true,
+                    });
+                    break;
+                }
+                // increaseMaxBidPrice
+                case 'command18': {
+                    _gaq.push(['_trackEvent', 'telemetry', 'increaseMaxBidPrice']);
+                    chrome.tabs.sendMessage(currentTab, {
+                        increaseMaxBidPrice: true,
                     });
                     break;
                 }

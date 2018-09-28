@@ -2,7 +2,9 @@ import back from './back';
 import buyBronzePack from './buyBronzePack';
 import buyNow from './buyNow';
 import comparePrice from './comparePrice';
+import decreaseMaxBidPrice from './decreaseMaxBidPrice';
 import decreaseMinBidPrice from './decreaseMinBidPrice';
+import increaseMaxBidPrice from './increaseMaxBidPrice';
 import increaseMinBidPrice from './increaseMinBidPrice';
 import list from './list';
 import listMinBin from './listMinBin';
@@ -25,7 +27,9 @@ export default function getProvider(): Provider {
         buyBronzePack: buyBronzePack,
         buyNow: buyNow,
         comparePrice: comparePrice,
+        decreaseMaxBidPrice: decreaseMaxBidPrice,
         decreaseMinBidPrice: decreaseMinBidPrice,
+        increaseMaxBidPrice: increaseMaxBidPrice,
         increaseMinBidPrice: increaseMinBidPrice,
         list: list,
         listMinBin: listMinBin,
