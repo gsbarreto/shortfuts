@@ -1,0 +1,11 @@
+- Replace "Native" and "Legacy" with new, single mode
+- Store a map (represented as object) of keyCode => shortcut, where shortcut is an enum
+- Implement a keydown listener that takes keyCode and searches map
+  - If keyCode results in a hit, pass to another function that'll have a switch
+    on that and call appropriate function from provider
+- Have UI to edit shortcuts
+  - UI would have a Save and a Discard option
+  - Save would build the map with whatever were in the inputs (just overwrite)
+  - Before writing to storage, there'd have to be a validator that ensures
+    there are no duplicates
+    - If there dupes, just show an error message and let them sort it out
