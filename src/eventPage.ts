@@ -51,7 +51,7 @@ function contactDeveloper() {
             chrome.tabs.create(
                 {
                     active: true,
-                    url: 'mailto:martellaj@live.com?subject=[shortfuts]%20Subject',
+                    url: 'mailto:shortfuts@gmail.com?subject=[shortfuts]%20Subject',
                 },
                 mailToTab => {
                     setTimeout(function () {

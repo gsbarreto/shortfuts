@@ -6,10 +6,7 @@
 
 ## Features
 
-*   Exposes shortcuts for popular FUT web app tasks
-*   Configurable hotkeys so you can do what's best for you
-*   Free (but feel free to [support me](https://www.paypal.me/martellaj/5) if you find it useful)
+- Exposes shortcuts for popular FUT web app tasks
+- Configurable hotkeys so you can do what's best for you
 
 ## Demo
-
-[![Demo](https://github.com/martellaj/shortfuts/blob/master/README%20media/screenshot%20with%20play.png)](https://youtu.be/VbbbM3LWLgs)
