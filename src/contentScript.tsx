@@ -133,6 +133,9 @@ import { log } from './utils/logger';
           case Shortcut.QUICK_SELL_ALL:
             provider.quickSellAll();
             break;
+          case Shortcut.QUICK_SELL:
+            provider.quickSell();
+            break;
         }
       });
     });

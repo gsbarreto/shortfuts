@@ -19,6 +19,7 @@ interface EditShortcutsState {
   listMinBinShortcut: string;
   listShortcut: string;
   quickSellAllShortcut: string;
+  quickSellShortcut: string;
 }
 
 @observer
@@ -39,6 +40,7 @@ export default class EditShortcuts extends React.Component<
   private listMinBinTextField: ITextField;
   private listTextField: ITextField;
   private quickSellAllTextField: ITextField;
+  private quickSellTextField: ITextField;
 
   @observable
   private hasError = false;
@@ -58,7 +60,8 @@ export default class EditShortcuts extends React.Component<
       increaseMinShortcut: "",
       listMinBinShortcut: "",
       listShortcut: "",
-      quickSellAllShortcut: ""
+      quickSellAllShortcut: "",
+      quickSellShortcut: ""
     };
   }
 
@@ -261,6 +264,21 @@ export default class EditShortcuts extends React.Component<
           />
         </div>
 
+        <div className="editShortcutsShortcut ms-borderColor-themePrimary">
+          <span>Quick sell</span>
+          <TextField
+            data-shortcut={Shortcut.QUICK_SELL}
+            componentRef={ref => (this.quickSellTextField = ref)}
+            value={this.state.quickSellShortcut}
+            underlined={true}
+            onChanged={(value: string) => {
+              this.setState({
+                quickSellShortcut: value.toUpperCase()
+              });
+            }}
+          />
+        </div>
+
         <div className="editShortcutsShortcut editShortcutsNavigationShortcut ms-borderColor-themePrimary">
           <span>Go back</span>
           <span>Backspace</span>
@@ -393,6 +411,14 @@ export default class EditShortcuts extends React.Component<
       return false;
     }
 
+    // Validate "Quick sell" shortcut.
+    if (
+      this.quickSellTextField.value &&
+      !this.validateShortcut(this.quickSellTextField.value)
+    ) {
+      return false;
+    }
+
     // If nothing short-circuited, it means all shortcuts are valid.
     return true;
   };
@@ -437,6 +463,7 @@ export default class EditShortcuts extends React.Component<
     const listMinBinEntry = this.getShortcutEntry(this.listMinBinTextField);
     const listEntry = this.getShortcutEntry(this.listTextField);
     const quickSellAllEntry = this.getShortcutEntry(this.quickSellAllTextField);
+    const quickSellEntry = this.getShortcutEntry(this.quickSellTextField);
 
     // Add all entries to shortcuts map.
     shortcutsMap[bidEntry.key] = bidEntry.shortcut;
@@ -450,6 +477,7 @@ export default class EditShortcuts extends React.Component<
     shortcutsMap[listMinBinEntry.key] = listMinBinEntry.shortcut;
     shortcutsMap[listEntry.key] = listEntry.shortcut;
     shortcutsMap[quickSellAllEntry.key] = quickSellAllEntry.shortcut;
+    shortcutsMap[quickSellEntry.key] = quickSellEntry.shortcut;
 
     // Save shortcuts map to storage, and then close popup.
     chrome.storage.sync.set({ shortcutsMap: shortcutsMap }, () => {
@@ -473,7 +501,7 @@ export default class EditShortcuts extends React.Component<
     chrome.storage.sync.get("shortcutsMap", data => {
       const shortcutsMap = data.shortcutsMap;
 
-      // TODO: Decide if we want default shortcuts.
+      // TODO: Make the default shortcuts the same as legacy shortcuts.
       const defaultShortcuts = {
         bidShortcut: "",
         binShortcut: "",
@@ -485,7 +513,8 @@ export default class EditShortcuts extends React.Component<
         increaseMinShortcut: "",
         listMinBinShortcut: "",
         listShortcut: "",
-        quickSellAllShortcut: ""
+        quickSellAllShortcut: "",
+        quickSellShortcut: ""
       };
 
       if (shortcutsMap) {
@@ -525,6 +554,9 @@ export default class EditShortcuts extends React.Component<
               break;
             case Shortcut.QUICK_SELL_ALL:
               defaultShortcuts.quickSellAllShortcut = keyCode;
+              break;
+            case Shortcut.QUICK_SELL:
+              defaultShortcuts.quickSellShortcut = keyCode;
               break;
           }
         }
