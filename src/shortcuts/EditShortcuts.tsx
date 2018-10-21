@@ -23,6 +23,7 @@ interface EditShortcutsState {
   searchShortcut: string;
   storeAllShortcut: string;
   storeShortcut: string;
+  toggleWatchShortcut: string;
 }
 
 @observer
@@ -47,6 +48,7 @@ export default class EditShortcuts extends React.Component<
   private searchTextField: ITextField;
   private storeAllTextField: ITextField;
   private storeTextField: ITextField;
+  private toggleWatchTextField: ITextField;
 
   @observable
   private hasError = false;
@@ -70,7 +72,8 @@ export default class EditShortcuts extends React.Component<
       quickSellShortcut: "",
       searchShortcut: "",
       storeAllShortcut: "",
-      storeShortcut: ""
+      storeShortcut: "",
+      toggleWatchShortcut: ''
     };
   }
 
@@ -338,6 +341,21 @@ export default class EditShortcuts extends React.Component<
           />
         </div>
 
+        <div className="editShortcutsShortcut ms-borderColor-themePrimary">
+          <span>Watch/unwatch</span>
+          <TextField
+            data-shortcut={Shortcut.TOGGLE_WATCH}
+            componentRef={ref => (this.toggleWatchTextField = ref)}
+            value={this.state.toggleWatchShortcut}
+            underlined={true}
+            onChanged={(value: string) => {
+              this.setState({
+                toggleWatchShortcut: value.toUpperCase()
+              });
+            }}
+          />
+        </div>
+
         <div className="editShortcutsShortcut editShortcutsNonEditableShortcut ms-borderColor-themePrimary">
           <span>Go back</span>
           <span>Backspace</span>
@@ -502,6 +520,14 @@ export default class EditShortcuts extends React.Component<
       return false;
     }
 
+    // Validate "Watch/unwatch" shortcut.
+    if (
+      this.toggleWatchTextField.value &&
+      !this.validateShortcut(this.toggleWatchTextField.value)
+    ) {
+      return false;
+    }
+
     // If nothing short-circuited, it means all shortcuts are valid.
     return true;
   };
@@ -550,6 +576,7 @@ export default class EditShortcuts extends React.Component<
     const searchEntry = this.getShortcutEntry(this.searchTextField);
     const storeAllEntry = this.getShortcutEntry(this.storeAllTextField);
     const storeEntry = this.getShortcutEntry(this.storeTextField);
+    const toggleWatchEntry = this.getShortcutEntry(this.toggleWatchTextField);
 
     // Add all entries to shortcuts map.
     shortcutsMap[bidEntry.key] = bidEntry.shortcut;
@@ -567,6 +594,7 @@ export default class EditShortcuts extends React.Component<
     shortcutsMap[searchEntry.key] = searchEntry.shortcut;
     shortcutsMap[storeAllEntry.key] = storeAllEntry.shortcut;
     shortcutsMap[storeEntry.key] = storeEntry.shortcut;
+    shortcutsMap[toggleWatchEntry.key] = toggleWatchEntry.shortcut;
 
     // Save shortcuts map to storage, and then close popup.
     chrome.storage.sync.set({ shortcutsMap: shortcutsMap }, () => {
@@ -606,7 +634,8 @@ export default class EditShortcuts extends React.Component<
         quickSellShortcut: "",
         searchShortcut: "",
         storeAllShortcut: "",
-        storeShortcut: ""
+        storeShortcut: "",
+        toggleWatchShortcut: ''
       };
 
       if (shortcutsMap) {
@@ -658,6 +687,9 @@ export default class EditShortcuts extends React.Component<
               break;
             case Shortcut.STORE:
               defaultShortcuts.storeShortcut = keyCode;
+              break;
+              case Shortcut.TOGGLE_WATCH:
+              defaultShortcuts.toggleWatchShortcut = keyCode;
               break;
           }
         }

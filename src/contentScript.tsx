@@ -145,6 +145,9 @@ import { log } from './utils/logger';
           case Shortcut.STORE:
             provider.storeInClub();
             break;
+          case Shortcut.TOGGLE_WATCH:
+            provider.watch();
+            break;
         }
       });
     });
