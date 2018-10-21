@@ -142,6 +142,9 @@ import { log } from './utils/logger';
           case Shortcut.STORE_ALL:
             provider.storeAllInClub();
             break;
+          case Shortcut.STORE:
+            provider.storeInClub();
+            break;
         }
       });
     });
