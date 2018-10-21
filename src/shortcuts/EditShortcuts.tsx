@@ -188,6 +188,21 @@ export default class EditShortcuts extends React.Component<
             />
           </div>
 
+          <div className="editShortcutsShortcut ms-borderColor-themePrimary">
+            <span>Watch/unwatch</span>
+            <TextField
+              data-shortcut={Shortcut.TOGGLE_WATCH}
+              componentRef={ref => (this.toggleWatchTextField = ref)}
+              value={this.state.toggleWatchShortcut}
+              underlined={true}
+              onChanged={(value: string) => {
+                this.setState({
+                  toggleWatchShortcut: value.toUpperCase()
+                });
+              }}
+            />
+          </div>
+
           <h3 className="editShortcutsHeading">Transfer market</h3>
 
           <div className="editShortcutsShortcut ms-borderColor-themePrimary">
@@ -260,21 +275,6 @@ export default class EditShortcuts extends React.Component<
               onChanged={(value: string) => {
                 this.setState({
                   increaseMaxShortcut: value.toUpperCase()
-                });
-              }}
-            />
-          </div>
-
-          <div className="editShortcutsShortcut ms-borderColor-themePrimary">
-            <span>Watch/unwatch</span>
-            <TextField
-              data-shortcut={Shortcut.TOGGLE_WATCH}
-              componentRef={ref => (this.toggleWatchTextField = ref)}
-              value={this.state.toggleWatchShortcut}
-              underlined={true}
-              onChanged={(value: string) => {
-                this.setState({
-                  toggleWatchShortcut: value.toUpperCase()
                 });
               }}
             />
