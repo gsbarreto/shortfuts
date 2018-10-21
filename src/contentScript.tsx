@@ -90,6 +90,10 @@ import { log } from './utils/logger';
             break;
           case Shortcut.BIN:
             provider.buyNow();
+            break;
+          case Shortcut.BRONZE_PACK:
+            provider.buyBronzePack();
+            break;
         }
       });
     });

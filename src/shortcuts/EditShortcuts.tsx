@@ -11,6 +11,7 @@ interface EditShortcutsState {
   backShortcut: string;
   bidShortcut: string;
   binShortcut: string;
+  buyBronzePackShortcut: string;
 }
 
 @observer
@@ -23,6 +24,7 @@ export default class EditShortcuts extends React.Component<
   private backTextField: ITextField;
   private bidTextField: ITextField;
   private binTextField: ITextField;
+  private buyBronzePackTextField: ITextField;
 
   @observable
   private hasError = false;
@@ -34,7 +36,8 @@ export default class EditShortcuts extends React.Component<
       isReady: false,
       backShortcut: "",
       bidShortcut: "",
-      binShortcut: ""
+      binShortcut: "",
+      buyBronzePackShortcut: ""
     };
   }
 
@@ -67,7 +70,8 @@ export default class EditShortcuts extends React.Component<
 
         {this.hasError && (
           <div className="editShortcutsError ms-fontColor-redDark">
-            All shortcuts must be a single, unique character.
+            All shortcuts must be a single, unique character between A-Z and
+            0-9.
           </div>
         )}
 
@@ -111,6 +115,21 @@ export default class EditShortcuts extends React.Component<
             onChanged={(value: string) => {
               this.setState({
                 binShortcut: value.toUpperCase()
+              });
+            }}
+          />
+        </div>
+
+        <div className="editShortcutsShortcut ms-borderColor-themePrimary">
+          <span>Buy bronze pack</span>
+          <TextField
+            data-shortcut={Shortcut.BRONZE_PACK}
+            componentRef={ref => (this.buyBronzePackTextField = ref)}
+            value={this.state.buyBronzePackShortcut}
+            underlined={true}
+            onChanged={(value: string) => {
+              this.setState({
+                buyBronzePackShortcut: value.toUpperCase()
               });
             }}
           />
@@ -159,6 +178,14 @@ export default class EditShortcuts extends React.Component<
       return false;
     }
 
+    // Validate "Buy bronze pack" shortcut.
+    if (
+      this.buyBronzePackTextField.value &&
+      !this.validateShortcut(this.buyBronzePackTextField.value)
+    ) {
+      return false;
+    }
+
     // If nothing short-circuited, it means all shortcuts are valid.
     return true;
   };
@@ -166,6 +193,11 @@ export default class EditShortcuts extends React.Component<
   private validateShortcut = (shortcut: string): boolean => {
     // Shortcut has to be 1 character.
     if (shortcut.length !== 1) {
+      return false;
+    }
+
+    // Shortcut has to be a-z, A-Z, or 0-9.
+    if (!shortcut.match(/[a-zA-Z0-9]/)) {
       return false;
     }
 
@@ -188,11 +220,15 @@ export default class EditShortcuts extends React.Component<
     const backEntry = this.getShortcutEntry(this.backTextField);
     const bidEntry = this.getShortcutEntry(this.bidTextField);
     const binEntry = this.getShortcutEntry(this.binTextField);
+    const buyBronzePackEntry = this.getShortcutEntry(
+      this.buyBronzePackTextField
+    );
 
     // Add all entries to shortcuts map.
     shortcutsMap[backEntry.key] = backEntry.shortcut;
     shortcutsMap[bidEntry.key] = bidEntry.shortcut;
     shortcutsMap[binEntry.key] = binEntry.shortcut;
+    shortcutsMap[buyBronzePackEntry.key] = buyBronzePackEntry.shortcut;
 
     // Save shortcuts map to storage, and then close popup.
     chrome.storage.sync.set({ shortcutsMap: shortcutsMap }, () => {
@@ -220,7 +256,8 @@ export default class EditShortcuts extends React.Component<
       const defaultShortcuts = {
         backShortcut: "",
         bidShortcut: "",
-        binShortcut: ""
+        binShortcut: "",
+        buyBronzePackShortcut: ""
       };
 
       if (shortcutsMap) {
@@ -236,6 +273,10 @@ export default class EditShortcuts extends React.Component<
               break;
             case Shortcut.BIN:
               defaultShortcuts.binShortcut = keyCode;
+              break;
+            case Shortcut.BRONZE_PACK:
+              defaultShortcuts.buyBronzePackShortcut = keyCode;
+              break;
           }
         }
       }
