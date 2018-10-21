@@ -139,6 +139,9 @@ import { log } from './utils/logger';
           case Shortcut.SEARCH:
             provider.search();
             break;
+          case Shortcut.STORE_ALL:
+            provider.storeAllInClub();
+            break;
         }
       });
     });
