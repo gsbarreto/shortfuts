@@ -108,6 +108,11 @@ export default class EditShortcuts extends React.Component<
           </div>
         )}
 
+        <div className="editShortcutsShortcut editShortcutsNonEditableShortcut ms-borderColor-themePrimary">
+          <span>Toggles extension on/off</span>
+          <span>Alt + Space</span>
+        </div>
+
         <div className="editShortcutsShortcut ms-borderColor-themePrimary">
           <span>Bid on card</span>
           <TextField
@@ -333,27 +338,27 @@ export default class EditShortcuts extends React.Component<
           />
         </div>
 
-        <div className="editShortcutsShortcut editShortcutsNavigationShortcut ms-borderColor-themePrimary">
+        <div className="editShortcutsShortcut editShortcutsNonEditableShortcut ms-borderColor-themePrimary">
           <span>Go back</span>
           <span>Backspace</span>
         </div>
 
-        <div className="editShortcutsShortcut editShortcutsNavigationShortcut ms-borderColor-themePrimary">
+        <div className="editShortcutsShortcut editShortcutsNonEditableShortcut ms-borderColor-themePrimary">
           <span>Select previous item</span>
           <span>Up arrow</span>
         </div>
 
-        <div className="editShortcutsShortcut editShortcutsNavigationShortcut ms-borderColor-themePrimary">
+        <div className="editShortcutsShortcut editShortcutsNonEditableShortcut ms-borderColor-themePrimary">
           <span>Selext next item</span>
           <span>Down arrow</span>
         </div>
 
-        <div className="editShortcutsShortcut editShortcutsNavigationShortcut ms-borderColor-themePrimary">
+        <div className="editShortcutsShortcut editShortcutsNonEditableShortcut ms-borderColor-themePrimary">
           <span>Go to previous page of items</span>
           <span>Left arrow</span>
         </div>
 
-        <div className="editShortcutsShortcut editShortcutsNavigationShortcut ms-borderColor-themePrimary">
+        <div className="editShortcutsShortcut editShortcutsNonEditableShortcut ms-borderColor-themePrimary">
           <span>Go to next page of items</span>
           <span>Right arrow</span>
         </div>
