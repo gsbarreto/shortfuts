@@ -24,6 +24,7 @@ interface EditShortcutsState {
   storeAllShortcut: string;
   storeShortcut: string;
   toggleWatchShortcut: string;
+  transferListShortcut: string;
 }
 
 @observer
@@ -49,6 +50,7 @@ export default class EditShortcuts extends React.Component<
   private storeAllTextField: ITextField;
   private storeTextField: ITextField;
   private toggleWatchTextField: ITextField;
+  private transferListTextField: ITextField;
 
   @observable
   private hasError = false;
@@ -73,7 +75,8 @@ export default class EditShortcuts extends React.Component<
       searchShortcut: "",
       storeAllShortcut: "",
       storeShortcut: "",
-      toggleWatchShortcut: ''
+      toggleWatchShortcut: "",
+      transferListShortcut: ""
     };
   }
 
@@ -356,6 +359,21 @@ export default class EditShortcuts extends React.Component<
           />
         </div>
 
+        <div className="editShortcutsShortcut ms-borderColor-themePrimary">
+          <span>Send to transfer list</span>
+          <TextField
+            data-shortcut={Shortcut.TRANSFER_LIST}
+            componentRef={ref => (this.transferListTextField = ref)}
+            value={this.state.transferListShortcut}
+            underlined={true}
+            onChanged={(value: string) => {
+              this.setState({
+                transferListShortcut: value.toUpperCase()
+              });
+            }}
+          />
+        </div>
+
         <div className="editShortcutsShortcut editShortcutsNonEditableShortcut ms-borderColor-themePrimary">
           <span>Go back</span>
           <span>Backspace</span>
@@ -528,6 +546,14 @@ export default class EditShortcuts extends React.Component<
       return false;
     }
 
+    // Validate "Send to transfer list" shortcut.
+    if (
+      this.transferListTextField.value &&
+      !this.validateShortcut(this.transferListTextField.value)
+    ) {
+      return false;
+    }
+
     // If nothing short-circuited, it means all shortcuts are valid.
     return true;
   };
@@ -577,6 +603,7 @@ export default class EditShortcuts extends React.Component<
     const storeAllEntry = this.getShortcutEntry(this.storeAllTextField);
     const storeEntry = this.getShortcutEntry(this.storeTextField);
     const toggleWatchEntry = this.getShortcutEntry(this.toggleWatchTextField);
+    const transferListEntry = this.getShortcutEntry(this.transferListTextField);
 
     // Add all entries to shortcuts map.
     shortcutsMap[bidEntry.key] = bidEntry.shortcut;
@@ -595,6 +622,7 @@ export default class EditShortcuts extends React.Component<
     shortcutsMap[storeAllEntry.key] = storeAllEntry.shortcut;
     shortcutsMap[storeEntry.key] = storeEntry.shortcut;
     shortcutsMap[toggleWatchEntry.key] = toggleWatchEntry.shortcut;
+    shortcutsMap[transferListEntry.key] = transferListEntry.shortcut;
 
     // Save shortcuts map to storage, and then close popup.
     chrome.storage.sync.set({ shortcutsMap: shortcutsMap }, () => {
@@ -635,7 +663,8 @@ export default class EditShortcuts extends React.Component<
         searchShortcut: "",
         storeAllShortcut: "",
         storeShortcut: "",
-        toggleWatchShortcut: ''
+        toggleWatchShortcut: "",
+        transferListShortcut: ""
       };
 
       if (shortcutsMap) {
@@ -688,8 +717,11 @@ export default class EditShortcuts extends React.Component<
             case Shortcut.STORE:
               defaultShortcuts.storeShortcut = keyCode;
               break;
-              case Shortcut.TOGGLE_WATCH:
+            case Shortcut.TOGGLE_WATCH:
               defaultShortcuts.toggleWatchShortcut = keyCode;
+              break;
+            case Shortcut.TRANSFER_LIST:
+              defaultShortcuts.transferListShortcut = keyCode;
               break;
           }
         }

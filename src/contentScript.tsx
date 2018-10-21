@@ -148,6 +148,9 @@ import { log } from './utils/logger';
           case Shortcut.TOGGLE_WATCH:
             provider.watch();
             break;
+          case Shortcut.TRANSFER_LIST:
+            provider.sendToTransferList();
+            break;
         }
       });
     });
