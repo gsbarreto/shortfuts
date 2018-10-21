@@ -12,6 +12,7 @@ interface EditShortcutsState {
   bidShortcut: string;
   binShortcut: string;
   buyBronzePackShortcut: string;
+  compareShortcut: string;
 }
 
 @observer
@@ -25,6 +26,7 @@ export default class EditShortcuts extends React.Component<
   private bidTextField: ITextField;
   private binTextField: ITextField;
   private buyBronzePackTextField: ITextField;
+  private compareTextField: ITextField;
 
   @observable
   private hasError = false;
@@ -37,7 +39,8 @@ export default class EditShortcuts extends React.Component<
       backShortcut: "",
       bidShortcut: "",
       binShortcut: "",
-      buyBronzePackShortcut: ""
+      buyBronzePackShortcut: "",
+      compareShortcut: ""
     };
   }
 
@@ -134,6 +137,21 @@ export default class EditShortcuts extends React.Component<
             }}
           />
         </div>
+
+        <div className="editShortcutsShortcut ms-borderColor-themePrimary">
+          <span>Compare price</span>
+          <TextField
+            data-shortcut={Shortcut.COMPARE}
+            componentRef={ref => (this.compareTextField = ref)}
+            value={this.state.compareShortcut}
+            underlined={true}
+            onChanged={(value: string) => {
+              this.setState({
+                compareShortcut: value.toUpperCase()
+              });
+            }}
+          />
+        </div>
       </div>
     );
   }
@@ -186,6 +204,14 @@ export default class EditShortcuts extends React.Component<
       return false;
     }
 
+    // Validate "Compare" shortcut.
+    if (
+      this.compareTextField.value &&
+      !this.validateShortcut(this.compareTextField.value)
+    ) {
+      return false;
+    }
+
     // If nothing short-circuited, it means all shortcuts are valid.
     return true;
   };
@@ -223,12 +249,14 @@ export default class EditShortcuts extends React.Component<
     const buyBronzePackEntry = this.getShortcutEntry(
       this.buyBronzePackTextField
     );
+    const compareEntry = this.getShortcutEntry(this.compareTextField);
 
     // Add all entries to shortcuts map.
     shortcutsMap[backEntry.key] = backEntry.shortcut;
     shortcutsMap[bidEntry.key] = bidEntry.shortcut;
     shortcutsMap[binEntry.key] = binEntry.shortcut;
     shortcutsMap[buyBronzePackEntry.key] = buyBronzePackEntry.shortcut;
+    shortcutsMap[compareEntry.key] = compareEntry.shortcut;
 
     // Save shortcuts map to storage, and then close popup.
     chrome.storage.sync.set({ shortcutsMap: shortcutsMap }, () => {
@@ -257,7 +285,8 @@ export default class EditShortcuts extends React.Component<
         backShortcut: "",
         bidShortcut: "",
         binShortcut: "",
-        buyBronzePackShortcut: ""
+        buyBronzePackShortcut: "",
+        compareShortcut: ""
       };
 
       if (shortcutsMap) {
@@ -276,6 +305,9 @@ export default class EditShortcuts extends React.Component<
               break;
             case Shortcut.BRONZE_PACK:
               defaultShortcuts.buyBronzePackShortcut = keyCode;
+              break;
+            case Shortcut.COMPARE:
+              defaultShortcuts.compareShortcut = keyCode;
               break;
           }
         }

@@ -94,6 +94,8 @@ import { log } from './utils/logger';
           case Shortcut.BRONZE_PACK:
             provider.buyBronzePack();
             break;
+          case Shortcut.COMPARE:
+            provider.comparePrice();
         }
       });
     });
