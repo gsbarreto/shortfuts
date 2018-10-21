@@ -109,6 +109,8 @@ import { log } from './utils/logger';
           case Shortcut.INCREASE_MIN:
             provider.increaseMinBidPrice();
             break;
+          case Shortcut.LIST_MIN_BIN:
+            provider.listMinBin();
         }
       });
     });
