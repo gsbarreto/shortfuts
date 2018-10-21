@@ -111,6 +111,10 @@ import { log } from './utils/logger';
             break;
           case Shortcut.LIST_MIN_BIN:
             provider.listMinBin();
+            break;
+          case Shortcut.LIST:
+            provider.list();
+            break;
         }
       });
     });

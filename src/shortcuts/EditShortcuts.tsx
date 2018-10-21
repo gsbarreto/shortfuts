@@ -18,6 +18,7 @@ interface EditShortcutsState {
   increaseMaxShortcut: string;
   increaseMinShortcut: string;
   listMinBinShortcut: string;
+  listShortcut: string;
 }
 
 @observer
@@ -37,6 +38,7 @@ export default class EditShortcuts extends React.Component<
   private increaseMaxTextField: ITextField;
   private increaseMinTextField: ITextField;
   private listMinBinTextField: ITextField;
+  private listTextField: ITextField;
 
   @observable
   private hasError = false;
@@ -55,7 +57,8 @@ export default class EditShortcuts extends React.Component<
       decreaseMinShortcut: "",
       increaseMaxShortcut: "",
       increaseMinShortcut: "",
-      listMinBinShortcut: ""
+      listMinBinShortcut: "",
+      listShortcut: ""
     };
   }
 
@@ -242,6 +245,21 @@ export default class EditShortcuts extends React.Component<
             }}
           />
         </div>
+
+        <div className="editShortcutsShortcut ms-borderColor-themePrimary">
+          <span>List item</span>
+          <TextField
+            data-shortcut={Shortcut.LIST}
+            componentRef={ref => (this.listTextField = ref)}
+            value={this.state.listShortcut}
+            underlined={true}
+            onChanged={(value: string) => {
+              this.setState({
+                listShortcut: value.toUpperCase()
+              });
+            }}
+          />
+        </div>
       </div>
     );
   }
@@ -334,10 +352,18 @@ export default class EditShortcuts extends React.Component<
       return false;
     }
 
-    // Validate "List min BID" shortcut.
+    // Validate "List min BIN" shortcut.
     if (
       this.listMinBinTextField.value &&
       !this.validateShortcut(this.listMinBinTextField.value)
+    ) {
+      return false;
+    }
+
+    // Validate "List" shortcut.
+    if (
+      this.listTextField.value &&
+      !this.validateShortcut(this.listTextField.value)
     ) {
       return false;
     }
@@ -385,6 +411,7 @@ export default class EditShortcuts extends React.Component<
     const increaseMaxEntry = this.getShortcutEntry(this.increaseMaxTextField);
     const increaseMinEntry = this.getShortcutEntry(this.increaseMinTextField);
     const listMinBinEntry = this.getShortcutEntry(this.listMinBinTextField);
+    const listEntry = this.getShortcutEntry(this.listTextField);
 
     // Add all entries to shortcuts map.
     shortcutsMap[backEntry.key] = backEntry.shortcut;
@@ -397,6 +424,7 @@ export default class EditShortcuts extends React.Component<
     shortcutsMap[increaseMaxEntry.key] = increaseMaxEntry.shortcut;
     shortcutsMap[increaseMinEntry.key] = increaseMinEntry.shortcut;
     shortcutsMap[listMinBinEntry.key] = listMinBinEntry.shortcut;
+    shortcutsMap[listEntry.key] = listEntry.shortcut;
 
     // Save shortcuts map to storage, and then close popup.
     chrome.storage.sync.set({ shortcutsMap: shortcutsMap }, () => {
@@ -431,7 +459,8 @@ export default class EditShortcuts extends React.Component<
         decreaseMinShortcut: "",
         increaseMaxShortcut: "",
         increaseMinShortcut: "",
-        listMinBinShortcut: ""
+        listMinBinShortcut: "",
+        listShortcut: ""
       };
 
       if (shortcutsMap) {
@@ -469,6 +498,8 @@ export default class EditShortcuts extends React.Component<
             case Shortcut.LIST_MIN_BIN:
               defaultShortcuts.listMinBinShortcut = keyCode;
               break;
+            case Shortcut.LIST:
+              defaultShortcuts.listShortcut = keyCode;
           }
         }
       }
