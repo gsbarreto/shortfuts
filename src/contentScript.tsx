@@ -106,6 +106,9 @@ import { log } from './utils/logger';
           case Shortcut.INCREASE_MAX:
             provider.increaseMaxBidPrice();
             break;
+          case Shortcut.INCREASE_MIN:
+            provider.increaseMinBidPrice();
+            break;
         }
       });
     });
