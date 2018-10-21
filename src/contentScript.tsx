@@ -96,6 +96,10 @@ import { log } from './utils/logger';
             break;
           case Shortcut.COMPARE:
             provider.comparePrice();
+            break;
+          case Shortcut.DECREASE_MAX:
+            provider.decreaseMaxBidPrice();
+            break;
         }
       });
     });
