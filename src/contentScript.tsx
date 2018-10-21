@@ -130,8 +130,8 @@ import { log } from './utils/logger';
           case Shortcut.LIST:
             provider.list();
             break;
-          case Shortcut.NEXT_ITEM:
-            provider.move("down");
+          case Shortcut.QUICK_SELL_ALL:
+            provider.quickSellAll();
             break;
         }
       });
