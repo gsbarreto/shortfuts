@@ -19,7 +19,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     review();
   } else if (request.isActive !== undefined) {
     chrome.browserAction.setBadgeBackgroundColor({
-      color: "#201c55" /* themePrimaryColor */
+      color: "#0078d4"
     });
     chrome.browserAction.setBadgeText({
       text: request.isActive ? "ON" : "OFF"
