@@ -4,43 +4,48 @@
 }
 
 .editShortcutsContainer {
-  // width: 340px;
-  height: 600px;
+  padding-bottom: 12px;
 }
 
 .editShortcutsButtons {
-  display: flex;
-  margin-left: auto;
-  margin-top: 12px;
-  margin-right: 6px;
   // width: 340px;
+  display: flex;
   justify-content: center;
+  margin-left: auto;
+  margin-right: 6px;
+  margin-top: 12px;
 }
 
 .editShortcutsError {
-  margin-top: 12px;
   // width: 340px;
   display: flex;
   justify-content: center;
+  margin-top: 12px;
   padding: 0px 24px;
 }
 
 .editShortcutsShortcut {
-  display: flex;
   align-items: center;
+  border-bottom: 1px solid;
+  display: flex;
   justify-content: space-between;
   margin-left: 12px;
-  margin-top: 2px;
-  border-bottom: 1px solid;
-  padding-bottom: 4px;
   margin-right: 12px;
+  margin-top: 2px;
+  padding-bottom: 4px;
 }
 
 .editShortcutsNonEditableShortcut {
-  padding-right: 8px;
   height: 38px;
+  padding-right: 8px;
 }
 
 .editShortcutsHeading {
   margin: 12px;
+}
+
+.editShortcutsList {
+  margin-top: 12px;
+  max-height: 400px;
+  overflow-y: scroll;
 }
