@@ -37,10 +37,6 @@ export default class Announcement extends React.Component<{}, {}> {
         chrome.storage.sync.set({
           announcementVersion: ANNOUNCEMENT_VERSION
         });
-
-        chrome.runtime.sendMessage({
-          announcementShown: true
-        });
       }
     });
   }
