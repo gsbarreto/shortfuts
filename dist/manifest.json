@@ -16,62 +16,6 @@
     "48": "icon48.png",
     "128": "icon128.png"
   },
-  "commands": {
-    "command0": {
-      "description": "Toggles the extension on and off"
-    },
-    "command2": {
-      "description": "Stores current item in the club"
-    },
-    "command3": {
-      "description": "Buys the current item for BIN price"
-    },
-    "command4": {
-      "description": "Compares price of the current item with other items on the market"
-    },
-    "command5": {
-      "description": "Quick sells the current item"
-    },
-    "command6": {
-      "description": "Sends current item to transfer list"
-    },
-    "command7": {
-      "description": "Lists the current item for minimum BIN"
-    },
-    "command8": {
-      "description": "Lists the current item (with currently selected price range)"
-    },
-    "command9": {
-      "description": "Buys a bronze pack"
-    },
-    "command10": {
-      "description": "Quick sells all remaining items in pack"
-    },
-    "command11": {
-      "description": "Stores all remaining items in pack in the club"
-    },
-    "command12": {
-      "description": "Toggles current item's status on your transfer targets list"
-    },
-    "command13": {
-      "description": "Makes a bid on the current item"
-    },
-    "command14": {
-      "description": "Searches the transfer market"
-    },
-    "command15": {
-      "description": "Decrease minimum bid price"
-    },
-    "command16": {
-      "description": "Increase minimum bid price"
-    },
-    "command17": {
-      "description": "Decrease maximum bid price"
-    },
-    "command18": {
-      "description": "Increase maximum bid price"
-    }
-  },
   "content_scripts": [
     {
       "matches": ["*://www.easports.com/*fifa/ultimate-team/web-app/*"],
