@@ -114,13 +114,10 @@ export default class EditShortcuts extends React.Component<
           </div>
         )}
 
-        <div className="editShortcutsShortcut editShortcutsNonEditableShortcut ms-borderColor-themePrimary">
-          <span>Toggles extension on/off</span>
-          <span>Alt + Space</span>
-        </div>
+        <h3 className="editShortcutsHeading">Buying items</h3>
 
         <div className="editShortcutsShortcut ms-borderColor-themePrimary">
-          <span>Bid on card</span>
+          <span>Make a bid</span>
           <TextField
             data-shortcut={Shortcut.BID}
             componentRef={ref => (this.bidTextField = ref)}
@@ -164,31 +161,18 @@ export default class EditShortcuts extends React.Component<
           />
         </div>
 
-        <div className="editShortcutsShortcut ms-borderColor-themePrimary">
-          <span>Compare price</span>
-          <TextField
-            data-shortcut={Shortcut.COMPARE}
-            componentRef={ref => (this.compareTextField = ref)}
-            value={this.state.compareShortcut}
-            underlined={true}
-            onChanged={(value: string) => {
-              this.setState({
-                compareShortcut: value.toUpperCase()
-              });
-            }}
-          />
-        </div>
+        <h3 className="editShortcutsHeading">Transfer market</h3>
 
         <div className="editShortcutsShortcut ms-borderColor-themePrimary">
-          <span>Decrease max bid price</span>
+          <span>Search</span>
           <TextField
-            data-shortcut={Shortcut.DECREASE_MAX}
-            componentRef={ref => (this.decreaseMaxTextField = ref)}
-            value={this.state.decreaseMaxShortcut}
+            data-shortcut={Shortcut.SEARCH}
+            componentRef={ref => (this.searchTextField = ref)}
+            value={this.state.searchShortcut}
             underlined={true}
             onChanged={(value: string) => {
               this.setState({
-                decreaseMaxShortcut: value.toUpperCase()
+                searchShortcut: value.toUpperCase()
               });
             }}
           />
@@ -210,6 +194,36 @@ export default class EditShortcuts extends React.Component<
         </div>
 
         <div className="editShortcutsShortcut ms-borderColor-themePrimary">
+          <span>Increase min bid price</span>
+          <TextField
+            data-shortcut={Shortcut.INCREASE_MIN}
+            componentRef={ref => (this.increaseMinTextField = ref)}
+            value={this.state.increaseMinShortcut}
+            underlined={true}
+            onChanged={(value: string) => {
+              this.setState({
+                increaseMinShortcut: value.toUpperCase()
+              });
+            }}
+          />
+        </div>
+
+        <div className="editShortcutsShortcut ms-borderColor-themePrimary">
+          <span>Decrease max bid price</span>
+          <TextField
+            data-shortcut={Shortcut.DECREASE_MAX}
+            componentRef={ref => (this.decreaseMaxTextField = ref)}
+            value={this.state.decreaseMaxShortcut}
+            underlined={true}
+            onChanged={(value: string) => {
+              this.setState({
+                decreaseMaxShortcut: value.toUpperCase()
+              });
+            }}
+          />
+        </div>
+
+        <div className="editShortcutsShortcut ms-borderColor-themePrimary">
           <span>Increase max bid price</span>
           <TextField
             data-shortcut={Shortcut.INCREASE_MAX}
@@ -225,15 +239,32 @@ export default class EditShortcuts extends React.Component<
         </div>
 
         <div className="editShortcutsShortcut ms-borderColor-themePrimary">
-          <span>Increase min bid price</span>
+          <span>Watch/unwatch</span>
           <TextField
-            data-shortcut={Shortcut.INCREASE_MIN}
-            componentRef={ref => (this.increaseMinTextField = ref)}
-            value={this.state.increaseMinShortcut}
+            data-shortcut={Shortcut.TOGGLE_WATCH}
+            componentRef={ref => (this.toggleWatchTextField = ref)}
+            value={this.state.toggleWatchShortcut}
             underlined={true}
             onChanged={(value: string) => {
               this.setState({
-                increaseMinShortcut: value.toUpperCase()
+                toggleWatchShortcut: value.toUpperCase()
+              });
+            }}
+          />
+        </div>
+
+        <h3 className="editShortcutsHeading">Dealing with owned items</h3>
+
+        <div className="editShortcutsShortcut ms-borderColor-themePrimary">
+          <span>Compare price</span>
+          <TextField
+            data-shortcut={Shortcut.COMPARE}
+            componentRef={ref => (this.compareTextField = ref)}
+            value={this.state.compareShortcut}
+            underlined={true}
+            onChanged={(value: string) => {
+              this.setState({
+                compareShortcut: value.toUpperCase()
               });
             }}
           />
@@ -270,60 +301,15 @@ export default class EditShortcuts extends React.Component<
         </div>
 
         <div className="editShortcutsShortcut ms-borderColor-themePrimary">
-          <span>Quick sell all</span>
+          <span>Send to transfer list</span>
           <TextField
-            data-shortcut={Shortcut.QUICK_SELL_ALL}
-            componentRef={ref => (this.quickSellAllTextField = ref)}
-            value={this.state.quickSellAllShortcut}
+            data-shortcut={Shortcut.TRANSFER_LIST}
+            componentRef={ref => (this.transferListTextField = ref)}
+            value={this.state.transferListShortcut}
             underlined={true}
             onChanged={(value: string) => {
               this.setState({
-                quickSellAllShortcut: value.toUpperCase()
-              });
-            }}
-          />
-        </div>
-
-        <div className="editShortcutsShortcut ms-borderColor-themePrimary">
-          <span>Quick sell</span>
-          <TextField
-            data-shortcut={Shortcut.QUICK_SELL}
-            componentRef={ref => (this.quickSellTextField = ref)}
-            value={this.state.quickSellShortcut}
-            underlined={true}
-            onChanged={(value: string) => {
-              this.setState({
-                quickSellShortcut: value.toUpperCase()
-              });
-            }}
-          />
-        </div>
-
-        <div className="editShortcutsShortcut ms-borderColor-themePrimary">
-          <span>Search</span>
-          <TextField
-            data-shortcut={Shortcut.SEARCH}
-            componentRef={ref => (this.searchTextField = ref)}
-            value={this.state.searchShortcut}
-            underlined={true}
-            onChanged={(value: string) => {
-              this.setState({
-                searchShortcut: value.toUpperCase()
-              });
-            }}
-          />
-        </div>
-
-        <div className="editShortcutsShortcut ms-borderColor-themePrimary">
-          <span>Store all</span>
-          <TextField
-            data-shortcut={Shortcut.STORE_ALL}
-            componentRef={ref => (this.storeAllTextField = ref)}
-            value={this.state.storeAllShortcut}
-            underlined={true}
-            onChanged={(value: string) => {
-              this.setState({
-                storeAllShortcut: value.toUpperCase()
+                transferListShortcut: value.toUpperCase()
               });
             }}
           />
@@ -345,34 +331,51 @@ export default class EditShortcuts extends React.Component<
         </div>
 
         <div className="editShortcutsShortcut ms-borderColor-themePrimary">
-          <span>Watch/unwatch</span>
+          <span>Quick sell</span>
           <TextField
-            data-shortcut={Shortcut.TOGGLE_WATCH}
-            componentRef={ref => (this.toggleWatchTextField = ref)}
-            value={this.state.toggleWatchShortcut}
+            data-shortcut={Shortcut.QUICK_SELL}
+            componentRef={ref => (this.quickSellTextField = ref)}
+            value={this.state.quickSellShortcut}
             underlined={true}
             onChanged={(value: string) => {
               this.setState({
-                toggleWatchShortcut: value.toUpperCase()
+                quickSellShortcut: value.toUpperCase()
               });
             }}
           />
         </div>
 
         <div className="editShortcutsShortcut ms-borderColor-themePrimary">
-          <span>Send to transfer list</span>
+          <span>Store all</span>
           <TextField
-            data-shortcut={Shortcut.TRANSFER_LIST}
-            componentRef={ref => (this.transferListTextField = ref)}
-            value={this.state.transferListShortcut}
+            data-shortcut={Shortcut.STORE_ALL}
+            componentRef={ref => (this.storeAllTextField = ref)}
+            value={this.state.storeAllShortcut}
             underlined={true}
             onChanged={(value: string) => {
               this.setState({
-                transferListShortcut: value.toUpperCase()
+                storeAllShortcut: value.toUpperCase()
               });
             }}
           />
         </div>
+
+        <div className="editShortcutsShortcut ms-borderColor-themePrimary">
+          <span>Quick sell all</span>
+          <TextField
+            data-shortcut={Shortcut.QUICK_SELL_ALL}
+            componentRef={ref => (this.quickSellAllTextField = ref)}
+            value={this.state.quickSellAllShortcut}
+            underlined={true}
+            onChanged={(value: string) => {
+              this.setState({
+                quickSellAllShortcut: value.toUpperCase()
+              });
+            }}
+          />
+        </div>
+
+        <h3 className="editShortcutsHeading">Navigation</h3>
 
         <div className="editShortcutsShortcut editShortcutsNonEditableShortcut ms-borderColor-themePrimary">
           <span>Go back</span>
@@ -397,6 +400,13 @@ export default class EditShortcuts extends React.Component<
         <div className="editShortcutsShortcut editShortcutsNonEditableShortcut ms-borderColor-themePrimary">
           <span>Go to next page of items</span>
           <span>Right arrow</span>
+        </div>
+
+        <h3 className="editShortcutsHeading">Other</h3>
+
+        <div className="editShortcutsShortcut editShortcutsNonEditableShortcut ms-borderColor-themePrimary">
+          <span>Toggles extension on/off</span>
+          <span>Alt + Space</span>
         </div>
       </div>
     );
