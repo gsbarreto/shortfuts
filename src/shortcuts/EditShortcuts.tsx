@@ -6,6 +6,26 @@ import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import './EditShortcuts.scss';
 
+const defaultShortcuts = {
+  bidShortcut: "D",
+  binShortcut: "N",
+  buyBronzePackShortcut: "B",
+  compareShortcut: "C",
+  decreaseMaxShortcut: "J",
+  decreaseMinShortcut: "I",
+  increaseMaxShortcut: "K",
+  increaseMinShortcut: "O",
+  listMinBinShortcut: "M",
+  listShortcut: "L",
+  quickSellAllShortcut: "A",
+  quickSellShortcut: "Q",
+  searchShortcut: "P",
+  storeAllShortcut: "X",
+  storeShortcut: "S",
+  toggleWatchShortcut: "W",
+  transferListShortcut: "T"
+};
+
 interface EditShortcutsState {
   isReady: boolean; // Don't render until shortcuts map loads.
   bidShortcut: string;
@@ -102,8 +122,15 @@ export default class EditShortcuts extends React.Component<
           <DefaultButton
             onClick={() => this.setShortcutsFromStorage()}
             title="Discards any unsaved changes"
+            style={{ marginRight: "12px" }}
           >
             Discard
+          </DefaultButton>
+          <DefaultButton
+            onClick={() => this.resetToDefaultShortcuts()}
+            title="Discards any unsaved changes"
+          >
+            Reset to default
           </DefaultButton>
         </div>
 
@@ -635,9 +662,12 @@ export default class EditShortcuts extends React.Component<
     shortcutsMap[toggleWatchEntry.key] = toggleWatchEntry.shortcut;
     shortcutsMap[transferListEntry.key] = transferListEntry.shortcut;
 
+    // Clear empty string from map.
+    delete shortcutsMap[""];
+
     // Save shortcuts map to storage, and then close popup.
     chrome.storage.sync.set({ shortcutsMap: shortcutsMap }, () => {
-      window.close();
+      this.hasError = false;
     });
   };
 
@@ -657,8 +687,7 @@ export default class EditShortcuts extends React.Component<
     chrome.storage.sync.get("shortcutsMap", data => {
       const shortcutsMap = data.shortcutsMap;
 
-      // TODO: Make the default shortcuts the same as legacy shortcuts.
-      const defaultShortcuts = {
+      const userShortcuts = {
         bidShortcut: "",
         binShortcut: "",
         buyBronzePackShortcut: "",
@@ -684,64 +713,81 @@ export default class EditShortcuts extends React.Component<
 
           switch (shortcut) {
             case Shortcut.BID:
-              defaultShortcuts.bidShortcut = keyCode;
+              userShortcuts.bidShortcut = keyCode;
               break;
             case Shortcut.BIN:
-              defaultShortcuts.binShortcut = keyCode;
+              userShortcuts.binShortcut = keyCode;
               break;
             case Shortcut.BRONZE_PACK:
-              defaultShortcuts.buyBronzePackShortcut = keyCode;
+              userShortcuts.buyBronzePackShortcut = keyCode;
               break;
             case Shortcut.COMPARE:
-              defaultShortcuts.compareShortcut = keyCode;
+              userShortcuts.compareShortcut = keyCode;
               break;
             case Shortcut.DECREASE_MAX:
-              defaultShortcuts.decreaseMaxShortcut = keyCode;
+              userShortcuts.decreaseMaxShortcut = keyCode;
               break;
             case Shortcut.DECREASE_MIN:
-              defaultShortcuts.decreaseMinShortcut = keyCode;
+              userShortcuts.decreaseMinShortcut = keyCode;
               break;
             case Shortcut.INCREASE_MAX:
-              defaultShortcuts.increaseMaxShortcut = keyCode;
+              userShortcuts.increaseMaxShortcut = keyCode;
               break;
             case Shortcut.INCREASE_MIN:
-              defaultShortcuts.increaseMinShortcut = keyCode;
+              userShortcuts.increaseMinShortcut = keyCode;
               break;
             case Shortcut.LIST_MIN_BIN:
-              defaultShortcuts.listMinBinShortcut = keyCode;
+              userShortcuts.listMinBinShortcut = keyCode;
               break;
             case Shortcut.LIST:
-              defaultShortcuts.listShortcut = keyCode;
+              userShortcuts.listShortcut = keyCode;
               break;
             case Shortcut.QUICK_SELL_ALL:
-              defaultShortcuts.quickSellAllShortcut = keyCode;
+              userShortcuts.quickSellAllShortcut = keyCode;
               break;
             case Shortcut.QUICK_SELL:
-              defaultShortcuts.quickSellShortcut = keyCode;
+              userShortcuts.quickSellShortcut = keyCode;
               break;
             case Shortcut.SEARCH:
-              defaultShortcuts.searchShortcut = keyCode;
+              userShortcuts.searchShortcut = keyCode;
               break;
             case Shortcut.STORE_ALL:
-              defaultShortcuts.storeAllShortcut = keyCode;
+              userShortcuts.storeAllShortcut = keyCode;
               break;
             case Shortcut.STORE:
-              defaultShortcuts.storeShortcut = keyCode;
+              userShortcuts.storeShortcut = keyCode;
               break;
             case Shortcut.TOGGLE_WATCH:
-              defaultShortcuts.toggleWatchShortcut = keyCode;
+              userShortcuts.toggleWatchShortcut = keyCode;
               break;
             case Shortcut.TRANSFER_LIST:
-              defaultShortcuts.transferListShortcut = keyCode;
+              userShortcuts.transferListShortcut = keyCode;
               break;
           }
         }
+      } else {
+        this.setState({
+          isReady: true,
+          ...defaultShortcuts
+        });
+        return;
       }
 
       this.setState({
         isReady: true,
-        ...defaultShortcuts
+        ...userShortcuts
       });
     });
   };
+
+  private resetToDefaultShortcuts() {
+    this.setState(
+      {
+        ...defaultShortcuts
+      },
+      () => {
+        this.saveShortcuts();
+      }
+    );
+  }
 }
