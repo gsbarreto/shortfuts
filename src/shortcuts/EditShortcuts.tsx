@@ -14,6 +14,7 @@ interface EditShortcutsState {
   buyBronzePackShortcut: string;
   compareShortcut: string;
   decreaseMaxShortcut: string;
+  decreaseMinShortcut: string;
 }
 
 @observer
@@ -29,6 +30,7 @@ export default class EditShortcuts extends React.Component<
   private buyBronzePackTextField: ITextField;
   private compareTextField: ITextField;
   private decreaseMaxTextField: ITextField;
+  private decreaseMinTextField: ITextField;
 
   @observable
   private hasError = false;
@@ -43,7 +45,8 @@ export default class EditShortcuts extends React.Component<
       binShortcut: "",
       buyBronzePackShortcut: "",
       compareShortcut: "",
-      decreaseMaxShortcut: ""
+      decreaseMaxShortcut: "",
+      decreaseMinShortcut: ""
     };
   }
 
@@ -170,6 +173,21 @@ export default class EditShortcuts extends React.Component<
             }}
           />
         </div>
+
+        <div className="editShortcutsShortcut ms-borderColor-themePrimary">
+          <span>Decrease min bid price</span>
+          <TextField
+            data-shortcut={Shortcut.DECREASE_MIN}
+            componentRef={ref => (this.decreaseMinTextField = ref)}
+            value={this.state.decreaseMinShortcut}
+            underlined={true}
+            onChanged={(value: string) => {
+              this.setState({
+                decreaseMinShortcut: value.toUpperCase()
+              });
+            }}
+          />
+        </div>
       </div>
     );
   }
@@ -238,6 +256,14 @@ export default class EditShortcuts extends React.Component<
       return false;
     }
 
+    // Validate "Decrease min bid" shortcut.
+    if (
+      this.decreaseMinTextField.value &&
+      !this.validateShortcut(this.decreaseMinTextField.value)
+    ) {
+      return false;
+    }
+
     // If nothing short-circuited, it means all shortcuts are valid.
     return true;
   };
@@ -277,6 +303,7 @@ export default class EditShortcuts extends React.Component<
     );
     const compareEntry = this.getShortcutEntry(this.compareTextField);
     const decreaseMaxEntry = this.getShortcutEntry(this.decreaseMaxTextField);
+    const decreaseMinEntry = this.getShortcutEntry(this.decreaseMinTextField);
 
     // Add all entries to shortcuts map.
     shortcutsMap[backEntry.key] = backEntry.shortcut;
@@ -285,6 +312,7 @@ export default class EditShortcuts extends React.Component<
     shortcutsMap[buyBronzePackEntry.key] = buyBronzePackEntry.shortcut;
     shortcutsMap[compareEntry.key] = compareEntry.shortcut;
     shortcutsMap[decreaseMaxEntry.key] = decreaseMaxEntry.shortcut;
+    shortcutsMap[decreaseMinEntry.key] = decreaseMinEntry.shortcut;
 
     // Save shortcuts map to storage, and then close popup.
     chrome.storage.sync.set({ shortcutsMap: shortcutsMap }, () => {
@@ -315,7 +343,8 @@ export default class EditShortcuts extends React.Component<
         binShortcut: "",
         buyBronzePackShortcut: "",
         compareShortcut: "",
-        decreaseMaxShortcut: ""
+        decreaseMaxShortcut: "",
+        decreaseMinShortcut: ""
       };
 
       if (shortcutsMap) {
@@ -340,6 +369,9 @@ export default class EditShortcuts extends React.Component<
               break;
             case Shortcut.DECREASE_MAX:
               defaultShortcuts.decreaseMaxShortcut = keyCode;
+              break;
+            case Shortcut.DECREASE_MIN:
+              defaultShortcuts.decreaseMinShortcut = keyCode;
               break;
           }
         }
