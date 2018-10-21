@@ -109,8 +109,7 @@ export default class EditShortcuts extends React.Component<
 
         {this.hasError && (
           <div className="editShortcutsError ms-fontColor-redDark">
-            All shortcuts must be a single, unique character between A-Z and
-            0-9.
+            All shortcuts must be single, unique characters between A-Z and 0-9.
           </div>
         )}
 
