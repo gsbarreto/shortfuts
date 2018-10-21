@@ -76,15 +76,30 @@ import { log } from './utils/logger';
         return;
       }
 
+      switch (keyCode) {
+        case 8 /* backspace */:
+          provider.back();
+          return;
+        case 38 /* up arrow */:
+          provider.move("up");
+          return;
+        case 40 /* down arrow */:
+          provider.move("down");
+          return;
+        case 37 /* left arrow */:
+          provider.pagePrevious();
+          return;
+        case 39 /* right arrow */:
+          provider.pageNext();
+          return;
+      }
+
       chrome.storage.sync.get("shortcutsMap", data => {
         const shortcutsMap = data.shortcutsMap;
         const shortcutKey = String.fromCharCode(keyCode);
         const shortcut = shortcutsMap[shortcutKey];
 
         switch (shortcut) {
-          case Shortcut.BACK:
-            provider.back();
-            break;
           case Shortcut.BID:
             provider.makeBid();
             break;
@@ -114,6 +129,9 @@ import { log } from './utils/logger';
             break;
           case Shortcut.LIST:
             provider.list();
+            break;
+          case Shortcut.NEXT_ITEM:
+            provider.move("down");
             break;
         }
       });

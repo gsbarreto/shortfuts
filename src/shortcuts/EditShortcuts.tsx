@@ -8,7 +8,6 @@ import './EditShortcuts.scss';
 
 interface EditShortcutsState {
   isReady: boolean; // Don't render until shortcuts map loads.
-  backShortcut: string;
   bidShortcut: string;
   binShortcut: string;
   buyBronzePackShortcut: string;
@@ -28,7 +27,6 @@ export default class EditShortcuts extends React.Component<
 > {
   private usedShortcuts: {} = {};
 
-  private backTextField: ITextField;
   private bidTextField: ITextField;
   private binTextField: ITextField;
   private buyBronzePackTextField: ITextField;
@@ -48,7 +46,6 @@ export default class EditShortcuts extends React.Component<
 
     this.state = {
       isReady: false,
-      backShortcut: "",
       bidShortcut: "",
       binShortcut: "",
       buyBronzePackShortcut: "",
@@ -95,21 +92,6 @@ export default class EditShortcuts extends React.Component<
             0-9.
           </div>
         )}
-
-        <div className="editShortcutsShortcut ms-borderColor-themePrimary">
-          <span>Go back</span>
-          <TextField
-            data-shortcut={Shortcut.BACK}
-            componentRef={ref => (this.backTextField = ref)}
-            value={this.state.backShortcut}
-            underlined={true}
-            onChanged={(value: string) => {
-              this.setState({
-                backShortcut: value.toUpperCase()
-              });
-            }}
-          />
-        </div>
 
         <div className="editShortcutsShortcut ms-borderColor-themePrimary">
           <span>Bid on card</span>
@@ -260,6 +242,31 @@ export default class EditShortcuts extends React.Component<
             }}
           />
         </div>
+
+        <div className="editShortcutsShortcut editShortcutsNavigationShortcut ms-borderColor-themePrimary">
+          <span>Go back</span>
+          <span>Backspace</span>
+        </div>
+
+        <div className="editShortcutsShortcut editShortcutsNavigationShortcut ms-borderColor-themePrimary">
+          <span>Select previous item</span>
+          <span>Up arrow</span>
+        </div>
+
+        <div className="editShortcutsShortcut editShortcutsNavigationShortcut ms-borderColor-themePrimary">
+          <span>Selext next item</span>
+          <span>Down arrow</span>
+        </div>
+
+        <div className="editShortcutsShortcut editShortcutsNavigationShortcut ms-borderColor-themePrimary">
+          <span>Go to previous page of items</span>
+          <span>Left arrow</span>
+        </div>
+
+        <div className="editShortcutsShortcut editShortcutsNavigationShortcut ms-borderColor-themePrimary">
+          <span>Go to next page of items</span>
+          <span>Right arrow</span>
+        </div>
       </div>
     );
   }
@@ -279,14 +286,6 @@ export default class EditShortcuts extends React.Component<
   private validateShortcuts = (): boolean => {
     // Clear used shortcuts map (from last validation).
     this.usedShortcuts = {};
-
-    // Validate "Back" shortcut.
-    if (
-      this.backTextField.value &&
-      !this.validateShortcut(this.backTextField.value)
-    ) {
-      return false;
-    }
 
     // Validate "Bid" shortcut.
     if (
@@ -399,7 +398,6 @@ export default class EditShortcuts extends React.Component<
     const shortcutsMap = {};
 
     // Get all entries to shortcuts map (1 per TextField).
-    const backEntry = this.getShortcutEntry(this.backTextField);
     const bidEntry = this.getShortcutEntry(this.bidTextField);
     const binEntry = this.getShortcutEntry(this.binTextField);
     const buyBronzePackEntry = this.getShortcutEntry(
@@ -414,7 +412,6 @@ export default class EditShortcuts extends React.Component<
     const listEntry = this.getShortcutEntry(this.listTextField);
 
     // Add all entries to shortcuts map.
-    shortcutsMap[backEntry.key] = backEntry.shortcut;
     shortcutsMap[bidEntry.key] = bidEntry.shortcut;
     shortcutsMap[binEntry.key] = binEntry.shortcut;
     shortcutsMap[buyBronzePackEntry.key] = buyBronzePackEntry.shortcut;
@@ -450,7 +447,6 @@ export default class EditShortcuts extends React.Component<
 
       // TODO: Decide if we want default shortcuts.
       const defaultShortcuts = {
-        backShortcut: "",
         bidShortcut: "",
         binShortcut: "",
         buyBronzePackShortcut: "",
@@ -468,9 +464,6 @@ export default class EditShortcuts extends React.Component<
           const shortcut = shortcutsMap[keyCode];
 
           switch (shortcut) {
-            case Shortcut.BACK:
-              defaultShortcuts.backShortcut = keyCode;
-              break;
             case Shortcut.BID:
               defaultShortcuts.bidShortcut = keyCode;
               break;
