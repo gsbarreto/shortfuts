@@ -20,6 +20,7 @@ interface EditShortcutsState {
   listShortcut: string;
   quickSellAllShortcut: string;
   quickSellShortcut: string;
+  searchShortcut: string;
 }
 
 @observer
@@ -41,6 +42,7 @@ export default class EditShortcuts extends React.Component<
   private listTextField: ITextField;
   private quickSellAllTextField: ITextField;
   private quickSellTextField: ITextField;
+  private searchTextField: ITextField;
 
   @observable
   private hasError = false;
@@ -61,7 +63,8 @@ export default class EditShortcuts extends React.Component<
       listMinBinShortcut: "",
       listShortcut: "",
       quickSellAllShortcut: "",
-      quickSellShortcut: ""
+      quickSellShortcut: "",
+      searchShortcut: ""
     };
   }
 
@@ -279,6 +282,21 @@ export default class EditShortcuts extends React.Component<
           />
         </div>
 
+        <div className="editShortcutsShortcut ms-borderColor-themePrimary">
+          <span>Search</span>
+          <TextField
+            data-shortcut={Shortcut.SEARCH}
+            componentRef={ref => (this.searchTextField = ref)}
+            value={this.state.searchShortcut}
+            underlined={true}
+            onChanged={(value: string) => {
+              this.setState({
+                searchShortcut: value.toUpperCase()
+              });
+            }}
+          />
+        </div>
+
         <div className="editShortcutsShortcut editShortcutsNavigationShortcut ms-borderColor-themePrimary">
           <span>Go back</span>
           <span>Backspace</span>
@@ -419,6 +437,14 @@ export default class EditShortcuts extends React.Component<
       return false;
     }
 
+    // Validate "Search" shortcut.
+    if (
+      this.searchTextField.value &&
+      !this.validateShortcut(this.searchTextField.value)
+    ) {
+      return false;
+    }
+
     // If nothing short-circuited, it means all shortcuts are valid.
     return true;
   };
@@ -464,6 +490,7 @@ export default class EditShortcuts extends React.Component<
     const listEntry = this.getShortcutEntry(this.listTextField);
     const quickSellAllEntry = this.getShortcutEntry(this.quickSellAllTextField);
     const quickSellEntry = this.getShortcutEntry(this.quickSellTextField);
+    const searchEntry = this.getShortcutEntry(this.searchTextField);
 
     // Add all entries to shortcuts map.
     shortcutsMap[bidEntry.key] = bidEntry.shortcut;
@@ -478,6 +505,7 @@ export default class EditShortcuts extends React.Component<
     shortcutsMap[listEntry.key] = listEntry.shortcut;
     shortcutsMap[quickSellAllEntry.key] = quickSellAllEntry.shortcut;
     shortcutsMap[quickSellEntry.key] = quickSellEntry.shortcut;
+    shortcutsMap[searchEntry.key] = searchEntry.shortcut;
 
     // Save shortcuts map to storage, and then close popup.
     chrome.storage.sync.set({ shortcutsMap: shortcutsMap }, () => {
@@ -514,7 +542,8 @@ export default class EditShortcuts extends React.Component<
         listMinBinShortcut: "",
         listShortcut: "",
         quickSellAllShortcut: "",
-        quickSellShortcut: ""
+        quickSellShortcut: "",
+        searchShortcut: ""
       };
 
       if (shortcutsMap) {
@@ -557,6 +586,9 @@ export default class EditShortcuts extends React.Component<
               break;
             case Shortcut.QUICK_SELL:
               defaultShortcuts.quickSellShortcut = keyCode;
+              break;
+            case Shortcut.SEARCH:
+              defaultShortcuts.searchShortcut = keyCode;
               break;
           }
         }
