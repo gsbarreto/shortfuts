@@ -1,18 +1,18 @@
 .header {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    padding-left: 12px;
-    padding-top: 4px;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 12px;
+  padding-top: 4px;
 }
 
 .headerTitle {
-    font-size: 20px;
-    padding-bottom: 6px;
+  font-size: 20px;
+  padding-bottom: 6px;
 }
 
 .headerButtons {
-    display: flex;
-    width: 200px;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
+  width: 200px;
 }
