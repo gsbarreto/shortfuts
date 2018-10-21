@@ -1,43 +1,11 @@
 import * as React from 'react';
 import Footer from './popup/Footer';
-import { Icon } from 'office-ui-fabric-react/lib/Icon';
-import { IconButton } from 'office-ui-fabric-react/lib/Button';
-import { Link } from 'office-ui-fabric-react/lib/Link';
-import { loadTheme } from '@uifabric/styling';
 import { Modal } from 'office-ui-fabric-react/lib/Modal';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import './Announcement.scss';
 
-// Replace OUFR default theme with FIFA 19 color theme.
-loadTheme({
-  palette: {
-    themePrimary: "#06153d",
-    themeLighterAlt: "#cfd5e8",
-    themeLighter: "#a7b2d2",
-    themeLight: "#8393bd",
-    themeTertiary: "#6476a8",
-    themeSecondary: "#495c92",
-    themeDarkAlt: "#32467d",
-    themeDark: "#1f3268",
-    themeDarker: "#102253",
-    neutralLighterAlt: "#9fe7da",
-    neutralLighter: "#9de3d6",
-    neutralLight: "#96dacd",
-    neutralQuaternaryAlt: "#8ccbbf",
-    neutralQuaternary: "#86c2b7",
-    neutralTertiaryAlt: "#80baaf",
-    neutralTertiary: "#f9c4d3",
-    neutralSecondary: "#f38ba9",
-    neutralPrimaryAlt: "#ed5983",
-    neutralPrimary: "#ea4372",
-    neutralDark: "#b23458",
-    black: "#832641",
-    white: "#a2ecde"
-  }
-});
-
-const ANNOUNCEMENT_VERSION = 8;
+const ANNOUNCEMENT_VERSION = 10;
 
 @observer
 export default class Announcement extends React.Component<{}, {}> {
@@ -45,6 +13,7 @@ export default class Announcement extends React.Component<{}, {}> {
   private isOpen: boolean = false;
 
   private message: string = `shortfuts only works when the web app is in English! Please change the language if you'd like to use shortfuts.`;
+  private message2: string = "";
 
   componentDidMount() {
     const appLanguage = document.getElementsByTagName("html")[0].lang;
@@ -52,15 +21,15 @@ export default class Announcement extends React.Component<{}, {}> {
       this.isOpen = true;
       return;
     } else {
-      this.message = `FIFA 19 web app is now supported! Please contact
-            me with any bugs!`;
+      this.message = `Welcome to shortfuts v5.0! This is an exciting, long requested update where you will now be able to assign custom, 1 character hotkeys to all shortcuts! Open the extension's popup to customize your shortcuts!`;
+
+      this.message2 = `If you are enjoying shortfuts, please take 2 seconds to leave a review in the Chrome Web Store. Your support really means a lot. Thank you!`;
     }
 
     chrome.storage.sync.get("announcementVersion", data => {
       if (
         data.announcementVersion === undefined ||
-        data.announcementVersion < ANNOUNCEMENT_VERSION ||
-        true
+        data.announcementVersion < ANNOUNCEMENT_VERSION
       ) {
         this.isOpen = true;
 
@@ -80,25 +49,18 @@ export default class Announcement extends React.Component<{}, {}> {
     return (
       <Modal isOpen={this.isOpen} onDismiss={this.onModalDismissed}>
         <div className="announcementContainer ms-Fabric ms-borderColor-themePrimary ms-fontColor-themePrimary">
-          <IconButton
-            className="announcementCloseButton"
-            iconProps={{ iconName: "ChromeClose" }}
-            onClick={this.onModalDismissed}
-          />
-          <div className="announcementHeader">
-            <Icon
-              iconName="MegaphoneSolid"
-              className="announcementHeaderIcon"
-            />
-            <span>shortfuts</span>
-            <Icon
-              iconName="MegaphoneSolid"
-              className="announcementHeaderIconRight"
-            />
-          </div>
+          <div className="announcementHeader">shortfuts</div>
           <div className="announcementBody">
             <div className="announcementBullet">
               <div className="announcementMessage">{this.message}</div>
+              {this.message2 && (
+                <div
+                  className="announcementMessage"
+                  style={{ marginTop: "12px" }}
+                >
+                  {this.message2}
+                </div>
+              )}
             </div>
           </div>
           <Footer />
