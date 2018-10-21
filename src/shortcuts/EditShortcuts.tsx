@@ -77,7 +77,7 @@ export default class EditShortcuts extends React.Component<
             underlined={true}
             onChanged={(value: string) => {
               this.setState({
-                backShortcut: value
+                backShortcut: value.toUpperCase()
               });
             }}
           />
@@ -92,7 +92,7 @@ export default class EditShortcuts extends React.Component<
             underlined={true}
             onChanged={(value: string) => {
               this.setState({
-                bidShortcut: value
+                bidShortcut: value.toUpperCase()
               });
             }}
           />
