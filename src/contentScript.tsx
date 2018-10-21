@@ -88,6 +88,8 @@ import { log } from './utils/logger';
           case Shortcut.BID:
             provider.makeBid();
             break;
+          case Shortcut.BIN:
+            provider.buyNow();
         }
       });
     });

@@ -10,6 +10,7 @@ interface EditShortcutsState {
   isReady: boolean; // Don't render until shortcuts map loads.
   backShortcut: string;
   bidShortcut: string;
+  binShortcut: string;
 }
 
 @observer
@@ -21,6 +22,7 @@ export default class EditShortcuts extends React.Component<
 
   private backTextField: ITextField;
   private bidTextField: ITextField;
+  private binTextField: ITextField;
 
   @observable
   private hasError = false;
@@ -31,7 +33,8 @@ export default class EditShortcuts extends React.Component<
     this.state = {
       isReady: false,
       backShortcut: "",
-      bidShortcut: ""
+      bidShortcut: "",
+      binShortcut: ""
     };
   }
 
@@ -97,6 +100,21 @@ export default class EditShortcuts extends React.Component<
             }}
           />
         </div>
+
+        <div className="editShortcutsShortcut ms-borderColor-themePrimary">
+          <span>Buy it now (BIN)</span>
+          <TextField
+            data-shortcut={Shortcut.BIN}
+            componentRef={ref => (this.binTextField = ref)}
+            value={this.state.binShortcut}
+            underlined={true}
+            onChanged={(value: string) => {
+              this.setState({
+                binShortcut: value.toUpperCase()
+              });
+            }}
+          />
+        </div>
       </div>
     );
   }
@@ -114,9 +132,10 @@ export default class EditShortcuts extends React.Component<
   };
 
   private validateShortcuts = (): boolean => {
-    // Clear used shortcuts map (from last validation);
+    // Clear used shortcuts map (from last validation).
     this.usedShortcuts = {};
 
+    // Validate "Back" shortcut.
     if (
       this.backTextField.value &&
       !this.validateShortcut(this.backTextField.value)
@@ -124,9 +143,18 @@ export default class EditShortcuts extends React.Component<
       return false;
     }
 
+    // Validate "Bid" shortcut.
     if (
       this.bidTextField.value &&
       !this.validateShortcut(this.bidTextField.value)
+    ) {
+      return false;
+    }
+
+    // Validate "Buy it now" shortcut.
+    if (
+      this.binTextField.value &&
+      !this.validateShortcut(this.binTextField.value)
     ) {
       return false;
     }
@@ -159,10 +187,12 @@ export default class EditShortcuts extends React.Component<
     // Get all entries to shortcuts map (1 per TextField).
     const backEntry = this.getShortcutEntry(this.backTextField);
     const bidEntry = this.getShortcutEntry(this.bidTextField);
+    const binEntry = this.getShortcutEntry(this.binTextField);
 
     // Add all entries to shortcuts map.
     shortcutsMap[backEntry.key] = backEntry.shortcut;
     shortcutsMap[bidEntry.key] = bidEntry.shortcut;
+    shortcutsMap[binEntry.key] = binEntry.shortcut;
 
     // Save shortcuts map to storage, and then close popup.
     chrome.storage.sync.set({ shortcutsMap: shortcutsMap }, () => {
@@ -189,7 +219,8 @@ export default class EditShortcuts extends React.Component<
       // TODO: Decide if we want default shortcuts.
       const defaultShortcuts = {
         backShortcut: "",
-        bidShortcut: ""
+        bidShortcut: "",
+        binShortcut: ""
       };
 
       if (shortcutsMap) {
@@ -203,6 +234,8 @@ export default class EditShortcuts extends React.Component<
             case Shortcut.BID:
               defaultShortcuts.bidShortcut = keyCode;
               break;
+            case Shortcut.BIN:
+              defaultShortcuts.binShortcut = keyCode;
           }
         }
       }
