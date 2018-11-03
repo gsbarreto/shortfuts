@@ -1,9 +1,10 @@
 import clickElement from './helpers/clickElement';
 import isUserOnPage from './helpers/isUserOnPage';
+import isUserOnSearchTransferMarketPage from './helpers/isUserOnSearchTransferMarketPage';
 
 export default function increaseMaxBidPrice() {
-    if (isUserOnPage('Search the Transfer Market')) {
-        const button = document.getElementsByClassName('increment-value')[1];
-        clickElement(button);
-    }
+  if (isUserOnSearchTransferMarketPage()) {
+    const button = document.getElementsByClassName("increment-value")[1];
+    clickElement(button);
+  }
 }

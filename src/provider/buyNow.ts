@@ -4,18 +4,16 @@ import isUserOnPage from './helpers/isUserOnPage';
 import { logError } from '../utils/logger';
 
 export default function buyNow() {
-    // Bail if user isn't on "Search Results" page.
-    if (!isUserOnPage('Search Results')) {
-        logError(
-            `Unable to "buy it now" because you're not on the "Search Results" page.`
-        );
-        return;
-    }
-
+  if (
+    // English
+    isUserOnPage("Search Results") ||
+    isUserOnPage("Résultats")
+  ) {
     try {
-        clickBuyNowButton();
-        confirmConfirmationDialog();
+      clickBuyNowButton();
+      confirmConfirmationDialog();
     } catch (error) {
-        logError(`Oops! Couldn't "buy it now" for some reason...`);
+      logError(`Oops! Couldn't "buy it now" for some reason...`);
     }
+  }
 }

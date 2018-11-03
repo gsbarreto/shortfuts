@@ -2,9 +2,18 @@ import clickDetailsPanelButton from './helpers/clickDetailsPanelButton';
 import { logError } from '../utils/logger';
 
 export default function sendToTransferList() {
-    try {
-        clickDetailsPanelButton('Send to Transfer List');
-    } catch (error) {
-        logError(`Couldn't send that item to the transfer list.`);
-    }
+  let buttonText = "Send to Transfer List";
+  const language = document.getElementsByTagName("html")[0].lang;
+
+  switch (language) {
+    case "fr":
+      buttonText = "Env. Liste transf.";
+      break;
+  }
+
+  try {
+    clickDetailsPanelButton(buttonText);
+  } catch (error) {
+    logError(`Couldn't send that item to the transfer list.`);
+  }
 }

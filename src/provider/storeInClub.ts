@@ -6,15 +6,24 @@ import { logError } from '../utils/logger';
  * is treated as a coin unlock and attempts to redeem it.
  */
 export default function storeInClub() {
-    try {
-        clickDetailsPanelButton('Send to My Club');
-    } catch (error) {
-        logError('Unable to store that item in your club.');
+  let buttonText = "Send to My Club";
+  const language = document.getElementsByTagName("html")[0].lang;
 
-        try {
-            clickDetailsPanelButton('Redeem');
-        } catch (error) {
-            logError(`Oops! Couldn't redeem those coins.`);
-        }
+  switch (language) {
+    case "fr":
+      buttonText = "Envoyer vers Mon club";
+      break;
+  }
+
+  try {
+    clickDetailsPanelButton(buttonText);
+  } catch (error) {
+    logError("Unable to store that item in your club.");
+
+    try {
+      clickDetailsPanelButton("Redeem");
+    } catch (error) {
+      logError(`Oops! Couldn't redeem those coins.`);
     }
+  }
 }

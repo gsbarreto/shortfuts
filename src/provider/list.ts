@@ -1,10 +1,13 @@
 import clickDetailsPanelButton from './helpers/clickDetailsPanelButton';
+import getListItemButtonText from './helpers/getListItemButtonText';
 import { logError } from '../utils/logger';
 
 export default function list() {
-    try {
-        clickDetailsPanelButton('List Item');
-    } catch (error) {
-        logError('Unable to list that card.');
-    }
+  const buttonText = getListItemButtonText();
+
+  try {
+    clickDetailsPanelButton(buttonText);
+  } catch (error) {
+    logError("Unable to list that card.");
+  }
 }
