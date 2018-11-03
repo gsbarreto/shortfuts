@@ -665,7 +665,7 @@ export default class EditShortcuts extends React.Component<
     // Clear empty string from map.
     delete shortcutsMap[""];
 
-    // Save shortcuts map to storage, and then close popup.
+    // Save shortcuts map to storage.
     chrome.storage.sync.set({ shortcutsMap: shortcutsMap }, () => {
       this.hasError = false;
     });

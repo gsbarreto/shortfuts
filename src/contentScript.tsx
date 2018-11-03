@@ -41,6 +41,35 @@ import { log } from './utils/logger';
     chrome.runtime.sendMessage({ isActive: data.isActive });
   });
 
+  // If there are no shortcuts saved, set them as the default ones.
+  chrome.storage.sync.get("shortcutsMap", data => {
+    if (!data.shortcutsMap) {
+      const defaultShortcuts = {
+        D: Shortcut.BID,
+        N: Shortcut.BIN,
+        B: Shortcut.BRONZE_PACK,
+        C: Shortcut.COMPARE,
+        J: Shortcut.DECREASE_MAX,
+        I: Shortcut.DECREASE_MIN,
+        K: Shortcut.INCREASE_MAX,
+        O: Shortcut.INCREASE_MIN,
+        M: Shortcut.LIST_MIN_BIN,
+        L: Shortcut.LIST,
+        A: Shortcut.QUICK_SELL_ALL,
+        Q: Shortcut.QUICK_SELL,
+        P: Shortcut.SEARCH,
+        X: Shortcut.STORE_ALL,
+        S: Shortcut.STORE,
+        W: Shortcut.TOGGLE_WATCH,
+        T: Shortcut.TRANSFER_LIST
+      };
+
+      chrome.storage.sync.set({ shortcutsMap: defaultShortcuts }, () => {
+        log("Default shortcuts set for this user.");
+      });
+    }
+  });
+
   // Get provider that performs hotkey actions for correct version of web app.
   const provider = getProvider();
 
