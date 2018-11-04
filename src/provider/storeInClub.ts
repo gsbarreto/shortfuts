@@ -13,6 +13,9 @@ export default function storeInClub() {
     case "fr":
       buttonText = "Envoyer vers Mon club";
       break;
+    case "it":
+      buttonText = "Invia a Il mio club";
+      break;
   }
 
   try {

@@ -8,7 +8,9 @@ export default function buyBronzePack() {
     // English
     isUserOnPage("Store") ||
     // French
-    isUserOnPage("BOUTIQUE")
+    isUserOnPage("BOUTIQUE") ||
+    // Italian
+    isUserOnPage("NEGOZIO")
   ) {
     // Go to "Bronze" tab of the store.
     // Select the last tab, which contain the bronze packs.
@@ -17,10 +19,22 @@ export default function buyBronzePack() {
     clickElement(bronzeTabButton);
 
     setTimeout(() => {
+      let packPack = "bronze pack";
+      const language = document.getElementsByTagName("html")[0].lang;
+
+      switch (language) {
+        case "fr":
+          packPack = "Env. Liste transf.";
+          break;
+        case "it":
+          packPack = "PACCHETTO BRONZO";
+          break;
+      }
+
       // Ensure we're actually buying a bronze pack...
       const packHeader = document.getElementsByClassName("packHeader")[0];
       const packTitle = packHeader.getElementsByTagName("span")[0];
-      if (packTitle.textContent.toLowerCase() !== "bronze pack") {
+      if (packTitle.textContent.toLowerCase() !== packPack.toLowerCase()) {
         return;
       }
 

@@ -6,6 +6,9 @@ export default function getListItemButtonText(): string {
     case "fr":
       buttonText = "Lister élément";
       break;
+    case "it":
+      buttonText = "Metti all'asta";
+      break;
   }
 
   return buttonText;

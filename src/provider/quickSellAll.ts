@@ -1,15 +1,9 @@
 import clickElement from './helpers/clickElement';
 import confirmConfirmationDialog from './helpers/confirmConfirmationDialog';
-import isUserOnPage from './helpers/isUserOnPage';
-import { logError } from '../utils/logger';
+import isUserOnUnassignedPage from './helpers/isUserOnUnassignedPage';
 
 export default function quickSellAll() {
-  if (
-    // English
-    isUserOnPage("Unassigned") ||
-    // French
-    isUserOnPage("NON ATTRIBUÉS")
-  ) {
+  if (isUserOnUnassignedPage()) {
     const quickSellAllButtons = document.getElementsByClassName(
       "ut-group-button cta"
     );

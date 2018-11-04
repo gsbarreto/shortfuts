@@ -1,14 +1,10 @@
 import clickBuyNowButton from './helpers/clickBuyNowButton';
 import confirmConfirmationDialog from './helpers/confirmConfirmationDialog';
-import isUserOnPage from './helpers/isUserOnPage';
+import isUserOnSearchResultsPage from './helpers/isUserOnSearchResultsPage';
 import { logError } from '../utils/logger';
 
 export default function buyNow() {
-  if (
-    // English
-    isUserOnPage("Search Results") ||
-    isUserOnPage("Résultats")
-  ) {
+  if (isUserOnSearchResultsPage()) {
     try {
       clickBuyNowButton();
       confirmConfirmationDialog();

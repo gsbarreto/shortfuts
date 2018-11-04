@@ -5,6 +5,8 @@ export default function isUserOnSearchTransferMarketPage(): boolean {
     // English
     isUserOnPage("Search the Transfer Market") ||
     // French
-    isUserOnPage("Marché transf.")
+    isUserOnPage("Marché transf.") ||
+    // Italian
+    isUserOnPage("Cerca in mercato")
   );
 }

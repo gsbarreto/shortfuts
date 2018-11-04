@@ -9,6 +9,9 @@ export default function makeBid() {
     case "fr":
       buttonText = "Faire offre";
       break;
+    case "it":
+      buttonText = "Fai offerta";
+      break;
   }
 
   try {

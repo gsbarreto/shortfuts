@@ -9,6 +9,9 @@ export default function sendToTransferList() {
     case "fr":
       buttonText = "Env. Liste transf.";
       break;
+    case "it":
+      buttonText = "Invia a trasferim.";
+      break;
   }
 
   try {

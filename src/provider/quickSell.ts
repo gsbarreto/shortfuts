@@ -10,6 +10,9 @@ export default function quickSell() {
     case "fr":
       buttonText = "Vente rapide";
       break;
+    case "it":
+      buttonText = "Scarta";
+      break;
   }
 
   try {
