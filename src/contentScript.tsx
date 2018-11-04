@@ -28,18 +28,18 @@ import { log } from './utils/logger';
     }
   }, 2000);
 
-  // Update badge with current status.
-  chrome.storage.sync.get("isActive", data => {
-    // Make extension active on first run.
-    if (data.isActive === undefined) {
-      chrome.storage.sync.set({ isActive: true }, () => {
-        chrome.runtime.sendMessage({ isActive: true });
-      });
-      return;
-    }
+  // // Update badge with current status.
+  // chrome.storage.sync.get("isActive", data => {
+  //   // Make extension active on first run.
+  //   if (data.isActive === undefined) {
+  //     chrome.storage.sync.set({ isActive: true }, () => {
+  //       chrome.runtime.sendMessage({ isActive: true });
+  //     });
+  //     return;
+  //   }
 
-    chrome.runtime.sendMessage({ isActive: data.isActive });
-  });
+  //   chrome.runtime.sendMessage({ isActive: data.isActive });
+  // });
 
   // If there are no shortcuts saved, set them as the default ones.
   chrome.storage.sync.get("shortcutsMap", data => {
@@ -83,27 +83,27 @@ import { log } from './utils/logger';
     }
 
     chrome.storage.sync.get("isActive", data => {
-      // Update badge with current status.
-      const isActive = data.isActive;
-      chrome.runtime.sendMessage({ isActive: isActive });
+      // // Update badge with current status.
+      // const isActive = data.isActive;
+      // chrome.runtime.sendMessage({ isActive: isActive });
 
-      /**
-       * Check "Alt + Space" first because that toggles the extension as active
-       * or not.
-       */
-      if (ev.altKey && keyCode === 32 /* Alt + Space */) {
-        chrome.storage.sync.set({ isActive: !isActive }, function() {
-          chrome.runtime.sendMessage({
-            isActive: !isActive
-          });
-        });
-        return;
-      }
+      // /**
+      //  * Check "Alt + Space" first because that toggles the extension as active
+      //  * or not.
+      //  */
+      // if (ev.altKey && keyCode === 32 /* Alt + Space */) {
+      //   chrome.storage.sync.set({ isActive: !isActive }, function() {
+      //     chrome.runtime.sendMessage({
+      //       isActive: !isActive
+      //     });
+      //   });
+      //   return;
+      // }
 
-      // If extension isn't active, don't process hotkeys.
-      if (!isActive) {
-        return;
-      }
+      // // If extension isn't active, don't process hotkeys.
+      // if (!isActive) {
+      //   return;
+      // }
 
       switch (keyCode) {
         case 8 /* backspace */:

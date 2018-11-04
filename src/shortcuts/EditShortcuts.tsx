@@ -429,12 +429,12 @@ export default class EditShortcuts extends React.Component<
             <span>Right arrow</span>
           </div>
 
-          <h3 className="editShortcutsHeading">Other</h3>
+          {/* <h3 className="editShortcutsHeading">Other</h3> */}
 
-          <div className="editShortcutsShortcut editShortcutsNonEditableShortcut ms-borderColor-themePrimary">
+          {/* <div className="editShortcutsShortcut editShortcutsNonEditableShortcut ms-borderColor-themePrimary">
             <span>Toggles extension on/off</span>
             <span>Alt + Space</span>
-          </div>
+          </div> */}
         </div>
       </div>
     );

@@ -8,6 +8,13 @@ ga.src = "https://ssl.google-analytics.com/ga.js";
 var s = document.getElementsByTagName("script")[0];
 s.parentNode.insertBefore(ga, s);
 
+chrome.browserAction.setBadgeBackgroundColor({
+  color: "#0078d4"
+});
+chrome.browserAction.setBadgeText({
+  text: "ON"
+});
+
 // Listen to messages sent from other parts of the extension.
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   // onMessage must return "true" if response is async.
@@ -17,14 +24,14 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     contactDeveloper();
   } else if (request.review) {
     review();
-  } else if (request.isActive !== undefined) {
-    chrome.browserAction.setBadgeBackgroundColor({
-      color: "#0078d4"
-    });
-    chrome.browserAction.setBadgeText({
-      text: request.isActive ? "ON" : "OFF"
-    });
-  }
+  } // else if (request.isActive !== undefined) {
+  //   chrome.browserAction.setBadgeBackgroundColor({
+  //     color: "#0078d4"
+  //   });
+  //   chrome.browserAction.setBadgeText({
+  //     text: request.isActive ? "ON" : "OFF"
+  //   });
+  // }
 
   return isResponseAsync;
 });
