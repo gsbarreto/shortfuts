@@ -12,12 +12,19 @@ export default class Announcement extends React.Component<{}, {}> {
   @observable
   private isOpen: boolean = false;
 
-  private message: string = `shortfuts only works when the web app is in English! Please change the language if you'd like to use shortfuts.`;
+  private message: string = `Your language isn't supported yet. Please email shortfuts@gmail.com with the language you'd like to see supported!`;
   private message2: string = "";
 
   componentDidMount() {
     const appLanguage = document.getElementsByTagName("html")[0].lang;
-    if (appLanguage && appLanguage.toLowerCase() !== "en") {
+    if (
+      appLanguage &&
+      !(
+        appLanguage.toLowerCase() === "en" ||
+        appLanguage.toLowerCase() === "fr" ||
+        appLanguage.toLowerCase() === "it"
+      )
+    ) {
       this.isOpen = true;
       return;
     } else {
