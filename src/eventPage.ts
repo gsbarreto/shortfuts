@@ -1,6 +1,6 @@
 // Google Analytics bootstrap
 var _gaq = _gaq || [];
-_gaq.push(["_setAccount", "UA-108017342-1"]);
+_gaq.push(["_setAccount", "UA-108017342-2"]);
 var ga = document.createElement("script");
 ga.type = "text/javascript";
 ga.async = true;
