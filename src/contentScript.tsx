@@ -19,6 +19,16 @@ import { log } from './utils/logger';
       updateAnchor.id = "updateAnchor";
       header.appendChild(updateAnchor);
 
+      const a = document.createElement("a");
+      a.innerText = "Enjoy shortfuts? Please consider buying me a coffee!";
+      a.style.display = "inline-block";
+      a.style.paddingLeft = "24px";
+      a.style.paddingTop = "4px";
+      a.style.fontSize = "30px";
+      a.target = "_blank";
+      a.href = "https://ko-fi.com/shortfuts";
+      header.appendChild(a);
+
       ReactDOM.render(
         <Announcement />,
         document.getElementById("updateAnchor")
