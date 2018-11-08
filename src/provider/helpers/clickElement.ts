@@ -22,10 +22,10 @@ function sendTouchEvent(element, eventType) {
     const touch = new Touch({
         // Using a number like TS suggest breaks this... stupid.
         // @ts-ignore
-        identifier: 'shortfut',
+        identifier: Math.random().toString(),
         target: element,
-        clientX: 0,
-        clientY: 0,
+        clientX: Math.random(),
+        clientY: Math.random(),
         radiusX: 2.5,
         radiusY: 2.5,
         rotationAngle: 10,
