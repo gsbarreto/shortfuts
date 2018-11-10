@@ -5,7 +5,7 @@ import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import './Announcement.scss';
 
-const ANNOUNCEMENT_VERSION = 10;
+const ANNOUNCEMENT_VERSION = 11;
 
 @observer
 export default class Announcement extends React.Component<{}, {}> {
@@ -31,7 +31,7 @@ export default class Announcement extends React.Component<{}, {}> {
       this.isOpen = true;
       return;
     } else {
-      this.message = `Welcome to shortfuts v5.0! This is an exciting, long requested update where you will now be able to assign custom, 1 character hotkeys to all shortcuts! Open the extension's popup to customize your shortcuts!`;
+      this.message = `The most recent update added some EA detection prevention logic to make using shortfuts safer, as well as added support for multiple new languages (French, Italian, German, Polish, Dutch)!`;
 
       this.message2 = `If you are enjoying shortfuts, please take 2 seconds to leave a review in the Chrome Web Store. Your support really means a lot. Thank you!`;
     }
