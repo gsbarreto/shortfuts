@@ -11,6 +11,8 @@ export default function isUserOnSearchTransferMarketPage(): boolean {
     // German
     isUserOnPage("Transfermarkt-Suche") ||
     // Polish
-    isUserOnPage("Szukaj na rynku")
+    isUserOnPage("Szukaj na rynku") ||
+    // Dutch
+    isUserOnPage("Doorzoek de transfermarkt")
   );
 }

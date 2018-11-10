@@ -18,6 +18,9 @@ export default function makeBid() {
     case "pl":
       buttonText = "Zalicytuj";
       break;
+    case "nl":
+      buttonText = "Bod uitbr.";
+      break;
   }
 
   try {

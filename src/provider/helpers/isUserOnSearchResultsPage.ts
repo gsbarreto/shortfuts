@@ -11,6 +11,8 @@ export default function isUserOnSearchResultsPage(): boolean {
     // German
     isUserOnPage("Suchergebnisse") ||
     // Polish
-    isUserOnPage("Wyniki wyszukiwania")
+    isUserOnPage("Wyniki wyszukiwania") ||
+    // Dutch
+    isUserOnPage("Zoekresultaten")
   );
 }

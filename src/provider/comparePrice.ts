@@ -18,6 +18,9 @@ export default function comparePrice() {
     case "pl":
       buttonText = "Porównaj cenę";
       break;
+    case "nl":
+      buttonText = "Prijs vergelijken";
+      break;
   }
 
   try {

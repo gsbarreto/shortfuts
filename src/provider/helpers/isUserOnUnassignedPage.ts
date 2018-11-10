@@ -11,6 +11,8 @@ export default function isUserOnUnassignedPage(): boolean {
     // German
     isUserOnPage("NICHT ZUGEWIESEN") ||
     // Polish
-    isUserOnPage("Nieprzypisane")
+    isUserOnPage("Nieprzypisane") ||
+    // Dutch
+    isUserOnPage("NIET TOEGEWEZ.")
   );
 }

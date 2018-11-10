@@ -18,6 +18,9 @@ export default function sendToTransferList() {
     case "pl":
       buttonText = "Wyślij na listę transferową";
       break;
+    case "nl":
+      buttonText = "Naar Mijn club sturen";
+      break;
   }
 
   try {

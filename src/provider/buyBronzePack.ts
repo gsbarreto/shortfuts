@@ -14,7 +14,9 @@ export default function buyBronzePack() {
     // German
     isUserOnPage("SHOP") ||
     // Polish
-    isUserOnPage("Sklep")
+    isUserOnPage("Sklep") ||
+    // Dutch
+    isUserOnPage("WINKEL")
   ) {
     // Go to "Bronze" tab of the store.
     // Select the last tab, which contain the bronze packs.
@@ -38,6 +40,10 @@ export default function buyBronzePack() {
           break;
         case "pl":
           packPack = "BRĄZOWA PACZKA";
+          break;
+        case "nl":
+          packPack = "BRONS-PAKKET";
+          break;
       }
 
       // Ensure we're actually buying a bronze pack...
