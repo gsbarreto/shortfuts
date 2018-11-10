@@ -12,6 +12,9 @@ export default function getListItemButtonText(): string {
     case "de":
       buttonText = "Objekt anbieten";
       break;
+    case "pl":
+      buttonText = "Na licytację";
+      break;
   }
 
   return buttonText;

@@ -9,6 +9,8 @@ export default function isUserOnSearchTransferMarketPage(): boolean {
     // Italian
     isUserOnPage("Cerca in mercato") ||
     // German
-    isUserOnPage("Transfermarkt-Suche")
+    isUserOnPage("Transfermarkt-Suche") ||
+    // Polish
+    isUserOnPage("Szukaj na rynku")
   );
 }

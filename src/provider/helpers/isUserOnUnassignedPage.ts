@@ -9,6 +9,8 @@ export default function isUserOnUnassignedPage(): boolean {
     // Italian
     isUserOnPage("NON ASSEGNATI") ||
     // German
-    isUserOnPage("NICHT ZUGEWIESEN")
+    isUserOnPage("NICHT ZUGEWIESEN") ||
+    // Polish
+    isUserOnPage("Nieprzypisane")
   );
 }

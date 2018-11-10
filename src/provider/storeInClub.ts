@@ -19,6 +19,9 @@ export default function storeInClub() {
     case "de":
       buttonText = "Zu Mein Verein";
       break;
+    case "pl":
+      buttonText = "Wyślij do klubu";
+      break;
   }
 
   try {

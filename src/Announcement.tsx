@@ -23,7 +23,8 @@ export default class Announcement extends React.Component<{}, {}> {
         appLanguage.toLowerCase() === "en" ||
         appLanguage.toLowerCase() === "fr" ||
         appLanguage.toLowerCase() === "it" ||
-        appLanguage.toLowerCase() === "de"
+        appLanguage.toLowerCase() === "de" ||
+        appLanguage.toLowerCase() === "pl"
       )
     ) {
       this.isOpen = true;

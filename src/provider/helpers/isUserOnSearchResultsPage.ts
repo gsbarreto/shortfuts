@@ -9,6 +9,8 @@ export default function isUserOnSearchResultsPage(): boolean {
     // Italian
     isUserOnPage("Risultati Ricerca") ||
     // German
-    isUserOnPage("Suchergebnisse")
+    isUserOnPage("Suchergebnisse") ||
+    // Polish
+    isUserOnPage("Wyniki wyszukiwania")
   );
 }

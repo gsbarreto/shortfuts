@@ -30,7 +30,10 @@ export default function goBack() {
     isUserOnPage("Trasferim.") ||
     // German
     isUserOnPage("Beob.-Liste") ||
-    isUserOnPage("Transfers")
+    isUserOnPage("Transfers") ||
+    // Polish
+    isUserOnPage("Cele transferowe") ||
+    isUserOnPage("Transfery")
   ) {
     clickElement(document.getElementsByClassName("btn-navigation")[0]);
     return;
