@@ -27,7 +27,10 @@ export default function goBack() {
     isUserOnPage("Transferts") ||
     // Italian
     isUserOnPage("Obiettivi mercato") ||
-    isUserOnPage("Trasferim.")
+    isUserOnPage("Trasferim.") ||
+    // German
+    isUserOnPage("Beob.-Liste") ||
+    isUserOnPage("Transfers")
   ) {
     clickElement(document.getElementsByClassName("btn-navigation")[0]);
     return;

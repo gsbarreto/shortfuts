@@ -12,6 +12,9 @@ export default function comparePrice() {
     case "it":
       buttonText = "Confronta prezzo";
       break;
+    case "de":
+      buttonText = "Preisvergleich";
+      break;
   }
 
   try {

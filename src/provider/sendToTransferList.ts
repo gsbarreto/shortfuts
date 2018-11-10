@@ -12,6 +12,9 @@ export default function sendToTransferList() {
     case "it":
       buttonText = "Invia a trasferim.";
       break;
+    case "de":
+      buttonText = "Auf Transferliste";
+      break;
   }
 
   try {

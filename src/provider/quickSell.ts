@@ -13,6 +13,9 @@ export default function quickSell() {
     case "it":
       buttonText = "Scarta";
       break;
+    case "de":
+      buttonText = "Abstoßen";
+      break;
   }
 
   try {

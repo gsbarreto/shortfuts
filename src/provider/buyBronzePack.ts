@@ -10,7 +10,9 @@ export default function buyBronzePack() {
     // French
     isUserOnPage("BOUTIQUE") ||
     // Italian
-    isUserOnPage("NEGOZIO")
+    isUserOnPage("NEGOZIO") ||
+    // German
+    isUserOnPage("SHOP")
   ) {
     // Go to "Bronze" tab of the store.
     // Select the last tab, which contain the bronze packs.
@@ -28,6 +30,9 @@ export default function buyBronzePack() {
           break;
         case "it":
           packPack = "PACCHETTO BRONZO";
+          break;
+        case "de":
+          packPack = "BRONZE-PACK";
           break;
       }
 
