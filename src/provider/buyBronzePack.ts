@@ -24,7 +24,7 @@ export default function buyBronzePack() {
 
       switch (language) {
         case "fr":
-          packPack = "Env. Liste transf.";
+          packPack = "PACK BRONZE";
           break;
         case "it":
           packPack = "PACCHETTO BRONZO";
