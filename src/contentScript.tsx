@@ -60,6 +60,7 @@ import { log } from './utils/logger';
   chrome.storage.sync.get("shortcutsMap", data => {
     if (!data.shortcutsMap) {
       const defaultShortcuts = {
+        0: Shortcut.BACK,
         D: Shortcut.BID,
         N: Shortcut.BIN,
         B: Shortcut.BRONZE_PACK,
@@ -122,6 +123,9 @@ import { log } from './utils/logger';
         const shortcut = shortcutsMap[shortcutKey];
 
         switch (shortcut) {
+          case Shortcut.BACK:
+            provider.back();
+            break;
           case Shortcut.BID:
             provider.makeBid();
             chrome.runtime.sendMessage({ makeBid: true });

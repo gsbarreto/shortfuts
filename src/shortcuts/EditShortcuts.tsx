@@ -7,6 +7,7 @@ import { observer } from 'mobx-react';
 import './EditShortcuts.scss';
 
 const defaultShortcuts = {
+  backShortcut: "0",
   bidShortcut: "D",
   binShortcut: "N",
   buyBronzePackShortcut: "B",
@@ -28,6 +29,7 @@ const defaultShortcuts = {
 
 interface EditShortcutsState {
   isReady: boolean; // Don't render until shortcuts map loads.
+  backShortcut: string;
   bidShortcut: string;
   binShortcut: string;
   buyBronzePackShortcut: string;
@@ -54,6 +56,7 @@ export default class EditShortcuts extends React.Component<
 > {
   private usedShortcuts: {} = {};
 
+  private backTextField: ITextField;
   private bidTextField: ITextField;
   private binTextField: ITextField;
   private buyBronzePackTextField: ITextField;
@@ -80,6 +83,7 @@ export default class EditShortcuts extends React.Component<
 
     this.state = {
       isReady: false,
+      backShortcut: "",
       bidShortcut: "",
       binShortcut: "",
       buyBronzePackShortcut: "",
@@ -404,9 +408,19 @@ export default class EditShortcuts extends React.Component<
 
           <h3 className="editShortcutsHeading">Navigation</h3>
 
-          <div className="editShortcutsShortcut editShortcutsNonEditableShortcut ms-borderColor-themePrimary">
-            <span>Go back</span>
-            <span>Backspace</span>
+          <div className="editShortcutsShortcut ms-borderColor-themePrimary">
+            <span>Go back (backspace key also works)</span>
+            <TextField
+              data-shortcut={Shortcut.BACK}
+              componentRef={ref => (this.backTextField = ref)}
+              value={this.state.backShortcut}
+              underlined={true}
+              onChanged={(value: string) => {
+                this.setState({
+                  backShortcut: value.toUpperCase()
+                });
+              }}
+            />
           </div>
 
           <div className="editShortcutsShortcut editShortcutsNonEditableShortcut ms-borderColor-themePrimary">
@@ -455,6 +469,14 @@ export default class EditShortcuts extends React.Component<
   private validateShortcuts = (): boolean => {
     // Clear used shortcuts map (from last validation).
     this.usedShortcuts = {};
+
+    // Validate "Go back" shortcut.
+    if (
+      this.backTextField.value &&
+      !this.validateShortcut(this.backTextField.value)
+    ) {
+      return false;
+    }
 
     // Validate "Bid" shortcut.
     if (
@@ -623,6 +645,7 @@ export default class EditShortcuts extends React.Component<
     const shortcutsMap = {};
 
     // Get all entries to shortcuts map (1 per TextField).
+    const backEntry = this.getShortcutEntry(this.backTextField);
     const bidEntry = this.getShortcutEntry(this.bidTextField);
     const binEntry = this.getShortcutEntry(this.binTextField);
     const buyBronzePackEntry = this.getShortcutEntry(
@@ -644,6 +667,7 @@ export default class EditShortcuts extends React.Component<
     const transferListEntry = this.getShortcutEntry(this.transferListTextField);
 
     // Add all entries to shortcuts map.
+    shortcutsMap[backEntry.key] = backEntry.shortcut;
     shortcutsMap[bidEntry.key] = bidEntry.shortcut;
     shortcutsMap[binEntry.key] = binEntry.shortcut;
     shortcutsMap[buyBronzePackEntry.key] = buyBronzePackEntry.shortcut;
@@ -688,6 +712,7 @@ export default class EditShortcuts extends React.Component<
       const shortcutsMap = data.shortcutsMap;
 
       const userShortcuts = {
+        backShortcut: "",
         bidShortcut: "",
         binShortcut: "",
         buyBronzePackShortcut: "",
@@ -712,6 +737,9 @@ export default class EditShortcuts extends React.Component<
           const shortcut = shortcutsMap[keyCode];
 
           switch (shortcut) {
+            case Shortcut.BACK:
+              userShortcuts.backShortcut = keyCode;
+              break;
             case Shortcut.BID:
               userShortcuts.bidShortcut = keyCode;
               break;
