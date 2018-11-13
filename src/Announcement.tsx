@@ -38,6 +38,26 @@ export default class Announcement extends React.Component<{}, {}> {
     }
 
     /**
+     * This is the announcement for telling users to restart Chrome after installing
+     * shortfuts because, for some reason, they listener doesn't respond for some
+     * users until they restart.
+     */
+    chrome.storage.sync.get("freSeen", data => {
+      if (data.freSeen === undefined) {
+        this.setAnnouncement(
+          `Thank you for installing shortfuts. If you find some shortcuts not working, please try fully restarting Google Chrome. If things still aren't working after that, please send an email to shortfuts@gmail.com and we'll help get you up and going!`
+        );
+
+        // Mark user as having seen FRE.
+        chrome.storage.sync.set({
+          freSeen: true
+        });
+
+        return;
+      }
+    });
+
+    /**
      * This is the announcement for making users aware that they shouldn't use
      * this extension and that they do so at their own risk!
      */
