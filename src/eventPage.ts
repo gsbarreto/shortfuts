@@ -1,22 +1,36 @@
 // Google Analytics bootstrap
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-108017342-2']);
-_gaq.push(['_trackPageview']);
+(function(i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+        i[r] ||
+        function() {
+            (i[r].q = i[r].q || []).push(arguments);
+        }),
+        (i[r].l = 1 * Number(new Date()));
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+})(
+    window,
+    document,
+    "script",
+    "https://www.google-analytics.com/analytics.js",
+    "ga"
+);
 
-(function() {
-    var ga = document.createElement('script');
-    ga.type = 'text/javascript';
-    ga.async = true;
-    ga.src = 'https://ssl.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(ga, s);
-})();
+// @ts-ignore
+ga("create", "UA-108017342-2", "auto");
+// @ts-ignore
+ga("set", "checkProtocolTask", function() {});
+// @ts-ignore
+ga("send", "pageview");
 
 chrome.browserAction.setBadgeBackgroundColor({
-    color: '#0078d4',
+    color: "#0078d4"
 });
 chrome.browserAction.setBadgeText({
-    text: 'ON',
+    text: "ON"
 });
 
 // Listen to messages sent from other parts of the extension.
@@ -29,39 +43,39 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     } else if (request.review) {
         review();
     } else if (request.makeBid) {
-        _gaq.push(['_trackEvent', 'telemetry', 'makeBid']);
+        trackEvent("makeBid");
     } else if (request.buyNow) {
-        _gaq.push(['_trackEvent', 'telemetry', 'buyNow']);
+        trackEvent("buyNow");
     } else if (request.buyBronzePack) {
-        _gaq.push(['_trackEvent', 'telemetry', 'buyBronzePack']);
+        trackEvent("buyBronzePack");
     } else if (request.comparePrice) {
-        _gaq.push(['_trackEvent', 'telemetry', 'comparePrice']);
+        trackEvent("comparePrice");
     } else if (request.decreaseMaxBidPrice) {
-        _gaq.push(['_trackEvent', 'telemetry', 'decreaseMaxBidPrice']);
+        trackEvent("decreaseMaxBidPrice");
     } else if (request.decreaseMinBidPrice) {
-        _gaq.push(['_trackEvent', 'telemetry', 'decreaseMinBidPrice']);
+        trackEvent("decreaseMinBidPrice");
     } else if (request.increaseMaxBidPrice) {
-        _gaq.push(['_trackEvent', 'telemetry', 'increaseMaxBidPrice']);
+        trackEvent("increaseMaxBidPrice");
     } else if (request.increaseMinBidPrice) {
-        _gaq.push(['_trackEvent', 'telemetry', 'increaseMinBidPrice']);
+        trackEvent("increaseMinBidPrice");
     } else if (request.listMinBin) {
-        _gaq.push(['_trackEvent', 'telemetry', 'listMinBin']);
+        trackEvent("listMinBin");
     } else if (request.list) {
-        _gaq.push(['_trackEvent', 'telemetry', 'list']);
+        trackEvent("list");
     } else if (request.quickSellAll) {
-        _gaq.push(['_trackEvent', 'telemetry', 'quickSellAll']);
+        trackEvent("quickSellAll");
     } else if (request.quickSell) {
-        _gaq.push(['_trackEvent', 'telemetry', 'quickSell']);
+        trackEvent("quickSell");
     } else if (request.search) {
-        _gaq.push(['_trackEvent', 'telemetry', 'search']);
+        trackEvent("search");
     } else if (request.storeAllInClub) {
-        _gaq.push(['_trackEvent', 'telemetry', 'storeAllInClub']);
+        trackEvent("storeAllInClub");
     } else if (request.storeInClub) {
-        _gaq.push(['_trackEvent', 'telemetry', 'storeInClub']);
+        trackEvent("storeInClub");
     } else if (request.watch) {
-        _gaq.push(['_trackEvent', 'telemetry', 'watch']);
+        trackEvent("watch");
     } else if (request.sendToTransferList) {
-        _gaq.push(['_trackEvent', 'telemetry', 'sendToTransferList']);
+        trackEvent("sendToTransferList");
     }
 
     return isResponseAsync;
@@ -73,7 +87,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 function contactDeveloper() {
     chrome.tabs.query(
         {
-            active: true,
+            active: true
         },
         tabs => {
             // Caches current user tab so we can return to it.
@@ -82,7 +96,8 @@ function contactDeveloper() {
             chrome.tabs.create(
                 {
                     active: true,
-                    url: 'mailto:shortfuts@gmail.com?subject=shortfuts%20feedback',
+                    url:
+                        "mailto:shortfuts@gmail.com?subject=shortfuts%20feedback"
                 },
                 mailToTab => {
                     setTimeout(function() {
@@ -91,7 +106,7 @@ function contactDeveloper() {
 
                         // Makes previously focused tab selected.
                         chrome.tabs.update(currentTabId, {
-                            highlighted: true,
+                            highlighted: true
                         });
                     }, 150);
                 }
@@ -106,6 +121,16 @@ function contactDeveloper() {
 function review() {
     chrome.tabs.create({
         active: true,
-        url: 'https://chrome.google.com/webstore/detail/shortfuts/piepdojghinggmddebidfkhfbdaggnmh',
+        url:
+            "https://chrome.google.com/webstore/detail/shortfuts/piepdojghinggmddebidfkhfbdaggnmh"
+    });
+}
+
+function trackEvent(eventName: string) {
+    // @ts-ignore
+    ga("send", {
+        hitType: "event",
+        eventCategory: "telemetry",
+        eventAction: eventName
     });
 }
