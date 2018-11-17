@@ -10,10 +10,18 @@ export default class Announcement extends React.Component<{}, {}> {
     @observable
     private isOpen: boolean = false;
 
+    @observable
+    private canDismiss: boolean = false;
+
     private message: string = "";
     private message2: string = "";
 
     componentDidMount() {
+        // Don't let users dismiss until 3 seconds have passed.
+        setTimeout(() => {
+            this.canDismiss = true;
+        }, 3000);
+
         /**
          * This is the announcement for making users who don't have their language
          * supported not leave me bad reviews.
@@ -90,11 +98,11 @@ export default class Announcement extends React.Component<{}, {}> {
          */
         chrome.storage.sync.get("announcementVersion", data => {
             const latestAnnouncementVersion = 12;
-            const announcementKillswitchEnabled = true;
+            const announcementKillswitchEnabled = false;
 
             if (
-                data.announcementVersion === undefined ||
-                data.announcementVersion < latestAnnouncementVersion ||
+                (data.announcementVersion === undefined ||
+                    data.announcementVersion < latestAnnouncementVersion) &&
                 !announcementKillswitchEnabled
             ) {
                 this.setAnnouncement(
@@ -137,7 +145,9 @@ export default class Announcement extends React.Component<{}, {}> {
     }
 
     private onModalDismissed = () => {
-        this.isOpen = false;
+        if (this.canDismiss) {
+            this.isOpen = false;
+        }
     };
 
     private setAnnouncement(message: string, message2: string = "") {
