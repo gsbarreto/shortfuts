@@ -99,7 +99,7 @@ export default class Announcement extends React.Component<{}, {}> {
          * I feel like it.
          */
         chrome.storage.sync.get("announcementVersion", data => {
-            const latestAnnouncementVersion = 12;
+            const latestAnnouncementVersion = 14;
             const announcementKillswitchEnabled = false;
 
             if (
@@ -108,8 +108,8 @@ export default class Announcement extends React.Component<{}, {}> {
                 !announcementKillswitchEnabled
             ) {
                 this.setAnnouncement(
-                    `Hey, shortfuts user! This is a warning. I've seen an increased number of users reporting that they've received permanent bans. This is because they are NOT using this extension responsibly, but spamming the transfer market with it like their favorite YouTuber.`,
-                    `If you care about your club, I suggest you a.) use this extension responsibly (i.e. don't spam the transfer market) or b.) uninstall it (safer way). The extension will remain available if you choose to continue to use it, but just be careful!`
+                    `This new update (v5.5.0) includes added support for Portuguese as well as an anti-ban warning (where you'll be warned if you're spamming the transfer market too much).`,
+                    `Please feel free to reach out via email with any bugs or feature requests. Happy FUTing!`
                 );
 
                 // Set current version to storage.
