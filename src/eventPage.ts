@@ -100,9 +100,19 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     } else if (request.sendToTransferList) {
         trackEvent("sendToTransferList");
     } else if (request.warningDismissed) {
-        trackEvent("warningDismissed");
+        trackEvent("firstWarningDismissed");
     } else if (request.warningShown) {
-        trackEvent("warningShown");
+        chrome.storage.sync.get("firstWarningShown", data => {
+            if (!data.firstWarningShown) {
+                chrome.storage.sync.set({
+                    firstWarningShown: true
+                });
+
+                trackEvent("firstWarningShown");
+            } else {
+                trackEvent("warningShown");
+            }
+        });
     }
 
     return isResponseAsync;
