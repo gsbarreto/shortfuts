@@ -99,6 +99,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         trackEvent("watch");
     } else if (request.sendToTransferList) {
         trackEvent("sendToTransferList");
+    } else if (request.warningDismissed) {
+        trackEvent("warningDismissed");
     }
 
     return isResponseAsync;

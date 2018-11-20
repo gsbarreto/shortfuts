@@ -173,10 +173,20 @@ export default class Announcement extends React.Component<{}, {}> {
                                         fontSize: "20px"
                                     }}
                                     onClick={() => {
+                                        // Set bit in storage not to show.
                                         chrome.storage.sync.set({
                                             antiBan: -1
                                         });
+
+                                        // Hide link for next announcement.
                                         this.showNeverWarnLink = false;
+
+                                        // Track event.
+                                        chrome.runtime.sendMessage({
+                                            warningDismissed: true
+                                        });
+
+                                        // Dimiss modal.
                                         this.onModalDismissed();
                                     }}
                                 >
