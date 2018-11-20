@@ -37,7 +37,8 @@ export default class Announcement extends React.Component<{}, {}> {
                 appLanguage.toLowerCase() === "it" ||
                 appLanguage.toLowerCase() === "de" ||
                 appLanguage.toLowerCase() === "pl" ||
-                appLanguage.toLowerCase() === "nl"
+                appLanguage.toLowerCase() === "nl" ||
+                appLanguage.toLowerCase() === "pt"
             )
         ) {
             this.setAnnouncement(

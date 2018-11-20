@@ -1,39 +1,42 @@
-import clickDetailsPanelButton from './helpers/clickDetailsPanelButton';
-import confirmConfirmationDialog from './helpers/confirmConfirmationDialog';
-import { logError } from '../utils/logger';
+import clickDetailsPanelButton from "./helpers/clickDetailsPanelButton";
+import confirmConfirmationDialog from "./helpers/confirmConfirmationDialog";
+import { logError } from "../utils/logger";
 
 export default function quickSell() {
-  let buttonText = "Quick Sell";
-  const language = document.getElementsByTagName("html")[0].lang;
+    let buttonText = "Quick Sell";
+    const language = document.getElementsByTagName("html")[0].lang;
 
-  switch (language) {
-    case "fr":
-      buttonText = "Vente rapide";
-      break;
-    case "it":
-      buttonText = "Scarta";
-      break;
-    case "de":
-      buttonText = "Abstoßen";
-      break;
-    case "pl":
-      buttonText = "Szybka sprzedaż";
-      break;
-    case "nl":
-      buttonText = "Snel verkopen";
-      break;
-  }
-
-  try {
-    clickDetailsPanelButton(buttonText);
-    confirmConfirmationDialog();
-  } catch (error) {
-    logError(`Oops! Couldn't quick sell that.`);
+    switch (language) {
+        case "fr":
+            buttonText = "Vente rapide";
+            break;
+        case "it":
+            buttonText = "Scarta";
+            break;
+        case "de":
+            buttonText = "Abstoßen";
+            break;
+        case "pl":
+            buttonText = "Szybka sprzedaż";
+            break;
+        case "nl":
+            buttonText = "Snel verkopen";
+            break;
+        case "pt":
+            buttonText = "Venda rápida";
+            break;
+    }
 
     try {
-      clickDetailsPanelButton("Redeem");
+        clickDetailsPanelButton(buttonText);
+        confirmConfirmationDialog();
     } catch (error) {
-      logError(`Oops! Couldn't redeem those coins.`);
+        logError(`Oops! Couldn't quick sell that.`);
+
+        try {
+            clickDetailsPanelButton("Redeem");
+        } catch (error) {
+            logError(`Oops! Couldn't redeem those coins.`);
+        }
     }
-  }
 }
