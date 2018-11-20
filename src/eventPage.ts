@@ -100,16 +100,26 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     } else if (request.sendToTransferList) {
         trackEvent("sendToTransferList");
     } else if (request.warningDismissed) {
-        trackEvent("firstWarningDismissed");
+        chrome.storage.sync.get("warningCount", data => {
+            if (data.warningCount === 1) {
+                trackEvent("firstWarningDismissed");
+            } else {
+                trackEvent("warningDismissed");
+            }
+        });
     } else if (request.warningShown) {
-        chrome.storage.sync.get("firstWarningShown", data => {
-            if (!data.firstWarningShown) {
+        chrome.storage.sync.get("warningCount", data => {
+            if (!data.warningCount) {
                 chrome.storage.sync.set({
-                    firstWarningShown: true
+                    warningCount: 1
                 });
 
                 trackEvent("firstWarningShown");
             } else {
+                chrome.storage.sync.set({
+                    warningCount: data.warningCount + 1
+                });
+
                 trackEvent("warningShown");
             }
         });
