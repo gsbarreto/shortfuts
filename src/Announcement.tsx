@@ -133,7 +133,15 @@ export default class Announcement extends React.Component<{}, {}> {
 
                 // If count is higher than safety threshold, give a warning.
                 if (count > 22) {
+                    // Show dismiss warning link forever.
                     this.showNeverWarnLink = true;
+
+                    // Track that warning was shown.
+                    chrome.runtime.sendMessage({
+                        warningShown: true
+                    });
+
+                    // Display announcement.
                     this.setAnnouncement(
                         `You're going pretty fast there, cowboy! We've, unscientifically, determined that a reasonable ammount of searches per minute (with a mouse) is about 22. You were going at a faster rate which puts you at high risk for a ban.`,
                         `This is just a warning to try to prevent you from getting banned. If you don't want to be warned again, simply click the link below and you'll never see this message again.`
