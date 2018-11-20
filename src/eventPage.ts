@@ -68,6 +68,29 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         trackEvent("quickSell");
     } else if (request.search) {
         trackEvent("search");
+
+        // Increment count of searches. Value is checked in Announcement component.
+        chrome.storage.sync.get("antiBan", data => {
+            const count = data.antiBan;
+
+            // If count is -1, user doesn't care to be warned so don't need to count.
+            if (count === -1) {
+                return;
+            }
+
+            // Initialize count if it doesn't exist, or increment if it does.
+            let newCount;
+            if (!count) {
+                newCount = 1;
+            } else {
+                newCount = count + 1;
+            }
+
+            // Set the count.
+            chrome.storage.sync.set({
+                antiBan: newCount
+            });
+        });
     } else if (request.storeAllInClub) {
         trackEvent("storeAllInClub");
     } else if (request.storeInClub) {

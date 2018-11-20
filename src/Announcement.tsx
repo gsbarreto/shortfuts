@@ -1,6 +1,7 @@
 import * as React from "react";
 import Footer from "./popup/Footer";
 import { Modal } from "office-ui-fabric-react/lib/Modal";
+import { Link } from "office-ui-fabric-react/lib/Link";
 import { observable } from "mobx";
 import { observer } from "mobx-react";
 import "./Announcement.scss";
@@ -15,6 +16,7 @@ export default class Announcement extends React.Component<{}, {}> {
 
     private message: string = "";
     private message2: string = "";
+    private showNeverWarnLink: boolean = false;
 
     componentDidMount() {
         // Don't let users dismiss until 3 seconds have passed.
@@ -116,6 +118,34 @@ export default class Announcement extends React.Component<{}, {}> {
                 });
             }
         });
+
+        setInterval(() => {
+            chrome.storage.sync.get("antiBan", data => {
+                const count = data.antiBan;
+
+                /**
+                 * If count is -1, it means user asked not to be warned, so just
+                 * return early.
+                 */
+                if (count === -1) {
+                    return;
+                }
+
+                // If count is higher than safety threshold, give a warning.
+                if (count > 22) {
+                    this.showNeverWarnLink = true;
+                    this.setAnnouncement(
+                        `You're going pretty fast there, cowboy! We've, unscientifically, determined that a reasonable ammount of searches per minute (with a mouse) is about 22. You were going at a faster rate which puts you at high risk for a ban.`,
+                        `This is just a warning to try to prevent you from getting banned. If you don't want to be warned again, simply click the link below and you'll never see this message again.`
+                    );
+                }
+
+                // Clear count (regardless if we showed warning or not).
+                chrome.storage.sync.set({
+                    antiBan: 0
+                });
+            });
+        }, 60000);
     }
 
     render() {
@@ -135,6 +165,23 @@ export default class Announcement extends React.Component<{}, {}> {
                                 >
                                     {this.message2}
                                 </div>
+                            )}
+                            {this.showNeverWarnLink && (
+                                <Link
+                                    style={{
+                                        marginTop: "24px",
+                                        fontSize: "20px"
+                                    }}
+                                    onClick={() => {
+                                        chrome.storage.sync.set({
+                                            antiBan: -1
+                                        });
+                                        this.showNeverWarnLink = false;
+                                        this.onModalDismissed();
+                                    }}
+                                >
+                                    Never warn me again!
+                                </Link>
                             )}
                         </div>
                     </div>
