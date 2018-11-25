@@ -13,7 +13,6 @@ export default class Announcement extends React.Component<{}, {}> {
     private message: string = "";
     private message2: string = "";
     private showNeverWarnLink: boolean = false;
-    private showUseAtYourOwnRisk: boolean = false;
 
     componentDidMount() {
         setInterval(() => {
@@ -95,21 +94,23 @@ export default class Announcement extends React.Component<{}, {}> {
                 chrome.storage.sync.set({
                     freSeen: true
                 });
-            } else if (data.useAtYourOwnRiskCount2 === undefined) {
-                this.showUseAtYourOwnRisk = true;
+            } else if (
+                data.useAtYourOwnRiskCount3 === undefined ||
+                data.useAtYourOwnRiskCount3 < 4
+            ) {
+                const updatedValue = data.useAtYourOwnRiskCount3
+                    ? data.useAtYourOwnRiskCount3 + 1
+                    : 1;
 
                 this.setAnnouncement(
-                    `EA doesn't want you using this extension. If they detect you using it, they will ban you. Because of this, there are some safety features on by default to try to prevent you from getting banned. Open the extension popup in the Chrome toolbar to turn them off if you're feeling risky.`,
-                    `While we feel the safety features will help circumvent most bans, please note the only way to guarantee you won't be banned and lose your club is to play by the rules and not use this extension.`
+                    `There are some safety features on by default to prevent you from getting banned. These features have been approved by an EA representative who has told us shortfuts users will not be banned if these feature are left on. However, if you're feeling risky, you can open the extension popup in the Chrome toolbar to turn them off.`,
+                    `We encourage you to continue to use shortfuts with these safety features enabled to keep you safe. Just so you really understand this, you'll see this message ${5 -
+                        updatedValue} more time(s).`
                 );
-
-                const updatedValue = data.useAtYourOwnRiskCount2
-                    ? data.useAtYourOwnRiskCount2 + 1
-                    : 1;
 
                 // Increment seen count in storage.
                 chrome.storage.sync.set({
-                    useAtYourOwnRiskCount2: updatedValue
+                    useAtYourOwnRiskCount3: updatedValue
                 });
             } else if (
                 (data.announcementVersion === undefined ||
@@ -151,25 +152,21 @@ export default class Announcement extends React.Component<{}, {}> {
                                 </div>
                             )}
 
-                            {!this.showNeverWarnLink &&
-                                !this.showUseAtYourOwnRisk && (
-                                    <Link
-                                        style={{
-                                            marginTop: "24px",
-                                            fontSize: "14px"
-                                        }}
-                                        onClick={() => {
-                                            // Hide link for next announcement.
-                                            this.showUseAtYourOwnRisk = false;
-
-                                            // Dimiss modal.
-                                            this.onModalDismissed();
-                                        }}
-                                    >
-                                        I definitely read this message, so
-                                        please close it.
-                                    </Link>
-                                )}
+                            {!this.showNeverWarnLink && (
+                                <Link
+                                    style={{
+                                        marginTop: "24px",
+                                        fontSize: "14px"
+                                    }}
+                                    onClick={() => {
+                                        // Dimiss modal.
+                                        this.onModalDismissed();
+                                    }}
+                                >
+                                    I definitely read this message, so please
+                                    close it.
+                                </Link>
+                            )}
 
                             {this.showNeverWarnLink && (
                                 <Link
@@ -197,25 +194,6 @@ export default class Announcement extends React.Component<{}, {}> {
                                 >
                                     Please don't warn me. I want to take the
                                     chance of getting banned.
-                                </Link>
-                            )}
-
-                            {this.showUseAtYourOwnRisk && (
-                                <Link
-                                    style={{
-                                        marginTop: "24px",
-                                        fontSize: "14px"
-                                    }}
-                                    onClick={() => {
-                                        // Hide link for next announcement.
-                                        this.showUseAtYourOwnRisk = false;
-
-                                        // Dimiss modal.
-                                        this.onModalDismissed();
-                                    }}
-                                >
-                                    I understand I'm using this extension at my
-                                    own risk and won't cry if I get banned.
                                 </Link>
                             )}
                         </div>
