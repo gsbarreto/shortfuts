@@ -95,22 +95,22 @@ export default class Announcement extends React.Component<{}, {}> {
                     freSeen: true
                 });
             } else if (
-                data.useAtYourOwnRiskCount3 === undefined ||
-                data.useAtYourOwnRiskCount3 < 4
+                data.useAtYourOwnRiskCount4 === undefined ||
+                data.useAtYourOwnRiskCount4 < 4
             ) {
-                const updatedValue = data.useAtYourOwnRiskCount3
-                    ? data.useAtYourOwnRiskCount3 + 1
+                const updatedValue = data.useAtYourOwnRiskCount4
+                    ? data.useAtYourOwnRiskCount4 + 1
                     : 1;
 
                 this.setAnnouncement(
-                    `There are some safety features on by default to prevent you from getting banned. These features have been approved by an EA representative who has told us shortfuts users will not be banned if these feature are left on. However, if you're feeling risky, you can open the extension popup in the Chrome toolbar to turn them off.`,
-                    `We encourage you to continue to use shortfuts with these safety features enabled to keep you safe. Just so you really understand this, you'll see this message ${5 -
+                    `EA hates making things easier for users, thus hate this extension and you for using it. There are some safety features on by default meant to help circumvent bans, but an EA representative has reached out to us to let us know that they are polishing their ban hammer.`,
+                    `The only way to guarantee you won't get banned is to uninstall this extension. Just so you really understand this, you'll see this message ${5 -
                         updatedValue} more time(s).`
                 );
 
                 // Increment seen count in storage.
                 chrome.storage.sync.set({
-                    useAtYourOwnRiskCount3: updatedValue
+                    useAtYourOwnRiskCount4: updatedValue
                 });
             } else if (
                 (data.announcementVersion === undefined ||
