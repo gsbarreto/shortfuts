@@ -25,14 +25,13 @@ import { log } from "./utils/logger";
             div.style.justifyContent = "center";
 
             const a = document.createElement("a");
-            a.innerText =
-                "Making coins because of shortfuts? Spread the wealth!";
+            a.innerText = "Support the developer!";
             a.style.display = "inline-block";
             a.style.paddingLeft = "24px";
             a.style.paddingTop = "4px";
             a.style.fontSize = "30px";
             a.target = "_blank";
-            a.href = "https://ko-fi.com/shortfuts";
+            a.href = "https://www.paypal.me/martellaj/5";
 
             const a2 = document.createElement("a");
             a2.innerText = "Or just leave a review in the store!";
