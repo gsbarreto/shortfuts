@@ -161,64 +161,88 @@ export default class SafetySettings extends React.Component<
             <div style={{ marginLeft: "12px" }}>
                 <div
                     style={{
-                        marginBottom: "6px",
-                        display: "flex",
-                        alignItems: "center"
+                        marginBottom: "6px"
                     }}
                 >
-                    <h3 style={{ marginRight: "12px" }}>Safety settings</h3>
-                    {!this.state.isPremium && (
-                        <PrimaryButton
-                            onClick={() => {
-                                (window as any).google.payments.inapp.buy({
-                                    parameters: { env: "prod" },
-                                    sku: "disable_safety_settings",
-                                    success: (response: any) => {
-                                        // Determine if user is premium by checking purchases.
-                                        (window as any).google.payments.inapp.getPurchases(
-                                            {
-                                                parameters: { env: "prod" },
-                                                success: (response: any) => {
-                                                    const purchase =
-                                                        response.response
-                                                            .details[0];
+                    <div
+                        style={{
+                            display: "flex",
+                            alignItems: "center"
+                        }}
+                    >
+                        <h3 style={{ marginRight: "12px" }}>Safety settings</h3>
+                        {!this.state.isPremium && (
+                            <PrimaryButton
+                                onClick={() => {
+                                    (window as any).google.payments.inapp.buy({
+                                        parameters: { env: "prod" },
+                                        sku: "disable_safety_settings",
+                                        success: (response: any) => {
+                                            // Determine if user is premium by checking purchases.
+                                            (window as any).google.payments.inapp.getPurchases(
+                                                {
+                                                    parameters: { env: "prod" },
+                                                    success: (
+                                                        response: any
+                                                    ) => {
+                                                        const purchase =
+                                                            response.response
+                                                                .details[0];
 
-                                                    if (purchase) {
-                                                        const isPremium =
-                                                            purchase &&
-                                                            purchase.state ===
-                                                                "ACTIVE";
-                                                        chrome.storage.sync.set(
-                                                            {
-                                                                isPremium: isPremium
-                                                            }
-                                                        );
-                                                    } else {
+                                                        if (purchase) {
+                                                            const isPremium =
+                                                                purchase &&
+                                                                purchase.state ===
+                                                                    "ACTIVE";
+                                                            chrome.storage.sync.set(
+                                                                {
+                                                                    isPremium: isPremium
+                                                                }
+                                                            );
+                                                        } else {
+                                                            chrome.storage.sync.set(
+                                                                {
+                                                                    isPremium: false
+                                                                }
+                                                            );
+                                                        }
+                                                    },
+                                                    failure: (
+                                                        response: any
+                                                    ) => {
                                                         chrome.storage.sync.set(
                                                             {
                                                                 isPremium: false
                                                             }
                                                         );
                                                     }
-                                                },
-                                                failure: (response: any) => {
-                                                    chrome.storage.sync.set({
-                                                        isPremium: false
-                                                    });
                                                 }
-                                            }
-                                        );
-                                    },
-                                    failure: (response: any) => {
-                                        chrome.storage.sync.set({
-                                            isPremium: false
-                                        });
-                                    }
-                                });
+                                            );
+                                        },
+                                        failure: (response: any) => {
+                                            chrome.storage.sync.set({
+                                                isPremium: false
+                                            });
+                                        }
+                                    });
+                                }}
+                            >
+                                Buy shortfuts Premium
+                            </PrimaryButton>
+                        )}
+                    </div>
+                    {!this.state.isPremium && (
+                        <span
+                            style={{
+                                fontSize: "12px",
+                                fontStyle: "italic",
+                                marginRight: "6px"
                             }}
                         >
-                            Buy shortfuts Premium
-                        </PrimaryButton>
+                            In-app purchasing is not available in all countries.
+                            If you're unable to purchase, please send us an
+                            email at shortfuts@gmail.com.
+                        </span>
                     )}
                 </div>
 
