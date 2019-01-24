@@ -76,7 +76,10 @@ export default class SafetySettings extends React.Component<
         })();
 
         chrome.identity.getProfileUserInfo(userInfo => {
-            const paidUsers = ["martellaj@gmail.com"];
+            const paidUsers = [
+                "csgolounge.predict@gmail.com",
+                "martellaj@gmail.com"
+            ];
             const email = userInfo.email;
 
             if (paidUsers.indexOf(email) > -1) {
