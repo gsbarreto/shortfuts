@@ -75,21 +75,31 @@ export default class SafetySettings extends React.Component<
             });
         })();
 
-        // Determine if user is premium by checking purchases.
-        (window as any).google.payments.inapp.getPurchases({
-            parameters: { env: "prod" },
-            success: (response: any) => {
-                const purchase = response.response.details[0];
+        chrome.identity.getProfileUserInfo(userInfo => {
+            const paidUsers = ["martellaj@gmail.com"];
+            const email = userInfo.email;
 
-                if (purchase) {
-                    const isPremium = purchase && purchase.state === "ACTIVE";
-                    this.updateToggleStates(isPremium);
-                } else {
-                    this.updateToggleStates(false);
-                }
-            },
-            failure: (response: any) => {
-                this.updateToggleStates(false);
+            if (paidUsers.indexOf(email) > -1) {
+                this.updateToggleStates(true);
+            } else {
+                // Determine if user is premium by checking purchases.
+                (window as any).google.payments.inapp.getPurchases({
+                    parameters: { env: "prod" },
+                    success: (response: any) => {
+                        const purchase = response.response.details[0];
+
+                        if (purchase) {
+                            const isPremium =
+                                purchase && purchase.state === "ACTIVE";
+                            this.updateToggleStates(isPremium);
+                        } else {
+                            this.updateToggleStates(false);
+                        }
+                    },
+                    failure: (response: any) => {
+                        this.updateToggleStates(false);
+                    }
+                });
             }
         });
     }
