@@ -83,7 +83,7 @@ export default class Announcement extends React.Component<{}, {}> {
                 chrome.storage.sync.set({
                     freSeen: true
                 });
-            } else if (data.premiumAnnouncement === undefined || true) {
+            } else if (data.premiumAnnouncement === undefined) {
                 this.setAnnouncement(
                     `While shortfuts is (and will remain) free, some functionality will now be gated by "shortfuts Premium". Currently, this functionality includes the ability to toggle the safety settings in the extension popup (i.e. the "buy now" delay and the "searching too quickly" warning).`,
                     `For just 0.99 USD, you can unlock "shortfuts Premium" in the extension popup! By doing so, you'll be supporting the shortfuts developer and ensuring shortfuts is kept up-to-date and working past FIFA 19.`
