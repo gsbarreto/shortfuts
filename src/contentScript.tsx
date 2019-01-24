@@ -1,6 +1,3 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import Announcement from "./Announcement";
 import getProvider from "./provider/getProvider";
 import Shortcut from "./shortcuts/Shortcut";
 import { initializeIcons } from "office-ui-fabric-react/lib/Icons";
@@ -11,50 +8,6 @@ import { log } from "./utils/logger";
 
     // Initialize OUFR icons.
     initializeIcons();
-
-    setTimeout(() => {
-        const header = document.getElementById("FIFAHeader");
-        if (header) {
-            const updateAnchor = document.createElement("div");
-            updateAnchor.id = "updateAnchor";
-            header.appendChild(updateAnchor);
-
-            const div = document.createElement("div");
-            div.style.display = "flex";
-            div.style.alignItems = "center";
-            div.style.justifyContent = "center";
-
-            const a = document.createElement("a");
-            a.innerText = "Support the developer!";
-            a.style.display = "inline-block";
-            a.style.paddingLeft = "24px";
-            a.style.paddingTop = "4px";
-            a.style.fontSize = "30px";
-            a.target = "_blank";
-            a.href = "https://www.paypal.me/martellaj/5";
-
-            const a2 = document.createElement("a");
-            a2.innerText = "Or just leave a review in the store!";
-            a2.style.display = "inline-block";
-            a2.style.paddingLeft = "16px";
-            a2.style.paddingTop = "8px";
-            a2.style.fontSize = "18px";
-            a2.target = "_blank";
-            a2.href =
-                "https://chrome.google.com/webstore/detail/shortfuts/piepdojghinggmddebidfkhfbdaggnmh";
-
-            div.appendChild(a);
-            div.appendChild(a2);
-            header.appendChild(div);
-
-            ReactDOM.render(
-                <Announcement />,
-                document.getElementById("updateAnchor")
-            );
-
-            return;
-        }
-    }, 2000);
 
     // If there are no shortcuts saved, set them as the default ones.
     chrome.storage.sync.get("shortcutsMap", data => {
