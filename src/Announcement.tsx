@@ -73,9 +73,6 @@ export default class Announcement extends React.Component<{}, {}> {
          * users until they restart.
          */
         chrome.storage.sync.get(null, data => {
-            const latestAnnouncementVersion = 14;
-            const announcementKillswitchEnabled = true;
-
             if (data.freSeen === undefined) {
                 this.setAnnouncement(
                     `Thank you for installing shortfuts. If you find some shortcuts not working, please try fully restarting Google Chrome.`,
@@ -85,6 +82,16 @@ export default class Announcement extends React.Component<{}, {}> {
                 // Mark user as having seen FRE.
                 chrome.storage.sync.set({
                     freSeen: true
+                });
+            } else if (data.premiumAnnouncement === undefined || true) {
+                this.setAnnouncement(
+                    `While shortfuts is (and will remain) free, some functionality will now be gated by "shortfuts Premium". Currently, this functionality includes the ability to toggle the safety settings in the extension popup (i.e. the "buy now" delay and the "searching too quickly" warning).`,
+                    `For just 0.99 USD, you can unlock "shortfuts Premium" in the extension popup! By doing so, you'll be supporting the shortfuts developer and ensuring shortfuts is kept up-to-date and working past FIFA 19.`
+                );
+
+                // Mark user as having seen premium announcement.
+                chrome.storage.sync.set({
+                    premiumAnnouncement: true
                 });
             }
         });
