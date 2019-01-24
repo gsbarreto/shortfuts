@@ -70,13 +70,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         trackEvent("search");
 
         // Increment count of searches. Value is checked in Announcement component.
-        chrome.storage.sync.get("antiBan", data => {
-            const count = data.antiBan;
-
-            // If count is -1, user doesn't care to be warned so don't need to count.
-            if (count === -1) {
-                return;
-            }
+        chrome.storage.sync.get("searchCount", data => {
+            const count = data.searchCount;
 
             // Initialize count if it doesn't exist, or increment if it does.
             let newCount;
@@ -88,7 +83,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
             // Set the count.
             chrome.storage.sync.set({
-                antiBan: newCount
+                searchCount: newCount
             });
         });
     } else if (request.storeAllInClub) {

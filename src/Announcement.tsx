@@ -12,42 +12,34 @@ export default class Announcement extends React.Component<{}, {}> {
 
     private message: string = "";
     private message2: string = "";
-    private showNeverWarnLink: boolean = false;
 
     componentDidMount() {
         setInterval(() => {
-            chrome.storage.sync.get("antiBan", data => {
-                const count = data.antiBan;
+            chrome.storage.sync.get("frequentSearchWarning", data => {
+                if (data.frequentSearchWarning !== false) {
+                    chrome.storage.sync.get("searchCount", data => {
+                        const count = data.searchCount;
 
-                /**
-                 * If count is -1, it means user asked not to be warned, so just
-                 * return early.
-                 */
-                if (count === -1) {
-                    return;
-                }
+                        // If count is higher than safety threshold, give a warning.
+                        if (count > 22) {
+                            // Track that warning was shown.
+                            chrome.runtime.sendMessage({
+                                warningShown: true
+                            });
 
-                // If count is higher than safety threshold, give a warning.
-                if (count > 22) {
-                    // Show dismiss warning link forever.
-                    this.showNeverWarnLink = true;
+                            // Display announcement.
+                            this.setAnnouncement(
+                                `You're going pretty fast there, cowboy! We've, unscientifically, determined that a reasonable amount of searches per minute (with a mouse) is about 22. You were going at a faster rate which puts you at high risk for a ban.`,
+                                `This is just a warning to try to prevent you from getting banned. If you don't want to be warned again, you can disable it by opening the extension popup.`
+                            );
+                        }
 
-                    // Track that warning was shown.
-                    chrome.runtime.sendMessage({
-                        warningShown: true
+                        // Clear count (regardless if we showed warning or not).
+                        chrome.storage.sync.set({
+                            searchCount: 0
+                        });
                     });
-
-                    // Display announcement.
-                    this.setAnnouncement(
-                        `You're going pretty fast there, cowboy! We've, unscientifically, determined that a reasonable amount of searches per minute (with a mouse) is about 22. You were going at a faster rate which puts you at high risk for a ban.`,
-                        `This is just a warning to try to prevent you from getting banned. If you don't want to be warned again, simply click the link below and you'll never see this message again.`
-                    );
                 }
-
-                // Clear count (regardless if we showed warning or not).
-                chrome.storage.sync.set({
-                    antiBan: 0
-                });
             });
         }, 60000);
 
@@ -94,37 +86,6 @@ export default class Announcement extends React.Component<{}, {}> {
                 chrome.storage.sync.set({
                     freSeen: true
                 });
-            } else if (
-                data.useAtYourOwnRiskCount4 === undefined ||
-                data.useAtYourOwnRiskCount4 < 4
-            ) {
-                const updatedValue = data.useAtYourOwnRiskCount4
-                    ? data.useAtYourOwnRiskCount4 + 1
-                    : 1;
-
-                this.setAnnouncement(
-                    `EA hates making things easier for users, thus hate this extension and you for using it. There are some safety features on by default meant to help circumvent bans, but an EA representative has reached out to us to let us know that they are polishing their ban hammer.`,
-                    `The only way to guarantee you won't get banned is to uninstall this extension. Just so you really understand this, you'll see this message ${5 -
-                        updatedValue} more time(s).`
-                );
-
-                // Increment seen count in storage.
-                chrome.storage.sync.set({
-                    useAtYourOwnRiskCount4: updatedValue
-                });
-            } else if (
-                (data.announcementVersion === undefined ||
-                    data.announcementVersion < latestAnnouncementVersion) &&
-                !announcementKillswitchEnabled
-            ) {
-                this.setAnnouncement(
-                    "Update message (when kill switch is off)."
-                );
-
-                // Set current version to storage.
-                chrome.storage.sync.set({
-                    announcementVersion: latestAnnouncementVersion
-                });
             }
         });
     }
@@ -152,50 +113,19 @@ export default class Announcement extends React.Component<{}, {}> {
                                 </div>
                             )}
 
-                            {!this.showNeverWarnLink && (
-                                <Link
-                                    style={{
-                                        marginTop: "24px",
-                                        fontSize: "14px"
-                                    }}
-                                    onClick={() => {
-                                        // Dimiss modal.
-                                        this.onModalDismissed();
-                                    }}
-                                >
-                                    I definitely read this message, so please
-                                    close it.
-                                </Link>
-                            )}
-
-                            {this.showNeverWarnLink && (
-                                <Link
-                                    style={{
-                                        marginTop: "24px",
-                                        fontSize: "14px"
-                                    }}
-                                    onClick={() => {
-                                        // Set bit in storage not to show.
-                                        chrome.storage.sync.set({
-                                            antiBan: -1
-                                        });
-
-                                        // Hide link for next announcement.
-                                        this.showNeverWarnLink = false;
-
-                                        // Track event.
-                                        chrome.runtime.sendMessage({
-                                            warningDismissed: true
-                                        });
-
-                                        // Dimiss modal.
-                                        this.onModalDismissed();
-                                    }}
-                                >
-                                    Please don't warn me. I want to take the
-                                    chance of getting banned.
-                                </Link>
-                            )}
+                            <Link
+                                style={{
+                                    marginTop: "24px",
+                                    fontSize: "14px"
+                                }}
+                                onClick={() => {
+                                    // Dimiss modal.
+                                    this.onModalDismissed();
+                                }}
+                            >
+                                I definitely read this message, so please close
+                                it.
+                            </Link>
                         </div>
                     </div>
                     <Footer />

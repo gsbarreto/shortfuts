@@ -1,9 +1,11 @@
 import * as React from "react";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
+import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
 
 interface SafetySettingsState {
-    binDelay: boolean;
-    antiBan: number; // Legacy name for frequent searching warning
+    buyNowDelay: boolean;
+    frequentSearchWarning: boolean;
+    isPremium: boolean;
 }
 
 export default class SafetySettings extends React.Component<
@@ -14,63 +16,218 @@ export default class SafetySettings extends React.Component<
         super(props, state);
 
         this.state = {
-            binDelay: true,
-            antiBan: 0
+            buyNowDelay: true,
+            frequentSearchWarning: true,
+            isPremium: false
         };
     }
 
     componentDidMount() {
-        chrome.storage.sync.get("binDelay", (data: any) => {
-            const localBinDelay =
-                data.binDelay !== undefined ? data.binDelay : true;
+        // buy.js
+        (function() {
+            var f = this,
+                g = function(a, d) {
+                    var c = a.split("."),
+                        b = window || f;
+                    c[0] in b || !b.execScript || b.execScript("var " + c[0]);
+                    for (var e; c.length && (e = c.shift()); )
+                        c.length || void 0 === d
+                            ? (b = b[e] ? b[e] : (b[e] = {}))
+                            : (b[e] = d);
+                };
+            var h = function(a) {
+                var d = chrome.runtime.connect(
+                        "nmmhkkegccagdldgiimedpiccmgmieda",
+                        {}
+                    ),
+                    c = !1;
+                d.onMessage.addListener(function(b: any) {
+                    c = !0;
+                    "response" in b && !("errorType" in b.response)
+                        ? a.success && a.success(b)
+                        : a.failure && a.failure(b);
+                });
+                d.onDisconnect.addListener(function() {
+                    !c &&
+                        a.failure &&
+                        a.failure({
+                            request: {},
+                            response: { errorType: "INTERNAL_SERVER_ERROR" }
+                        });
+                });
+                d.postMessage(a);
+            };
+            g("google.payments.inapp.buy", function(a) {
+                a.method = "buy";
+                h(a);
+            });
+            g("google.payments.inapp.consumePurchase", function(a) {
+                a.method = "consumePurchase";
+                h(a);
+            });
+            g("google.payments.inapp.getPurchases", function(a) {
+                a.method = "getPurchases";
+                h(a);
+            });
+            g("google.payments.inapp.getSkuDetails", function(a) {
+                a.method = "getSkuDetails";
+                h(a);
+            });
+        })();
 
-            this.setState(
-                {
-                    binDelay: localBinDelay
-                },
-                () => {
-                    chrome.storage.sync.set({
-                        binDelay: localBinDelay
-                    });
+        // Determine if user is premium by checking purchases.
+        (window as any).google.payments.inapp.getPurchases({
+            parameters: { env: "prod" },
+            success: (response: any) => {
+                const purchase = response.response.details[0];
+
+                if (purchase) {
+                    const isPremium = purchase && purchase.state === "ACTIVE";
+                    this.updateToggleStates(isPremium);
+                } else {
+                    this.updateToggleStates(false);
                 }
-            );
-        });
-
-        chrome.storage.sync.get("antiBan", (data: any) => {
-            const localAntiBan = data.antiBan !== undefined ? data.antiBan : 0;
-
-            this.setState(
-                {
-                    antiBan: localAntiBan
-                },
-                () => {
-                    chrome.storage.sync.set({
-                        antiBan: localAntiBan
-                    });
-                }
-            );
+            },
+            failure: (response: any) => {
+                this.updateToggleStates(false);
+            }
         });
     }
 
     render() {
+        // buy.js
+        (function() {
+            var f = this,
+                g = function(a, d) {
+                    var c = a.split("."),
+                        b = window || f;
+                    c[0] in b || !b.execScript || b.execScript("var " + c[0]);
+                    for (var e; c.length && (e = c.shift()); )
+                        c.length || void 0 === d
+                            ? (b = b[e] ? b[e] : (b[e] = {}))
+                            : (b[e] = d);
+                };
+            var h = function(a) {
+                var d = chrome.runtime.connect(
+                        "nmmhkkegccagdldgiimedpiccmgmieda",
+                        {}
+                    ),
+                    c = !1;
+                d.onMessage.addListener(function(b: any) {
+                    c = !0;
+                    "response" in b && !("errorType" in b.response)
+                        ? a.success && a.success(b)
+                        : a.failure && a.failure(b);
+                });
+                d.onDisconnect.addListener(function() {
+                    !c &&
+                        a.failure &&
+                        a.failure({
+                            request: {},
+                            response: { errorType: "INTERNAL_SERVER_ERROR" }
+                        });
+                });
+                d.postMessage(a);
+            };
+            g("google.payments.inapp.buy", function(a) {
+                a.method = "buy";
+                h(a);
+            });
+            g("google.payments.inapp.consumePurchase", function(a) {
+                a.method = "consumePurchase";
+                h(a);
+            });
+            g("google.payments.inapp.getPurchases", function(a) {
+                a.method = "getPurchases";
+                h(a);
+            });
+            g("google.payments.inapp.getSkuDetails", function(a) {
+                a.method = "getSkuDetails";
+                h(a);
+            });
+        })();
+
         return (
             <div style={{ marginLeft: "12px" }}>
-                <h3 style={{ marginBottom: "6px" }}>Safety settings</h3>
+                <div
+                    style={{
+                        marginBottom: "6px",
+                        display: "flex",
+                        alignItems: "center"
+                    }}
+                >
+                    <h3 style={{ marginRight: "12px" }}>Safety settings</h3>
+                    {!this.state.isPremium && (
+                        <PrimaryButton
+                            onClick={() => {
+                                (window as any).google.payments.inapp.buy({
+                                    parameters: { env: "prod" },
+                                    sku: "disable_safety_settings",
+                                    success: (response: any) => {
+                                        // Determine if user is premium by checking purchases.
+                                        (window as any).google.payments.inapp.getPurchases(
+                                            {
+                                                parameters: { env: "prod" },
+                                                success: (response: any) => {
+                                                    const purchase =
+                                                        response.response
+                                                            .details[0];
+
+                                                    if (purchase) {
+                                                        const isPremium =
+                                                            purchase &&
+                                                            purchase.state ===
+                                                                "ACTIVE";
+                                                        chrome.storage.sync.set(
+                                                            {
+                                                                isPremium: isPremium
+                                                            }
+                                                        );
+                                                    } else {
+                                                        chrome.storage.sync.set(
+                                                            {
+                                                                isPremium: false
+                                                            }
+                                                        );
+                                                    }
+                                                },
+                                                failure: (response: any) => {
+                                                    chrome.storage.sync.set({
+                                                        isPremium: false
+                                                    });
+                                                }
+                                            }
+                                        );
+                                    },
+                                    failure: (response: any) => {
+                                        chrome.storage.sync.set({
+                                            isPremium: false
+                                        });
+                                    }
+                                });
+                            }}
+                        >
+                            Buy shortfuts Premium
+                        </PrimaryButton>
+                    )}
+                </div>
+
                 {/* Buy now delay */}
                 <div style={{ marginBottom: "12px" }}>
                     <Toggle
                         label={`"Buy Now" delay`}
                         onText="On"
                         offText="Off"
-                        checked={this.state.binDelay}
+                        checked={this.state.buyNowDelay}
+                        disabled={!this.state.isPremium}
                         onChanged={(checked: boolean) => {
                             chrome.storage.sync.set(
                                 {
-                                    binDelay: checked
+                                    buyNowDelay: checked
                                 },
                                 () => {
                                     this.setState({
-                                        binDelay: checked
+                                        buyNowDelay: checked
                                     });
                                 }
                             );
@@ -90,15 +247,16 @@ export default class SafetySettings extends React.Component<
                         label={`Warn me if I'm searching too quickly`}
                         onText="On"
                         offText="Off"
-                        checked={this.state.antiBan > -1}
+                        checked={this.state.frequentSearchWarning}
+                        disabled={!this.state.isPremium}
                         onChanged={(checked: boolean) => {
                             chrome.storage.sync.set(
                                 {
-                                    antiBan: checked
+                                    frequentSearchWarning: checked
                                 },
                                 () => {
                                     this.setState({
-                                        antiBan: checked ? 0 : -1
+                                        frequentSearchWarning: checked
                                     });
                                 }
                             );
@@ -112,5 +270,65 @@ export default class SafetySettings extends React.Component<
                 </div>
             </div>
         );
+    }
+
+    updateToggleStates(isPremium: boolean) {
+        if (!isPremium) {
+            this.setState(
+                {
+                    buyNowDelay: true,
+                    frequentSearchWarning: true,
+                    isPremium: false
+                },
+                () => {
+                    chrome.storage.sync.set({
+                        buyNowDelay: true
+                    });
+
+                    chrome.storage.sync.set({
+                        frequentSearchWarning: true
+                    });
+                }
+            );
+            return;
+        } else {
+            this.setState({
+                isPremium: true
+            });
+        }
+
+        chrome.storage.sync.get("buyNowDelay", (data: any) => {
+            const localBuyNowDelay =
+                data.buyNowDelay !== undefined ? data.buyNowDelay : true;
+
+            this.setState(
+                {
+                    buyNowDelay: localBuyNowDelay
+                },
+                () => {
+                    chrome.storage.sync.set({
+                        buyNowDelay: localBuyNowDelay
+                    });
+                }
+            );
+        });
+
+        chrome.storage.sync.get("frequentSearchWarning", (data: any) => {
+            const localFrequentSearchWarning =
+                data.frequentSearchWarning !== undefined
+                    ? data.frequentSearchWarning
+                    : true;
+
+            this.setState(
+                {
+                    frequentSearchWarning: localFrequentSearchWarning
+                },
+                () => {
+                    chrome.storage.sync.set({
+                        frequentSearchWarning: localFrequentSearchWarning
+                    });
+                }
+            );
+        });
     }
 }
