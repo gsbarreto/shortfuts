@@ -91,9 +91,14 @@ export default class SafetySettings extends React.Component<
                 "marcelkuel@gmail.com",
                 "Joeypol4@gmail.com"
             ];
-            const email = userInfo.email;
 
-            if (paidUsers.indexOf(email) > -1) {
+            const lowerCasePaidUsers = paidUsers.map((email: string) =>
+                email.toLocaleLowerCase()
+            );
+            const lowerCaseEmail =
+                userInfo.email && userInfo.email.toLocaleLowerCase();
+
+            if (lowerCasePaidUsers.indexOf(lowerCaseEmail) > -1) {
                 this.updateToggleStates(true);
             } else {
                 // Determine if user is premium by checking purchases.
