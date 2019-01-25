@@ -86,7 +86,10 @@ export default class SafetySettings extends React.Component<
                 "a.t.traspadini@gmail.com",
                 "levenmillie@gmail.com",
                 "roberto1988@hotmail.de",
-                "pornotato@gmail.com"
+                "pornotato@gmail.com",
+                "milanone@web.de",
+                "marcelkuel@gmail.com",
+                "Joeypol4@gmail.com"
             ];
             const email = userInfo.email;
 
