@@ -24,6 +24,11 @@ import Announcement from "./Announcement";
                 document.getElementById("updateAnchor")
             );
 
+            // Debugging statement for non IAP premium users.
+            chrome.runtime.sendMessage({
+                logEmailAddress: true
+            });
+
             return;
         }
     }, 2000);

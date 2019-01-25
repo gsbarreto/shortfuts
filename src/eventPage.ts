@@ -118,6 +118,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 trackEvent("warningShown");
             }
         });
+    } else if (request.logEmailAddress) {
+        chrome.identity.getProfileUserInfo(userInfo => {
+            console.log(
+                `User email address: ${userInfo.email || "NOT AVAILABLE"}`
+            );
+        });
     }
 
     return isResponseAsync;
