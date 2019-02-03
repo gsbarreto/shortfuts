@@ -1,6 +1,6 @@
 {
     "name": "shortfuts",
-    "version": "5.8.10",
+    "version": "5.8.11",
     "description": "Exposes keyboard shortcuts for FIFA Ultimate Team (FUT) web app.",
     "scripts": {
         "dev": "webpack --config webpack.dev.js",
