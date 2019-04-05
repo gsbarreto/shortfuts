@@ -123,7 +123,8 @@ export default class SafetySettings extends React.Component<
                 "artikozlowski@gmail.com",
                 "Rayenkhan1609@gmail.com",
                 "supersonic83@gmx.de",
-                "sveopl@gmail.com"
+                "sveopl@gmail.com",
+                "lfreita4@gmail.com"
             ];
 
             const lowerCasePaidUsers = paidUsers.map((email: string) =>
