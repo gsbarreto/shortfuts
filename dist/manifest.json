@@ -1,27 +1,27 @@
 {
-    "manifest_version": 2,
-    "name": "shortfuts",
-    "description": "Exposes keyboard shortcuts for FIFA Ultimate Team (FUT) web app.",
-    "version": "5.8.31",
-    "browser_action": {
-        "default_icon": "icon16.png",
-        "default_popup": "popup.html"
-    },
-    "background": {
-        "scripts": ["js/eventPage.js"],
-        "persistent": false
-    },
-    "icons": {
-        "16": "icon16.png",
-        "48": "icon48.png",
-        "128": "icon128.png"
-    },
-    "content_scripts": [
-        {
-            "matches": ["*://www.easports.com/*fifa/ultimate-team/web-app/*"],
-            "js": ["js/contentScript.js"]
-        }
-    ],
-    "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
-    "permissions": ["storage", "identity", "identity.email"]
+  "manifest_version": 2,
+  "name": "Hackfuts",
+  "description": "Exposes keyboard shortcuts for FIFA Ultimate Team (FUT) web app.",
+  "version": "5.8.31",
+  "browser_action": {
+    "default_icon": "icon16.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": ["js/eventPage.js"],
+    "persistent": false
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://www.ea.com/*fifa/ultimate-team/web-app/*"],
+      "js": ["js/contentScript.js"]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "permissions": ["storage", "identity", "identity.email"]
 }
