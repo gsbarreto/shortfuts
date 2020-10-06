@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "Hackfuts",
+  "name": "Freefuts",
   "description": "Exposes keyboard shortcuts for FIFA Ultimate Team (FUT) web app.",
   "version": "5.8.31",
   "browser_action": {
